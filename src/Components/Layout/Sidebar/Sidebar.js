@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 const Sidebar = (props) => {
   console.log("props", props);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div>
@@ -20,7 +20,7 @@ const Sidebar = (props) => {
           <MenuIcon />
         </button>
       </div>
-      {isOpen !== true ? (
+      {isOpen !== false ? (
         <>
           <div className="sidebar">
             <a className="" href={props.link}>

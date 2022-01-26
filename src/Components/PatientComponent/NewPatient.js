@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../Layout/Header/Header";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import OutPatientModal from "../Layout/OutPatientModal/OutPatientModal";
+import { Modal } from "@mui/material";
 
 const NewPatient = () => {
   const [user, setUser] = useState({
@@ -27,18 +28,12 @@ const NewPatient = () => {
       <Sidebar /> */}
       <div>
         <h2>Patient Registration</h2>
-        <button
-          onClick={() => {
-            setOpenModal(!openModal);
-          }}
-        >
-          options
-        </button>
+        <button onClick={() => setOpenModal(!openModal)}>options</button>
       </div>
       {openModal !== false ? (
-        <>
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
           <OutPatientModal />
-        </>
+        </Modal>
       ) : (
         <>
           <div>

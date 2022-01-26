@@ -21,18 +21,26 @@ export const PatientSidebarData = [
   },
   {
     title: "Diagnosis",
-    link: "/medication",
+    link: "/diagnosis",
   },
   {
     title: "Investigation Procedure",
-    link: "/complaint",
+    link: "/investigation",
   },
   {
     title: "Prescription Medicine",
-    link: "/edicationm",
+    link: "/prescription",
   },
   {
     title: "Advice",
+    link: "/advice",
+  },
+  {
+    title: "Medical Certificate",
+    link: "/advice",
+  },
+  {
+    title: "Refer to Doctor",
     link: "/advice",
   },
 ];
