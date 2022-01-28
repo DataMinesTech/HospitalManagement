@@ -1,7 +1,7 @@
 export const PatientSidebarData = [
   {
     title: "Vital Signs",
-    link: "/vitalsigns",
+    link: "/patientvisit",
   },
   {
     title: "Allergies",

@@ -31,10 +31,18 @@ import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
 import DoctorTransfer from "./Components/PatientComponent/DoctorTransfer";
 import PatientAdmission from "./Components/PatientComponent/PatientAdmission";
 import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
+import { useState } from "react";
+import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
+import VitalSigns from "./Components/PatientComponent/VitalSigns";
 
 function App(props) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Router>
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+
+      <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
@@ -49,6 +57,7 @@ function App(props) {
         <Route exact path="/investigation" component={InvestigationProcedure} />
         <Route exact path="/prescription" component={PrescriptionMedicine} />
         <Route exact path="/advice" component={Advice} />
+        {/* <Route exact path="/vitalsigns" component={VitalSigns} /> */}
         <Route
           exact
           path="/medicalcertificate"

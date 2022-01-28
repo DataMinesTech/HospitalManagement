@@ -1,8 +1,12 @@
 import React from "react";
+import Sidebar from "../Layout/Sidebar/Sidebar";
 
 const PatientAllergies = () => {
+  console.log(window.location.hash);
+
   return (
     <div>
+      <Sidebar />
       <h2>Allergies</h2>
       <label>Allergy Type</label>
       <select>

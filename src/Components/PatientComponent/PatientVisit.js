@@ -2,34 +2,44 @@ import React from "react";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import { PatientSidebarData } from "../Layout/Sidebar/PatientSidebarData";
 import "./PatientVisit.css";
+import Header from "../Layout/Header/Header";
+import MaterialDrawer from "../Layout/Sidebar/MaterialDrawer";
+import { Link } from "react-router-dom";
+import PatientAllergies from "./PatientAllergies";
+import VitalSigns from "./VitalSigns";
+import Medication from "./Medication";
 
 const PatientVisit = () => {
+  const currentRoute = window.location.pathname;
+
+  console.log("current Route", currentRoute);
+  console.log("hash location", window.location.hash);
+
   return (
-    <div>
-      <form>
-        <div>
-          <h2>Patient Visits</h2>
-          <span>patient Id : 5584133 </span>&nbsp;
-          <span>Name : John Smith</span> &nbsp;
-          <span>Age : 35 years</span>
-        </div>
-        <div>
-          <button>Medical Record</button>
-          <button>Package</button>
-          <button>Consultation</button>
-          <button>Vaccination</button>
-        </div>
-        <h3>Treatment Details</h3>
+    <>
+      <Sidebar />
+      {/* <div>
+        {" "}
+        <form>
+          {" "}
+          <div>
+             <h2>Patient Visits</h2>
+             <span>patient Id : 5584133 </span>&nbsp; //{" "}
+            <span>Name : John Smith</span> &nbsp; // <span>Age : 35 years</span>
+            {" "}
+          </div>
+          {" "}
+          <div>
+             <button>Medical Record</button>
+            <button>Package</button>
+             <button>Consultation</button>
+             <button>Vaccination</button>
+            {" "}
+          </div>
+          <h3>Treatment Details</h3> */}
 
-        {PatientSidebarData.map((data, index) => {
-          return (
-            <li key={index}>
-              <Sidebar title={data.title} link={data.link} />
-            </li>
-          );
-        })}
-
-        <div className="vitalsigns">
+      <div className="vitalsigns">
+        <div>
           <h3>Vital Signs</h3>
           <label>Weight(kg)</label>
           <input type="text" />
@@ -52,22 +62,22 @@ const PatientVisit = () => {
           <label>SPO 2</label>
           <input type="text" />
           <br />
-          <label>AVPO</label>
+          <label>AVPO</label>{" "}
           <select>
-            <option>Select</option>
+            <option>Select</option>{" "}
           </select>
-          <label>Trauma</label>
+          <label>Trauma</label>{" "}
           <select>
-            <option>Select</option>
+            <option>Select</option>{" "}
           </select>
-          <label>Mobility</label>
+          <label>Mobility</label>{" "}
           <select>
-            <option>Select</option>
+            <option>Select</option>{" "}
           </select>
           <br />
-          <label>Oxygen Supplementation</label>
+          <label>Oxygen Supplementation</label>{" "}
           <select>
-            <option>Select</option>
+            <option>Select</option>{" "}
           </select>
           <label>Intake</label>
           <input type="text" />
@@ -84,8 +94,8 @@ const PatientVisit = () => {
           <h2>Current Vitals</h2>
         </div>
         <button type="submit">Submit</button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 
