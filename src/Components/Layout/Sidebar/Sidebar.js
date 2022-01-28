@@ -4,27 +4,17 @@ import Drawer from "@mui/material/Drawer";
 import { Button, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const Sidebar = (props) => {
-  console.log("props", props);
-
-  const [isOpen, setIsOpen] = useState(true);
-
+const Sidebar = ({ link, title, isOpen }) => {
   return (
     <div>
       <div>
-        <button
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <MenuIcon />
-        </button>
+        <button></button>
       </div>
       {isOpen !== false ? (
         <>
           <div className="sidebar">
-            <a className="" href={props.link}>
-              {props.title}
+            <a className="" href={link}>
+              {title}
             </a>
           </div>
         </>
