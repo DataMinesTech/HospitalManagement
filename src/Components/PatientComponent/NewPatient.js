@@ -3,7 +3,16 @@ import Header from "../Layout/Header/Header";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import OutPatientModal from "../Layout/OutPatientModal/OutPatientModal";
 import { Modal } from "@mui/material";
-
+const divStyle = {
+  width : '110px',
+  margin: '20px',
+  // border: '5px solid black'
+};
+const emailStyle = {
+  width : '300px',
+  margin: '40px',
+  // border: '5px solid black'
+};
 const NewPatient = () => {
   const [user, setUser] = useState({
     firstName: "",
@@ -63,52 +72,55 @@ const NewPatient = () => {
                 <input placeholder="Months" />
                 <input placeholder="Day" />
                 <label>Gender</label>
-                <select name="gender" id="gender">
+                <select class="form-select" name="gender" id="gender" style={divStyle}>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
                 <br />
                 <label>Marital Status</label>
-                <select name="maritalstatus" id="maritalstatus">
+                <select class="form-select" name="maritalstatus" id="maritalstatus" style={divStyle}>
                   <option value="married">Married</option>
                   <option value="unmarried">Unmarried</option>
                 </select>
                 <label>Occupation</label>
-                <select name="occupation" id="occupation">
+                <select class = "form-select" name="occupation" id="occupation" style={divStyle}>
                   <option value="unemployed">Unemployed</option>
                   <option value="Employed">Employed</option>
                 </select>
                 <label>Language</label>
-                <select name="language" id="language">
+                <select class="form-select" name="language" id="language" style={divStyle}>
                   <option value="english">English</option>
                   <option value="hindi">Hindi</option>
                   <option value="other">Other</option>
                 </select>
                 <br />
                 <label>Religion</label>
-                <select name="religion" id="religion">
+                <select class ="form-select" name="religion" id="religion" style={divStyle}>
                   <option value="hindu">Hindu</option>
                   <option value="jain">Jain</option>
                   <option value="sikh">Sikh</option>
-                </select>
-                <label>Nationality</label>
-                <select name="nationality" id="nationality">
-                  <option value="nri">NRI</option>
-                  <option value="indian">Indian</option>
-                  <option value="other">other</option>
-                </select>
+                </select><br />
+                
+                <span>
+                    <label>Nationality</label>
+                    <select class="form-select" name="nationality" id="nationality" style={divStyle}>
+                    <option value="nri">NRI</option>
+                    <option value="indian">Indian</option>
+                    <option value="other">other</option>
+                  </select>
+                </span>
                 <label>Email Id</label>
-                <input type="email" />
+                <input type="email" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" style={emailStyle}/>
                 <br />
                 <label>Loyalty Name</label>
-                <input type="text" />
+                <input type="text" class="form-control" placeholder="Name" style={divStyle} />
                 <label>Loyalty Card No</label>
                 <input type="number" />
                 <label>Expiry Date</label>
                 <input type="date" />
                 <br />
                 <label>Identity No</label>
-                <select>
+                <select class="form-select" style={divStyle}>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -120,21 +132,21 @@ const NewPatient = () => {
                 <label>Address/Village</label>
                 <input type="text" />
                 <label>Province</label>
-                <select>
+                <select class="form-select" style={divStyle}>
                   <option value="up">Uttar Pradesh</option>
                   <option value="andhrapradesh">Andhra Pradesh</option>
                   <option value="punjab">Punjab</option>
                 </select>
                 <label>District</label>
-                <select>
+                <select class="form-select" style={divStyle}>
                   <option value="anantpur">Anantpur</option>
                   <option value="chittoor">chittoor</option>
                   <option value="agra">Agra</option>
                 </select>
                 <label>Postal Code</label>
-                <input type="text" />
+                <input type="text" placeholder="PIN" class= "form-control" style={divStyle}   />
                 <label>Telephone</label>
-                <input type="number" />
+                <input type="number" placeholder="0755-123456" class="form-control" style={divStyle} />
                 <br />
                 <label>Postal Address</label>
                 <input type="checkbox" />
@@ -148,7 +160,7 @@ const NewPatient = () => {
                 <label>Relative Name</label>
                 <input type="text" placeholder="Telephone 2" />
                 <label>Address/Village</label>
-                <input type="text" />
+                <input type="text" placeholder="Address" class="form-control" style={divStyle}/>
                 <label>Province</label>
                 <select>
                   <option value="up">Uttar Pradesh</option>
@@ -156,7 +168,7 @@ const NewPatient = () => {
                   <option value="punjab">Punjab</option>
                 </select>
                 <label>District</label>
-                <select>
+                <select class="form-select" style={divStyle}>
                   <option value="anantpur">Anantpur</option>
                   <option value="chittoor">chittoor</option>
                   <option value="agra">Agra</option>
@@ -169,7 +181,7 @@ const NewPatient = () => {
                 <label>Postal Address</label>
                 <input type="checkbox" />
                 <label>Telephone 2</label>
-                <input type="number" placeholder="Telephone 2" />
+                <input class="form-control" type="number" placeholder="Telephone 2" />
                 <h3>Payer Information</h3>
                 <label>Payer</label>
                 <select>
@@ -186,7 +198,7 @@ const NewPatient = () => {
                   <option value="select">Select</option>
                 </select>
               </div>
-              <button type="submit">Submit </button>
+              <button type="submit" class="btn btn-success">Submit </button>
             </form>
           </div>
         </>
@@ -194,5 +206,4 @@ const NewPatient = () => {
     </div>
   );
 };
-
 export default NewPatient;
