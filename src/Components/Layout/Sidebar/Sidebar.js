@@ -25,11 +25,13 @@ const Sidebar = ({ link, title, isOpen }) => {
           return (
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <button class="nav-link .hover " aria-current="page">
-                  <Link className="text-decoration-none " to={data.link}>
-                    {data.title}
-                  </Link>
-                </button>
+                <Link
+                  className="row"
+                  id={window.location.pathname === data.link ? "active" : " "}
+                  to={data.link}
+                >
+                  {data.title}
+                </Link>
               </li>
             </ul>
           );

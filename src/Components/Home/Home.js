@@ -10,7 +10,6 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
 
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
@@ -18,9 +17,6 @@ const Home = () => {
 
   return (
     <div>
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-
-      <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
       <Dashboard />
     </div>
   );
