@@ -41,10 +41,14 @@ div.content {
   width: 100%;
   height: 40px;
   list-style-type: none;
-  margin: 0%;
+  margin: 5%;
   display: flex;
   flex-direction: row;
-  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: grey;
   justify-content: center;
   align-items: center;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
