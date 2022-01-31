@@ -3,16 +3,21 @@ import Header from "../Layout/Header/Header";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import OutPatientModal from "../Layout/OutPatientModal/OutPatientModal";
 import { Divider, Modal, Typography } from "@mui/material";
-const divStyle = {
-  width: "110px",
-  margin: "20px",
-  // border: '5px solid black'
+import { Box } from "@mui/system";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#fff",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "1rem",
 };
-const emailStyle = {
-  width: "300px",
-  margin: "40px",
-  // border: '5px solid black'
-};
+
 const NewPatient = () => {
   const [user, setUser] = useState({
     firstName: "",
@@ -41,7 +46,9 @@ const NewPatient = () => {
       </div>
       {openModal !== false ? (
         <Modal open={openModal} onClose={() => setOpenModal(false)}>
-          <OutPatientModal />
+          <Box sx={style}>
+            <OutPatientModal />
+          </Box>
         </Modal>
       ) : (
         <>
@@ -284,73 +291,153 @@ const NewPatient = () => {
                       </select>
                     </div>
                   </div>
-                  <label>Postal Code</label>
-                  <input type="text" placeholder="PIN" />
-                  <label>Telephone</label>
-                  <input type="number" placeholder="0755-123456" />
-                  <br />
-                  <label>Postal Address</label>
-                  <input type="checkbox" />
-                  <label>Telephone 2</label>
-                  <input type="number" placeholder="Telephone 2" />
+                  <div className="d-flex justify-content-around">
+                    <div>
+                      <label>Commune/Sangkat</label>
+
+                      <input
+                        type="text"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                      />
+                    </div>
+                    <div className="d-flex justify-content-around">
+                      <label>Postal Code</label>
+                      <input
+                        type="text"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                        placeholder="PIN"
+                      />
+                    </div>
+                    <div>
+                      <label>Telephone</label>
+                      <input
+                        type="number"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                        placeholder="0755-123456"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="d-flex justify-content-around">
+                      <div className="form-check">
+                        <label>Postal Address</label>
+                        <input className="form-check-input" type="checkbox" />
+                      </div>
+                      <div>
+                        <label>Telephone 2</label>
+                        <input
+                          type="number"
+                          className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                          placeholder="Telephone 2"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
                   <h3>Nearest Relative</h3>
-                  <input type="checkbox" />
-                  <label>Same address as patient</label>
+                  <Divider></Divider>
+                  <div className="d-flex justify-content-end">
+                    <input type="checkbox" className="form-check-input" />
+                    <label>Same address as patient</label>
+                  </div>
                   <br />
-                  <label>Relative Name</label>
-                  <input type="text" placeholder="Telephone 2" />
-                  <label>Address/Village</label>
-                  <input
-                    type="text"
-                    placeholder="Address"
-                    class="form-control"
-                    style={divStyle}
-                  />
-                  <label>Province</label>
-                  <select>
-                    <option value="up">Uttar Pradesh</option>
-                    <option value="andhrapradesh">Andhra Pradesh</option>
-                    <option value="punjab">Punjab</option>
-                  </select>
-                  <label>District</label>
-                  <select class="form-select" style={divStyle}>
-                    <option value="anantpur">Anantpur</option>
-                    <option value="chittoor">chittoor</option>
-                    <option value="agra">Agra</option>
-                  </select>
-                  <label>Postal Code</label>
-                  <input type="number" />
-                  <label>Telephone</label>
-                  <input type="number" />
+                  <div className="d-flex justify-content-around">
+                    <div>
+                      <label>Relative Name</label>
+                      <input
+                        type="text"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                        placeholder="Telephone 2"
+                      />
+                    </div>
+                    <div>
+                      <label>Address/Village</label>
+                      <input
+                        type="text"
+                        placeholder="Address"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                      />
+                    </div>
+                    <div>
+                      <label>Province</label>
+                      <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="andhrapradesh">Andhra Pradesh</option>
+                        <option value="punjab">Punjab</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <div>
+                      <label>District</label>
+
+                      <select class="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+                        <option value="anantpur">Anantpur</option>
+                        <option value="chittoor">chittoor</option>
+                        <option value="agra">Agra</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label>Postal Code</label>
+                      <input
+                        type="number"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                      />
+                    </div>
+                    <div>
+                      <label>Telephone</label>
+                      <input
+                        type="number"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                      />
+                    </div>
+                  </div>
                   <br />
-                  <label>Postal Address</label>
-                  <input type="checkbox" />
-                  <label>Telephone 2</label>
-                  <input
-                    class="form-control"
-                    type="number"
-                    placeholder="Telephone 2"
-                  />
+                  <div className="d-flex justify-content-around">
+                    <div className="form-check">
+                      <label>Postal Address</label>
+                      <input type="checkbox" className="form-check-input" />
+                    </div>
+                    <div>
+                      <label>Telephone 2</label>
+                      <input
+                        type="number"
+                        className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                        placeholder="Telephone 2"
+                      />
+                    </div>
+                  </div>
+
                   <h3>Payer Information</h3>
-                  <label>Payer</label>
-                  <select>
-                    <option value="standard">Standard</option>
-                  </select>
-                  <br />
-                  <label>Sponsor </label>
-                  <select>
-                    <option value="standard">Standard</option>
-                  </select>
-                  <br />
-                  <label>Network</label>
-                  <select>
-                    <option value="select">Select</option>
-                  </select>
+                  <Divider></Divider>
+                  <div className="">
+                    <label>Payer</label>
+                    <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+                      <option value="standard">Standard</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Sponsor </label>
+                    <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+                      <option value="standard">Standard</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label>Network</label>
+                    <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+                      <option value="select">Select</option>
+                    </select>
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-success">
-                  Submit{" "}
-                </button>
+                <div className="d-flex justify-content-center">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-block mb-4  "
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </form>
           </div>
