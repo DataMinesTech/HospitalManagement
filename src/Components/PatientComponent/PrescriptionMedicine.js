@@ -1,43 +1,82 @@
+import { Divider } from "@mui/material";
 import React from "react";
 
 const PrescriptionMedicine = () => {
   return (
     <div>
-      <h2>Prescription Medicine</h2>
-      <label>Store</label>
-      <select>
-        <option>Select</option>
-        <option>Pharmacy 1</option>
-        <option>Pharmacy 2</option>
-      </select>
-      <label>Medicine</label>
-      <input type="text" />
+      <p className="h2">Prescription Medicine</p>
+      <Divider />
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <label>Store &nbsp;</label>
+          <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <option>Select</option>
+            <option>Pharmacy 1</option>
+            <option>Pharmacy 2</option>
+          </select>
+        </div>
+        <div className="">
+          <label>Medicine</label>
+          <input
+            type="text"
+            className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+          />
+        </div>
+      </div>
       <br />
-      <label>Dosage</label>
-      <input type="text" />
-      <select>
-        <option>Select</option>
-        <option>1</option>
-        <option>2</option>
-      </select>
-      <label>Frequency</label>
-      <input type="text" />
-      <label>No of Days</label>
-      <input type="text" />
-      <select>
-        <option>Day</option>
-        <option>Night</option>
-      </select>
-      <label>Food Relation</label>
-      <select>
-        <option>select</option>
-      </select>
-      <label>Route</label>
-      <select>
-        <option>Select</option>
-      </select>
-      <label>Instruction</label>
-      <input type="text" />
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <label>Dosage</label>
+          <input
+            type="text"
+            className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+          />
+          <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <option>Select</option>
+            <option>1</option>
+            <option>2</option>
+          </select>
+        </div>
+        <div>
+          <label>Frequency</label>
+          <input
+            type="text"
+            className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+          />
+        </div>
+        <div>
+          <label>No of Days</label>
+          <input
+            type="text"
+            className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+          />
+          <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <option>Day</option>
+            <option>Night</option>
+          </select>
+        </div>
+      </div>
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <label>Food Relation</label>
+          <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <option>select</option>
+          </select>
+        </div>
+        <div>
+          <label>Route</label>
+          <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <option>Select</option>
+          </select>
+        </div>
+        <div>
+          <label>Instruction</label>
+          <input
+            type="text"
+            className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+          />
+        </div>
+      </div>
     </div>
   );
 };

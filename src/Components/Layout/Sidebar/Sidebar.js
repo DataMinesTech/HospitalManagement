@@ -6,32 +6,34 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { PatientSidebarData } from "./PatientSidebarData";
 
-const Sidebar = ({ link, title, isOpen }) => {
+const Sidebar = ({ link, title, isOpen, setActive }) => {
+  console.log("windancac", window.location.pathname);
+
   return (
     <div>
       <div
-        class="d-flex flex-column flex-shrink-0 p-3 bg-light"
+        class="d-flex flex-column flex-shrink-0 p-3 bg-light "
         style={{ width: "280px" }}
       >
-        <a
-          href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
-        >
+        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"></svg>
-          <span class="fs-4">Sidebar</span>
+          <span class="fs-4"> Treatment Details</span>
         </a>
         <hr />
         {PatientSidebarData.map((data) => {
           return (
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <Link
-                  className="row"
+                <button
+                  onClick={() => {
+                    setActive(`${data.title}`);
+                  }}
+                  className="sidebar-row"
                   id={window.location.pathname === data.link ? "active" : " "}
                   to={data.link}
                 >
                   {data.title}
-                </Link>
+                </button>
               </li>
             </ul>
           );

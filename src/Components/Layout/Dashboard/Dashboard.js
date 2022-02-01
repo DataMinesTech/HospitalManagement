@@ -31,214 +31,320 @@ import SecurityIcon from "@mui/icons-material/Security";
 import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 import ScienceIcon from "@mui/icons-material/Science";
+import { Divider } from "@mui/material";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
-
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4 "
-      >
-        <CalendarTodayIcon />
-      </button>
-      {/* <br />
-        <span>Appointment </span> */}
-
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <PersonAddAltIcon />
-      </button>
-      {/* <br />
-        <span>Doctor </span> */}
-
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <ManageAccountsIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <MedicalServicesIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <MeetingRoomIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <RoomPreferencesIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        {" "}
-        <ManageSearchIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <AddBusinessIcon />
-      </button>
-      {/* <p>Nurse Station </p> */}
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <SummarizeIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <ReportOffIcon />
-      </button>
+      <Divider />
       <br />
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <VolunteerActivismIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <BiotechIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <BloodtypeIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <EggIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <CheckroomIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <ExitToAppIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <FlagIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <FeedbackIcon />
-      </button>
-      <Link to="/inventory">
-        <button
-          type="button"
-          className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-        >
-          <InventoryIcon />
-        </button>
-      </Link>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        {" "}
-        <AddRoadIcon />
-      </button>
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <button
+            type="button"
+            className="btn rounded-circle btn-lg py-4 px-4 "
+          >
+            <img src="https://img.icons8.com/color/48/000000/calendar--v1.png" />
+          </button>
+
+          <p>Appoinment</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/edit-user-male--v1.png" />
+          </button>
+          <p>Patient Register</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/clinic.png" />
+          </button>
+          <p>Clinic manage</p>
+        </div>
+
+        <div>
+          {" "}
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/doctors-bag.png" />
+          </button>
+          <p>Emergency</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/hospital.png" />
+          </button>
+          <p>Procedure room</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/hospital-room--v1.png" />
+          </button>
+          <p>Operation Theatre</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            {" "}
+            <img src="https://img.icons8.com/color/48/000000/call-in-bed.png" />
+          </button>
+          <p>In-Patient Management</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/looking-after.png" />
+          </button>
+          <p>Nurse Station</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/estimate.png" />
+          </button>
+          <p>Billing and collection</p>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/bill.png" />
+          </button>
+          <p>Insuarance nd claim</p>
+        </div>
+      </div>
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/enema.png" />
+          </button>
+          <p>Phlebotomy</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/laboratory.png" />
+          </button>
+          <p>Laboratory</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/diabetes-monitor.png" />
+          </button>
+          <p>Blood bank</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/xray.png" />
+          </button>
+          <p>Radiology</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/clothes-in-laundry.png" />
+          </button>
+          <p>Linen and laundary</p>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/leave-house.png" />
+          </button>
+          <p>Discharge Summary</p>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/funeral.png" />
+          </button>
+          <p>Mortuary management</p>
+        </div>
+        <div>
+          <Link to="/feedback">
+            <button
+              type="button"
+              className="btn  rounded-circle btn-xl py-4 px-4"
+            >
+              <img src="https://img.icons8.com/color/48/000000/feedback.png" />
+            </button>
+            <p>Feedback Management</p>
+          </Link>
+        </div>
+
+        <div>
+          <Link to="/inventory">
+            <button
+              type="button"
+              className="btn  rounded-circle btn-xl py-4 px-4"
+            >
+              <img src="https://img.icons8.com/color/48/000000/new-product--v1.png" />
+            </button>
+          </Link>
+          <p>Inventory</p>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/online-request.png" />
+          </button>
+          <p>MRD</p>
+        </div>
+      </div>
       <br />
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <AdfScannerIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <AssessmentIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <AllInboxIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <BorderColorIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <ApiIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        {" "}
-        <WysiwygIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <ControlCameraIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <SecurityIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        {" "}
-        <LaptopChromebookIcon />
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
-      >
-        <AirportShuttleIcon />
-      </button>
+      <div className="d-flex justify-content-evenly">
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/combo-chart--v1.png" />
+          </button>
+          <p>Mis Dashboard</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/report-card.png" />
+          </button>
+          <p>Mis Reports</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/move-by-trolley.png" />
+          </button>
+          <p>Inventory Setup</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/template.png" />
+          </button>
+          <p>Custom Template</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/project-management.png" />
+          </button>
+          <p>Software Management</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/support.png" />
+          </button>
+          <p>CSSO</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/cyber-security.png" />
+          </button>
+          <p>System Control</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/user-credentials.png" />
+          </button>
+          <p>Security and Audit</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/administrator-female.png" />
+          </button>
+          <p>HR Management</p>
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/ambulance.png" />
+            <p>Ambulance management</p>
+          </button>
+        </div>
+      </div>
       <br />
-      <button
-        type="button"
-        className="btn btn-danger rounded-circle btn-xl py-4 px-4"
+      <div
+        className="d-flex justify-content-start"
+        style={{ paddingLeft: "1rem" }}
       >
-        <ScienceIcon />
-      </button>
+        <div>
+          <button
+            type="button"
+            className="btn  rounded-circle btn-xl py-4 px-4"
+          >
+            <img src="https://img.icons8.com/color/48/000000/chemical-plant-3.png" />
+          </button>
+          <p>Laboratory Setup</p>
+        </div>
+      </div>
     </div>
   );
 };
