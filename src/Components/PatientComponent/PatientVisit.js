@@ -43,13 +43,13 @@ const PatientVisit = () => {
               <span>Age : 35 years &nbsp;</span>{" "}
             </div>
           </div>
-          <div className=" " style={{ width: "100%" }}>
-            <button>Medical Record</button>
-            <button>Package</button>
-            <button>Consultation</button>
-            <button>Vaccination</button>{" "}
+          <div className="d-flex bd-highlight">
+            <button className="p-2 bd-highlight col-3">Medical Record</button>
+            <button className="p-2 bd-highlight col-3">Package</button>
+            <button className="p-2 bd-highlight col-3">Consultation</button>
+            <button className="p-2 bd-highlight col-3">Vaccination</button>{" "}
           </div>
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end py-2">
             <button className="btn btn-block btn-primary" type="submit">
               Save
             </button>
