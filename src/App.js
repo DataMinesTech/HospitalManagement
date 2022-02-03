@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Auth/Login";
 import NewPatient from "./Components/PatientComponent/NewPatient";
-import Sidebar from "./Components/Layout/Sidebar/Sidebar";
 import Header from "./Components/Layout/Header/Header";
 import PatientVisit from "./Components/PatientComponent/PatientVisit";
 import PatientAllergies from "./Components/PatientComponent/PatientAllergies";
@@ -34,6 +33,7 @@ import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
 import { useState } from "react";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
 import VitalSigns from "./Components/PatientComponent/VitalSigns";
+import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
 
 function App(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +73,7 @@ function App(props) {
         />
         <Route exact path="/samplecollection" component={SampleCollection} />
         <Route exact path="/sampleacknowledge" component={SampleAcknowledge} />
+        <Route exact path="/appointment" component={DoctorAppointment} />
         <Route exact path="/result" component={Result} />
         <Route
           exact

@@ -40,6 +40,10 @@ export const PatientSidebarData = [
     link: "/advice",
   },
   {
+    title: "Doctor Appointment",
+    link: "/appointment",
+  },
+  {
     title: "Refer to Doctor",
     link: "/advice",
   },
