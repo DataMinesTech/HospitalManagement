@@ -7,51 +7,55 @@ const PatientVitals = () => {
       <div>
         <h3>Vital Signs</h3>
         <Divider />
-        <div className="d-flex justify-content-evenly py-2">
-          <div>
-            <label>Weight(kg)</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
-          </div>
-          <div>
-            <label>Height(cm)</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
-          </div>
-          <div>
-            <label>BMI(kg)</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <label>Weight(kg)</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
+            <div className="col">
+              <label>Height(cm)</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
+            <div className="col">
+              <label>BMI(kg)</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
           </div>
           <br />
         </div>
-        <div className="d-flex justify-content-evenly">
-          <div>
-            <label>Systolic B.P</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
-          </div>
-          <div>
-            <label>Diastolic B.P</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
-          </div>
-          <div>
-            <label>Temperature(C)</label>
-            <input
-              type="text"
-              className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
-            />
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <label>Systolic B.P</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
+            <div className="col-sm">
+              <label>Diastolic B.P</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
+            <div className="col-sm">
+              <label>Temperature(C)</label>
+              <input
+                type="text"
+                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              />
+            </div>
           </div>
         </div>
         <br />

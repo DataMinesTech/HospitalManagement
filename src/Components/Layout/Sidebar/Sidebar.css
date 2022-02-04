@@ -59,7 +59,7 @@ div.content {
   border-radius: 10px;
 }
 
-.sidebar-row #active {
+.sidebar-row .active {
   background-color: #293846;
 }
 

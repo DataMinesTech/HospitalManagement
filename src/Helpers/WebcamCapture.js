@@ -1,8 +1,11 @@
 import React, { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
+import Tesseract from "tesseract.js";
+import { Buffer } from "buffer";
 
 const WebcamCapture = () => {
   const [image, setImage] = useState("");
+  const [decodedImage, setDecodedImage] = useState("");
 
   const webcamRef = useRef(null);
 
@@ -16,6 +19,52 @@ const WebcamCapture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
 
     setImage(imageSrc);
+
+    localStorage.setItem("recent-img", imageSrc);
+
+    if (imageSrc) {
+      // return decodeURIComponent(
+      //   atob(imageSrc)
+      //     .split("")
+      //     .map(function (c) {
+      //       return "%" + ("00" + c.charCodeAt(0).toString(16).slice(-2));
+      //     })
+      //     .join("")
+      // );
+
+      //Using Buffer
+
+      // let base64ToString = Buffer.from(imageSrc, "base64").toString();
+      // base64ToString = JSON.parse(base64ToString);
+
+      // console.log("image scr", base64ToString);
+      console.log("imageSrc State", imageSrc);
+      const byteCharacters = btoa(imageSrc);
+
+      console.log("byteCharacters", byteCharacters);
+
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+
+      let image = new Blob([byteArray], { type: "image/jpeg" });
+
+      console.log("image bfor URL ", image);
+
+      let imageUrl = URL.createObjectURL(image);
+      console.log("image scr", imageUrl);
+      setDecodedImage(imageUrl);
+    }
+    // if (imageSrc !== "") {
+    //   Tesseract.recognize(imageUrl, "eng", {
+    //     logger: (m) => console.log("loading", m),
+    //   }).then(({ data: { text } }) => {
+    //     debugger;
+    //     console.log("converted ", text);
+    //   });
+    // }
   }, [webcamRef]);
 
   const captureButton = (e) => {

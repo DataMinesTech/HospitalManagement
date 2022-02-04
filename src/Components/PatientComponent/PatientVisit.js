@@ -30,7 +30,7 @@ const PatientVisit = () => {
     <>
       <div className="d-flex bd-highlight ">
         <div className="flex-shrink-1 p-2 bd-highlight">
-          <Sidebar setActive={setActive} />
+          <Sidebar setActive={setActive} isActive={active} />
         </div>
         <div className="w-100 p-2 bd-highlight">
           <div className="d-flex bd-highlight mb-3">

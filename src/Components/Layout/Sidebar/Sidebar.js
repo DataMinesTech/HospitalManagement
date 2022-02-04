@@ -6,8 +6,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { PatientSidebarData } from "./PatientSidebarData";
 
-const Sidebar = ({ link, title, isOpen, setActive }) => {
-  console.log("windancac", window.location.pathname);
+const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
+  console.log("sidebar button", isActive);
 
   return (
     <div>
@@ -29,7 +29,7 @@ const Sidebar = ({ link, title, isOpen, setActive }) => {
                     setActive(`${data.title}`);
                   }}
                   className="sidebar-row"
-                  id={window.location.pathname === data.link ? "active" : " "}
+                  id={isActive ? "active" : " "}
                   to={data.link}
                 >
                   {data.title}
