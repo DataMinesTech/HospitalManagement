@@ -20,8 +20,6 @@ const WebcamCapture = () => {
 
     setImage(imageSrc);
 
-    localStorage.setItem("recent-img", imageSrc);
-
     if (imageSrc) {
       // return decodeURIComponent(
       //   atob(imageSrc)
@@ -49,22 +47,24 @@ const WebcamCapture = () => {
       }
       const byteArray = new Uint8Array(byteNumbers);
 
-      let image = new Blob([byteArray], { type: "image/jpeg" });
+      let blobimage = new Blob([byteArray], { type: "image/png" });
 
-      console.log("image bfor URL ", image);
+      console.log("image bfor URL", blobimage);
 
-      let imageUrl = URL.createObjectURL(image);
-      console.log("image scr", imageUrl);
-      setDecodedImage(imageUrl);
+      // let imageUrl = URL.createObjectURL(image);
+      // console.log("image scr", imageUrl);
+      setDecodedImage(blobimage);
+      debugger;
     }
-    // if (imageSrc !== "") {
-    //   Tesseract.recognize(imageUrl, "eng", {
-    //     logger: (m) => console.log("loading", m),
-    //   }).then(({ data: { text } }) => {
-    //     debugger;
-    //     console.log("converted ", text);
-    //   });
-    // }
+    if (decodedImage !== "") {
+      debugger;
+      Tesseract.recognize(decodedImage, "eng", {
+        logger: (m) => console.log("loading", m),
+      }).then(({ data: { text } }) => {
+        debugger;
+        console.log("converted ", text);
+      });
+    }
   }, [webcamRef]);
 
   const captureButton = (e) => {
