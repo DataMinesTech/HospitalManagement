@@ -32,7 +32,6 @@ import PatientAdmission from "./Components/PatientComponent/PatientAdmission";
 import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
 import { useState } from "react";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
-import VitalSigns from "./Components/PatientComponent/VitalSigns";
 import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
 
 function App(props) {
@@ -49,7 +48,7 @@ function App(props) {
         <Route exact path="/home" component={Home} />
         <Route exact path="/newpatient" component={NewPatient} />
         <Route exact path="/patientvisit" component={PatientVisit} />
-        <Route exact path="/allergies" component={PatientAllergies} />
+        {/* <Route exact path="/allergies" component={PatientAllergies} /> */}
         <Route exact path="/complaint" component={PresentingComplaint} />
         <Route exact path="/medication" component={Medication} />
         <Route exact path="/diagnosis" component={Diagnosis} />
@@ -57,7 +56,6 @@ function App(props) {
         <Route exact path="/investigation" component={InvestigationProcedure} />
         <Route exact path="/prescription" component={PrescriptionMedicine} />
         <Route exact path="/advice" component={Advice} />
-        {/* <Route exact path="/vitalsigns" component={VitalSigns} /> */}
         <Route
           exact
           path="/medicalcertificate"

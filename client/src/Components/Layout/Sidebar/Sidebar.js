@@ -28,8 +28,11 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
                   onClick={() => {
                     setActive(`${data.title}`);
                   }}
-                  className="sidebar-row"
-                  id={isActive ? "active" : " "}
+                  className={
+                    isActive === data.title
+                      ? `sidebar-row-active `
+                      : "sidebar-row"
+                  }
                   to={data.link}
                 >
                   {data.title}

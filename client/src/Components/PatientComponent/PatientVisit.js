@@ -6,7 +6,6 @@ import Header from "../Layout/Header/Header";
 import MaterialDrawer from "../Layout/Sidebar/MaterialDrawer";
 import { Link } from "react-router-dom";
 import PatientAllergies from "./PatientAllergies";
-import VitalSigns from "./VitalSigns";
 import Medication from "./Medication";
 import PatientVitals from "./PatientVitals";
 import PresentingComplaint from "./PresentingComplaint";

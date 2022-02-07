@@ -37,13 +37,17 @@ const SampleCollection = () => {
           <div className="row">
             <div className="col-sm">
               <label>Search by</label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-2 py-1 rounded shadow"
+                style={{ marginLeft: "34px" }}
+              >
                 <option>Select</option>
                 <option>Lab No</option>
               </select>
               <input
                 type="text"
                 className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                style={{ width: "124px" }}
               />
             </div>
 
@@ -52,6 +56,7 @@ const SampleCollection = () => {
               <input
                 type="date"
                 className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                style={{ marginLeft: "34px" }}
               />
             </div>
             <div className="col-sm">
@@ -59,6 +64,7 @@ const SampleCollection = () => {
               <input
                 type="date"
                 className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                style={{ marginLeft: "34px" }}
               />
             </div>
           </div>
@@ -67,21 +73,30 @@ const SampleCollection = () => {
           <div className="row">
             <div className="col-sm">
               <label>Hospital</label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
+                style={{ marginLeft: "42px" }}
+              >
                 <option>Silver Hills Hospitals</option>
                 <option>Other Hospitals</option>
               </select>
             </div>
             <div className="col-sm">
               <label>Sample Status </label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
+                style={{ marginLeft: "22px" }}
+              >
                 <option>Collected</option>
                 <option>Not Collected</option>
               </select>
             </div>
             <div className="col-sm">
               <label>Order Type</label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-5 py-1 rounded shadow"
+                style={{ marginLeft: "34px" }}
+              >
                 <option>Select</option>
                 <option>All</option>
               </select>

@@ -10,12 +10,18 @@ const PatientIssue = () => {
         <div className="row">
           <div className="col-sm">
             <label>Issue Sale</label>
-            <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <select
+              className="selectpicker border-1 mb-1 px-2 py-1 rounded shadow"
+              style={{ marginLeft: "10px" }}
+            >
               <option>Select</option>
               <option>Sale</option>
             </select>
-            <label>Visit</label>
-            <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <label style={{ marginLeft: "10px" }}>Visit</label>
+            <select
+              className="selectpicker border-1 mb-1 px-2 py-1 rounded shadow"
+              style={{ marginLeft: "10px" }}
+            >
               <option>Select</option>
             </select>
           </div>
@@ -24,6 +30,7 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "15px" }}
             />
           </div>
           <div className="col-sm">
@@ -31,6 +38,7 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "15px" }}
             />
           </div>
         </div>
@@ -43,13 +51,14 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "56px" }}
             />
           </div>
 
           <div className="col-sm">
             <label>Issue Date</label>
 
-            <input type="date" />
+            <input type="date" style={{ marginLeft: "25px" }} />
           </div>
           <div className="col-sm">
             <label>Sponsor</label>
@@ -57,6 +66,7 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "15px", width: "176px" }}
             />
           </div>
         </div>
@@ -68,6 +78,7 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "52px" }}
             />
           </div>
 
@@ -76,11 +87,15 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "32px" }}
             />
           </div>
           <div className="col-sm">
             <label>Doctor</label>
-            <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <select
+              className="selectpicker border-1 mb-1 px-5 py-1 rounded shadow"
+              style={{ marginLeft: "38px" }}
+            >
               <option>Select</option>
             </select>
           </div>
@@ -93,9 +108,10 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ width: "52px", marginLeft: "14px" }}
             />
             <select
-              className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
+              className="selectpicker border-1 mb-1 px-2 py-1 rounded shadow"
               placeholder="Years"
             >
               <option>1</option>
@@ -103,7 +119,7 @@ const PatientIssue = () => {
               <option>3</option>
               <option>4</option>
             </select>
-            <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+            <select className="selectpicker border-1 mb-1 px-2 py-1 rounded shadow">
               <option>Male</option>
               <option>Female</option>
             </select>
@@ -113,32 +129,38 @@ const PatientIssue = () => {
             <input
               type="text"
               className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+              style={{ marginLeft: "30px" }}
             />
           </div>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <div className="col-sm">
-            <input type="checkbox" />
-            <label>Issue To Patient</label>
+            <input type="checkbox" style={{ marginRight: "5px" }} />
+            <label>Issue To Patient &nbsp;</label>
           </div>
         </div>
       </div>
-      <br />
       <div>
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              <input type="checkbox" />
+              <input type="checkbox" style={{ marginRight: "5px" }} />
               <label>Substitute Required</label>
             </div>
             <div className="col-sm">
               <label>Generic </label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-5 py-1 rounded shadow"
+                style={{ marginLeft: "54px" }}
+              >
                 <option>Select</option>
               </select>
             </div>
             <div className="col-sm">
               <label>Profile Item </label>
-              <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
+              <select
+                className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
+                style={{ marginLeft: "54px" }}
+              >
                 <option>Select</option>
               </select>
             </div>
@@ -151,6 +173,7 @@ const PatientIssue = () => {
               <input
                 type="text"
                 className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                style={{ marginLeft: "16px" }}
               />
             </div>
             <div className="col-4">
@@ -158,6 +181,7 @@ const PatientIssue = () => {
               <input
                 type="text"
                 className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                style={{ marginLeft: "34px", width: "160px" }}
               />
             </div>
           </div>

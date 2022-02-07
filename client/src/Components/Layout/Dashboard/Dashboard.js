@@ -326,8 +326,8 @@ const Dashboard = () => {
             className="btn  rounded-circle btn-xl py-4 px-4"
           >
             <img src="https://img.icons8.com/color/48/000000/ambulance.png" />
-            <p>Ambulance management</p>
           </button>
+          <p>Ambulance management</p>
         </div>
       </div>
       <br />

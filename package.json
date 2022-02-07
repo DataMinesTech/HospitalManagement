@@ -20,6 +20,8 @@
   "homepage": "https://github.com/DataMinesTech/HospitalManagement/",
   "dependencies": {
     "dotenv": "^16.0.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0",
+    "validator": "^13.7.0"
   }
 }
