@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
-import Tesseract from "tesseract.js";
+import Tesseract, { createWorker } from "tesseract.js";
 import { Buffer } from "buffer";
 
 const WebcamCapture = () => {
@@ -18,53 +18,33 @@ const WebcamCapture = () => {
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
 
+    console.log("imageSrc", imageSrc);
+
     setImage(imageSrc);
 
-    if (imageSrc) {
-      // return decodeURIComponent(
-      //   atob(imageSrc)
-      //     .split("")
-      //     .map(function (c) {
-      //       return "%" + ("00" + c.charCodeAt(0).toString(16).slice(-2));
-      //     })
-      //     .join("")
-      // );
+    var strImage = imageSrc.replace(/^data:image\/[a-z]+;base64,/, "");
 
-      //Using Buffer
+    console.log("strImage", strImage);
 
-      // let base64ToString = Buffer.from(imageSrc, "base64").toString();
-      // base64ToString = JSON.parse(base64ToString);
+    let imageBuffer = Buffer.from(strImage, "base64");
+    console.log("image buffer", imageBuffer);
+    const worker = createWorker({
+      logger: (m) => console.log(m),
+    });
 
-      // console.log("image scr", base64ToString);
-      console.log("imageSrc State", imageSrc);
-      const byteCharacters = btoa(imageSrc);
-
-      console.log("byteCharacters", byteCharacters);
-
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-
-      let blobimage = new Blob([byteArray], { type: "image/png" });
-
-      console.log("image bfor URL", blobimage);
-
-      // let imageUrl = URL.createObjectURL(image);
-      // console.log("image scr", imageUrl);
-      setDecodedImage(blobimage);
+    (async () => {
       debugger;
-    }
-    if (decodedImage !== "") {
-      debugger;
-      Tesseract.recognize(decodedImage, "eng", {
-        logger: (m) => console.log("loading", m),
-      }).then(({ data: { text } }) => {
-        debugger;
-        console.log("converted ", text);
-      });
-    }
+      await worker.load();
+      await worker.loadLanguage("eng");
+      await worker.initialize("eng");
+      console.log("Recognizing...");
+      const {
+        data: { text },
+      } = await worker.recognize(imageBuffer);
+      console.log("Recognized text:", text);
+
+      await worker.terminate();
+    })();
   }, [webcamRef]);
 
   const captureButton = (e) => {
