@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
   },
   userRole: {
     type: String,
-    default: "user",
+    default: "patient",
   },
   email: {
     type: String,
@@ -27,3 +27,5 @@ const userSchema = mongoose.Schema({
     required: [true, "Please Enter your Address"],
   },
 });
+
+module.exports = mongoose.model("Users", userSchema);
