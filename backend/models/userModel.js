@@ -12,6 +12,11 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "patient",
   },
+  userAvailability: {
+    type: String,
+    required: [true, "Please Enter Availabilty"],
+    default: "Available",
+  },
   email: {
     type: String,
     required: [true, "Please Enter Your Email"],

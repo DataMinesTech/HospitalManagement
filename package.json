@@ -17,7 +17,6 @@
   "bugs": {
     "url": "https://github.com/DataMinesTech/HospitalManagement/issues"
   },
-  "homepage": "https://github.com/DataMinesTech/HospitalManagement/",
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
