@@ -25,16 +25,20 @@ exports.getAllRooms = catchAsyncErrors(async (req, res) => {
 exports.updateRoom = catchAsyncErrors(async (req, res) => {
   let room = await Rooms.findById(req.params.id);
 
-  console.log("room", room);
-
   if (!room) {
     return res.status(500).json({
       success: false,
-      message: "User not found",
+      message: "Room not found",
     });
   }
 
   const prevPatientRoom = await room.saveCurrentPatient(room);
+
+  room = await Rooms.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
   const updatedBody = {
     admissionDate: room.admissionDate,
@@ -44,16 +48,9 @@ exports.updateRoom = catchAsyncErrors(async (req, res) => {
     vacancyStatus: room.vacancyStatus,
     history: prevPatientRoom,
   };
-  console.log("updated body", updatedBody);
-
-  room = await Rooms.findByIdAndUpdate(req.params.id, updatedBody, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
 
   res.status(200).json({
     success: true,
-    room,
+    updatedBody,
   });
 });
