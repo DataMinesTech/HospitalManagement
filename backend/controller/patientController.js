@@ -18,8 +18,6 @@ exports.createPatient = catchAsyncErrors(async (req, res) => {
 exports.getAllPatients = catchAsyncErrors(async (req, res) => {
   const apiFeatures = new ApiFeatures(Patients.find(), req.query).search();
 
-  console.log("apiFeatures", apiFeatures);
-
   const patients = await apiFeatures.query;
 
   res.status(200).json({ success: true, patients });

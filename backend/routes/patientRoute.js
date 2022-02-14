@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAuthenticatedUser, authorizeRoles } = require("../controller/auth");
 const {
   createPatient,
   getAllPatients,
@@ -10,7 +11,9 @@ const {
 const router = express.Router();
 
 router.route("/patients").get(getAllPatients);
-router.route("/patient/new").post(createPatient);
+router
+  .route("/patient/new")
+  .post(isAuthenticatedUser, authorizeRoles("admin"), createPatient);
 router
   .route("/patient/:id")
   .get(getPatientDetails)
