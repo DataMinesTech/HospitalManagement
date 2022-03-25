@@ -33,11 +33,19 @@ import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 import ScienceIcon from "@mui/icons-material/Science";
 import { Divider } from "@mui/material";
 import "./Dashboard.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+
   return (
     <div>
       <h2>Dashboard</h2>
+      Hello: {user.userName.toUpperCase()}
       <Divider />
       <br />
       <div className="d-flex justify-content-evenly">

@@ -2,6 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  CLEAR_ERRORS,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -12,10 +13,20 @@ export const login = (email, password) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
-    const { data } = await axios.post(``, { email, password }, config);
+    const { data } = await axios.post(
+      `http://localhost:5000/api/v1/login`,
+      { email, password },
+      config
+    );
+
+    console.log(data, "data");
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.message });
   }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

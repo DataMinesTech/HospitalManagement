@@ -16,9 +16,14 @@ import PrescriptionMedicine from "./PrescriptionMedicine";
 import Advice from "./Advice";
 import MedicalCertificate from "./MedicalCertificate";
 import DoctorTransfer from "./DoctorTransfer";
+import { useSelector } from "react-redux";
 
-const PatientVisit = () => {
+const PatientVisit = ({}) => {
   const currentRoute = window.location.pathname;
+
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
 
   console.log("current Route", currentRoute);
   console.log("hash location", window.location.hash);
@@ -38,7 +43,7 @@ const PatientVisit = () => {
             </div>
             <div className="ms-auto p-2 bd-highlight">
               <span>Patient Id : 5584133 &nbsp; </span>
-              <span>Name : John Smith &nbsp;</span>
+              <span>Name : {user.userName} &nbsp;</span>
               <span>Age : 35 years &nbsp;</span>{" "}
             </div>
           </div>
