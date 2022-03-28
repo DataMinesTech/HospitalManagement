@@ -45,7 +45,7 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
-      Hello: {user.userName.toUpperCase()}
+      Hello: {user?.userName}
       <Divider />
       <br />
       <div className="d-flex justify-content-evenly">
@@ -59,15 +59,17 @@ const Dashboard = () => {
 
           <p>Appoinment</p>
         </div>
-        <div>
-          <button
-            type="button"
-            className="btn  rounded-circle btn-xl py-4 px-4"
-          >
-            <img src="https://img.icons8.com/color/48/000000/edit-user-male--v1.png" />
-          </button>
-          <p>Patient Register</p>
-        </div>
+        <Link to="/newpatient">
+          <div>
+            <button
+              type="button"
+              className="btn  rounded-circle btn-xl py-4 px-4"
+            >
+              <img src="https://img.icons8.com/color/48/000000/edit-user-male--v1.png" />
+            </button>
+            <p>Patient Register</p>
+          </div>
+        </Link>
         <div>
           <button
             type="button"

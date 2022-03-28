@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import { PatientSidebarData } from "../Layout/Sidebar/PatientSidebarData";
 import "./PatientVisit.css";
-import Header from "../Layout/Header/Header";
-import MaterialDrawer from "../Layout/Sidebar/MaterialDrawer";
 import { Link } from "react-router-dom";
 import PatientAllergies from "./PatientAllergies";
 import Medication from "./Medication";

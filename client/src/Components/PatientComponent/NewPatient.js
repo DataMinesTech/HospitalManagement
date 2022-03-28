@@ -6,6 +6,7 @@ import { Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./NewPatient.css";
 import WebcamCapture from "../../Helpers/WebcamCapture";
+import { useForm } from "react-hook-form";
 
 const style = {
   position: "absolute",
@@ -21,22 +22,34 @@ const style = {
 };
 
 const NewPatient = () => {
-  const [user, setUser] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    email: "",
-    dob: "",
-    age: "",
-    gender: "",
-    maritalStatus: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [openModal, setOpenModal] = useState(false);
   const [openCamera, setOpenCamera] = useState(false);
 
-  const registerPatient = (e) => {
-    e.preventDefault();
-    console.log("hello");
+  const registerPatient = (data) => {
+    console.log("hello", data);
+
+    const patientName = `${data.firstName} ${data.middleName} ${data.lastName}`;
+    const patientAddress = `${data.address} ${data.province} ${data.district} ${data.postalcode}`;
+    const patientAge = new Date().getFullYear() - data.years;
+
+    const newData = {
+      patientName,
+      patientAddress,
+      patientGender: data.gender,
+      patientEmail: data.email,
+      patientPhoneNo: data.phone,
+      patientAge,
+      patientOccupation: data.occupation,
+      patientAdmissionStatus: data.Admitted ?? "Not Admitted",
+    };
+
+    console.log("patientName", newData);
   };
 
   return (
@@ -60,7 +73,7 @@ const NewPatient = () => {
             <form
               encType="multipart/form-data"
               className="form-horizontal"
-              onSubmit={registerPatient}
+              onSubmit={handleSubmit(registerPatient)}
             >
               <div className="form-group py-2 ">
                 <div className="container">
@@ -73,7 +86,6 @@ const NewPatient = () => {
                         className="pl-2 py-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2"
                         type="text"
                         name="patientId"
-                        required
                       />
                     </div>
                     <div className="col">
@@ -129,12 +141,14 @@ const NewPatient = () => {
                       <label>First Name: &nbsp;</label>
                       <input
                         type="text"
+                        {...register("firstName")}
                         className="pl-2 py-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2"
                       />
                     </div>
                     <div className="col-sm">
                       <label>Middle Name: &nbsp;</label>
                       <input
+                        {...register("middleName")}
                         type="text"
                         className="pl-2 py-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2"
                       />
@@ -142,6 +156,7 @@ const NewPatient = () => {
                     <div className="col-sm">
                       <label>Last Name: &nbsp; </label>
                       <input
+                        {...register("lastName")}
                         type="text"
                         className="pl-2 py-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2"
                       />
@@ -163,12 +178,12 @@ const NewPatient = () => {
                         type="number"
                         id="years"
                         placeholder="Years"
+                        {...register("years")}
                         className="shadow-sm col-sm input-sm bg-white rounded border-1 "
                         style={{ width: "80px", marginLeft: "13px" }}
                       />
                       <input
                         type="number"
-                        className="col-"
                         placeholder="Months"
                         className="col-sm shadow-sm col-sm input-sm bg-white rounded border-1 "
                         style={{ width: "80px" }}
@@ -185,6 +200,7 @@ const NewPatient = () => {
                       <select
                         className="selectpicker border-1 mb-1 px-5   py-1 rounded shadow"
                         name="gender"
+                        {...register("gender")}
                         id="gender"
                         style={{ marginLeft: "28px" }}
                       >
@@ -199,7 +215,7 @@ const NewPatient = () => {
                       <label>Marital Status:</label>
                       <select
                         className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
-                        name="maritalstatus"
+                        {...register("maritalstatus")}
                         id="maritalstatus"
                         style={{ marginLeft: "20px" }}
                       >
@@ -211,6 +227,7 @@ const NewPatient = () => {
                       <label>Occupation: &nbsp;</label>
                       <select
                         className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
+                        {...register("occupation")}
                         name="occupation"
                         id="occupation"
                         style={{ marginLeft: "32px" }}
@@ -266,6 +283,7 @@ const NewPatient = () => {
                       <label>Email Id: &nbsp;</label>
                       <input
                         type="email"
+                        {...register("email")}
                         class="pl-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2"
                         placeholder="Recipient's username"
                         aria-label="Recipient's username"
@@ -340,6 +358,7 @@ const NewPatient = () => {
                         type="text"
                         className="pl-3 py-2 form-control-sm shadow-sm mb-3 bg-white rounded border-2s"
                         style={{ width: "145px" }}
+                        {...register("address")}
                       />
                     </div>
                     <div className="col-sm">
@@ -347,6 +366,7 @@ const NewPatient = () => {
                       <select
                         class="selectpicker border-1 mb-1 px-4 py-1 rounded shadow"
                         style={{ marginLeft: "35px" }}
+                        {...register("province")}
                       >
                         <option value="up">Uttar Pradesh</option>
                         <option value="andhrapradesh">Andhra Pradesh</option>
@@ -356,6 +376,7 @@ const NewPatient = () => {
                     <div className="col-sm">
                       <label>District &nbsp; &nbsp; </label>
                       <select
+                        {...register("district")}
                         class="selectpicker border-1 mb-1 px-5 py-1 rounded shadow"
                         style={{ marginLeft: "15px" }}
                       >
@@ -379,6 +400,7 @@ const NewPatient = () => {
                       <label>Postal Code</label>
                       <input
                         type="text"
+                        {...register("postalcode")}
                         className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
                         placeholder="PIN"
                         style={{ marginLeft: "28px", width: "180px" }}
@@ -388,6 +410,7 @@ const NewPatient = () => {
                       <label>Telephone</label>
                       <input
                         type="number"
+                        {...register("phone")}
                         className="pl-2 form-control-sm px-2  shadow-sm mb-3 bg-white rounded border"
                         style={{ marginLeft: "18px" }}
                       />

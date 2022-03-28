@@ -40,8 +40,6 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
         onClose={closeDrawer}
       >
         {SidebarData.map((data) => {
-          console.log("pdppdwad", data);
-
           return (
             <Link to={data.link} style={styles.link}>
               <List>
