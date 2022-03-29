@@ -16,7 +16,7 @@ import MedicalCertificate from "./MedicalCertificate";
 import DoctorTransfer from "./DoctorTransfer";
 import { useSelector } from "react-redux";
 
-const PatientVisit = ({}) => {
+const PatientVisit = () => {
   const currentRoute = window.location.pathname;
 
   const { error, loading, isAuthenticated, user } = useSelector(

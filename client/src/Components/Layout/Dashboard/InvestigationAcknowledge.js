@@ -1,6 +1,17 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const InvestigationAcknowledge = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const submitHandler = (data) => {
+    console.log(data);
+  };
+
   return (
     <div>
       <h2 className="h2">Investigation Acknowledge </h2>
