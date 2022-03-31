@@ -34,6 +34,7 @@ import { useState } from "react";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
 import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
 import { useSelector } from "react-redux";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +50,7 @@ function App(props) {
       <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/newpatient" component={NewPatient} />
         <Route
