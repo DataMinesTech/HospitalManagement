@@ -12,8 +12,10 @@ export const createNewPatient = (patientData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
+    console.log("patientData", patientData);
+
     const { data } = await axios.post(
-      `http://localhost:5000/api/v1/login`,
+      `http://localhost:5000/api/v1/patient/new`,
       patientData,
       config
     );

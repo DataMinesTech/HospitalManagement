@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import Header from "../Layout/Header/Header";
-import Sidebar from "../Layout/Sidebar/Sidebar";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OutPatientModal from "../Layout/OutPatientModal/OutPatientModal";
 import { Divider, Modal, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./NewPatient.css";
 import WebcamCapture from "../../Helpers/WebcamCapture";
 import { useForm } from "react-hook-form";
+import { createNewPatient } from "../../actions/patientActions";
+import { loadUser } from "../../actions/userActions";
 
 const style = {
   position: "absolute",
@@ -22,6 +23,12 @@ const style = {
 };
 
 const NewPatient = () => {
+  const dispatch = useDispatch();
+
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+
   const {
     register,
     handleSubmit,
@@ -49,7 +56,7 @@ const NewPatient = () => {
       patientAdmissionStatus: data.Admitted ?? "Not Admitted",
     };
 
-    console.log("patientName", newData);
+    dispatch(createNewPatient(newData));
   };
 
   return (

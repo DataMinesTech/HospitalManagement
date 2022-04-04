@@ -17,14 +17,9 @@ import DoctorTransfer from "./DoctorTransfer";
 import { useSelector } from "react-redux";
 
 const PatientVisit = () => {
-  const currentRoute = window.location.pathname;
-
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
-
-  console.log("current Route", currentRoute);
-  console.log("hash location", window.location.hash);
 
   const [active, setActive] = useState("Vital Signs");
 

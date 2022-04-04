@@ -1,14 +1,22 @@
 const express = require("express");
-const app = express();
 const errorMiddleware = require("./middleware/error");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
+var cors = require("cors");
 
-app.use(cors());
+const app = express();
+
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors(corsOptions));
 
 const user = require("./routes/userRoute");
 const patient = require("./routes/patientRoute");

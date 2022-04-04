@@ -30,13 +30,19 @@ import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
 import DoctorTransfer from "./Components/PatientComponent/DoctorTransfer";
 import PatientAdmission from "./Components/PatientComponent/PatientAdmission";
 import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
 import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
 import { useSelector } from "react-redux";
+import store from "./store";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import { loadUser } from "./actions/userActions";
 
 function App(props) {
+  useEffect(() => {
+    // store.dispatch(loadUser());
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const { error, loading, isAuthenticated, user } = useSelector(
@@ -52,7 +58,7 @@ function App(props) {
         <Route exact path="/login" component={Login} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/home" component={Home} />
-        <Route exact path="/newpatient" component={NewPatient} />
+        <ProtectedRoute exact path="/newpatient" component={NewPatient} />
         <Route
           exact
           path="/patientvisit"

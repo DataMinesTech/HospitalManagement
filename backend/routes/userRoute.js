@@ -1,4 +1,5 @@
 const express = require("express");
+const { isAuthenticatedUser } = require("../controller/auth");
 const {
   getAllUsers,
   updateUser,

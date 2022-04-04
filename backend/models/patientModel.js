@@ -40,7 +40,8 @@ const patientSchema = mongoose.Schema({
   },
   patientAdmissionStatus: {
     type: String,
-    required: [true, "Please Enter Status of Admission of patient"],
+    // required: [true, "Please Enter Status of Admission of patient"],
+    default: "Admitted Today",
   },
   patientAppointment: {
     type: Date,

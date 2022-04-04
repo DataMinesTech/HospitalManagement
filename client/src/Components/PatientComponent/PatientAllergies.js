@@ -1,10 +1,7 @@
 import { Divider } from "@mui/material";
 import React from "react";
-import Sidebar from "../Layout/Sidebar/Sidebar";
 
 const PatientAllergies = () => {
-  console.log(window.location.hash);
-
   return (
     <div>
       <h2>Allergies</h2>

@@ -1,7 +1,6 @@
 {
   "name": "hospital-management",
   "version": "0.1.0",
-  "homepage": "https://dataminestech.github.io/HospitalManagement/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -61,5 +60,6 @@
   },
   "devDependencies": {
     "mini-css-extract-plugin": "2.4.5"
-  }
+  },
+  "proxy": "http://localhost:5000/"
 }
