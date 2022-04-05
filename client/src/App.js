@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Auth/Login";
 import NewPatient from "./Components/PatientComponent/NewPatient";
@@ -39,9 +44,9 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 
 function App(props) {
-  useEffect(() => {
-    // store.dispatch(loadUser());
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 

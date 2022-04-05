@@ -29,6 +29,12 @@ const NewPatient = () => {
     (state) => state.user
   );
 
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     dispatch(loadUser());
+  //   }
+  // }, [isAuthenticated, dispatch]);
+
   const {
     register,
     handleSubmit,

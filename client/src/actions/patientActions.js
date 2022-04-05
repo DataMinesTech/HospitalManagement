@@ -3,6 +3,10 @@ import {
   CREATE_PATIENT_SUCCESS,
   CREATE_PATIENT_FAIL,
   CLEAR_ERRORS,
+  GET_PATIENTS_REQUEST,
+  GET_ALL_PATIENTS_REQUEST,
+  GET_ALL_PATIENTS_SUCCESS,
+  GET_ALL_PATIENTS_FAIL,
 } from "../constants/patientConstants";
 import axios from "axios";
 
@@ -15,7 +19,7 @@ export const createNewPatient = (patientData) => async (dispatch) => {
     console.log("patientData", patientData);
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/v1/patient/new`,
+      `api/v1/patient/new`,
       patientData,
       config
     );
@@ -29,5 +33,33 @@ export const createNewPatient = (patientData) => async (dispatch) => {
       type: CREATE_PATIENT_FAIL,
       payload: error.data,
     });
+  }
+};
+
+export const getAllPatients = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ALL_PATIENTS_REQUEST });
+
+    const { data } = await axios.get(`api/v1/patients`);
+
+    console.log("get all patients", data);
+
+    dispatch({ type: GET_ALL_PATIENTS_SUCCESS, payload: data.patients });
+  } catch (error) {
+    dispatch({ type: GET_ALL_PATIENTS_FAIL, payload: error.data });
+  }
+};
+
+export const searchPatient = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_PATIENTS_REQUEST });
+
+    const { data } = await axios.post(`api/v1/patient/${id}`);
+
+    console.log("patient search data", data);
+  } catch (error) {
+    dispatch({ type: GET_ALL_PATIENTS_FAIL, payload: error.data });
+
+    console.log(error);
   }
 };

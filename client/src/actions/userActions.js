@@ -19,12 +19,14 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/v1/login`,
+      `api/v1/login`,
       { email, password },
       config
     );
 
-    console.log(data, "data");
+    // console.log(data, "data111");
+    // console.log(data.token, "token");
+    localStorage.setItem("token", data.token);
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
@@ -32,11 +34,11 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const loadUser = (id) => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`http://localhost:5000/api/v1/user/${id}`);
+    const { data } = await axios.get(`api/v1/user`);
 
     console.log(data, "loaddata");
 

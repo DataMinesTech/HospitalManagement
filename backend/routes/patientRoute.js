@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuthenticatedUser, authorizeRoles } = require("../controller/auth");
+const { isAuthenticatedUser, authorizeRoles } = require("../utils/auth");
 const {
   createPatient,
   getAllPatients,

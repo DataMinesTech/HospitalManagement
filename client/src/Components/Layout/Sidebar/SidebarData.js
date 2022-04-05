@@ -8,6 +8,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ArticleIcon from "@mui/icons-material/Article";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import ScheduleIcon from "@mui/icons-material/Schedule";
 
 export const SidebarData = [
   {
@@ -34,6 +35,11 @@ export const SidebarData = [
     icon: <MedicationIcon />,
     title: "Medicine Dispense",
     link: "/medicinedispense",
+  },
+  {
+    icon: <ScheduleIcon />,
+    title: "Schedule an Appointment",
+    link: "/appointment",
   },
   {
     icon: <NewReleasesIcon />,

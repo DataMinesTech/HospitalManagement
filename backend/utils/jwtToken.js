@@ -4,12 +4,11 @@ const sendToken = (user, statusCode, res) => {
   const token = user.getJWTToken();
 
   const options = {
-    maxAge: 60 * 60 * 1000 * 24,
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
     httpOnly: true,
-    sameSite: "lax",
   };
 
-  res.status(statusCode).cookie("token", token, options).json({
+  res.cookie("token", token, options).status(statusCode).json({
     success: true,
     user,
     token,

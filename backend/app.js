@@ -9,14 +9,13 @@ const app = express();
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+  // optionSuccessStatus: 200,
 };
 
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
 
 const user = require("./routes/userRoute");
 const patient = require("./routes/patientRoute");

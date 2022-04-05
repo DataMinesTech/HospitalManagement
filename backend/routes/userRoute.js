@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuthenticatedUser } = require("../controller/auth");
+const { isAuthenticatedUser } = require("../utils/auth");
 const {
   getAllUsers,
   updateUser,
@@ -20,6 +20,6 @@ router
   .route("/user/:id")
   .put(updateUser)
   .delete(deleteUser)
-  .get(getUserDetails);
+  .get(isAuthenticatedUser, getUserDetails);
 
 module.exports = router;
