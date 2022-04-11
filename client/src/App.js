@@ -26,7 +26,7 @@ import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
 import OutPatientMedicineDispense from "./Components/Layout/OutPatientModal/OutPatientMedicineDispense";
 import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
 import InvestigationAcknowledge from "./Components/Layout/Dashboard/InvestigationAcknowledge";
-import Result from "./Components/Layout/Dashboard/Result";
+import Room from "./Components/Layout/Dashboard/Room";
 import SampleAcknowledge from "./Components/Layout/Dashboard/SampleAcknowledge";
 import OutPatientBilling from "./Components/Layout/OutPatientModal/OutPatientBilling";
 import PatientList from "./Components/PatientComponent/PatientList";
@@ -61,7 +61,12 @@ function App(props) {
       <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
       <Switch>
         <Route exact path="/login" component={Login} />
-        <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+        <ProtectedRoute
+          exact
+          path="/dashboard"
+          component={Dashboard}
+          user={user}
+        />
         <Route exact path="/home" component={Home} />
         <ProtectedRoute exact path="/newpatient" component={NewPatient} />
         <Route
@@ -94,7 +99,7 @@ function App(props) {
         <Route exact path="/samplecollection" component={SampleCollection} />
         <Route exact path="/sampleacknowledge" component={SampleAcknowledge} />
         <Route exact path="/appointment" component={DoctorAppointment} />
-        <Route exact path="/result" component={Result} />
+        <Route exact path="/room" component={Room} />
         <Route
           exact
           path="/investigationacknowledge"

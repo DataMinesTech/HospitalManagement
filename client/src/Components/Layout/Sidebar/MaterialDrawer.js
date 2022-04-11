@@ -11,9 +11,19 @@ import ReorderIcon from "@material-ui/icons/Reorder";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
+import PatientSidebar from "./PatientSidebar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { useDispatch, useSelector } from "react-redux";
 
 const MaterialDrawer = ({ isOpen, setIsOpen }) => {
+  const dispatch = useDispatch();
+
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+
+  console.log("user patient", user);
+
   const closeDrawer = () => {
     setIsOpen(false);
   };
@@ -32,27 +42,52 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
   };
 
   return (
-    <div>
-      <Drawer
-        anchor="left"
-        variant="temporary"
-        open={isOpen}
-        onClose={closeDrawer}
-      >
-        {SidebarData.map((data) => {
-          return (
-            <Link to={data.link} style={styles.link}>
-              <List>
-                <ListItem button key={data.title}>
-                  <ListItemIcon>{data.icon}</ListItemIcon>
-                  <ListItemText primary={data.title} />
-                </ListItem>
-              </List>
-            </Link>
-          );
-        })}
-      </Drawer>
-    </div>
+    <>
+      {loading ? (
+        <>Loading ... </>
+      ) : (
+        <div>
+          <Drawer
+            anchor="left"
+            variant="temporary"
+            open={isOpen}
+            onClose={closeDrawer}
+          >
+            {user.userRole !== "admin" ? (
+              <>
+                {PatientSidebar.map((data) => {
+                  return (
+                    <Link to={data.link} style={styles.link}>
+                      <List>
+                        <ListItem button key={data.title}>
+                          <ListItemIcon>{data.icon}</ListItemIcon>
+                          <ListItemText primary={data.title} />
+                        </ListItem>
+                      </List>
+                    </Link>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                {SidebarData.map((data) => {
+                  return (
+                    <Link to={data.link} style={styles.link}>
+                      <List>
+                        <ListItem button key={data.title}>
+                          <ListItemIcon>{data.icon}</ListItemIcon>
+                          <ListItemText primary={data.title} />
+                        </ListItem>
+                      </List>
+                    </Link>
+                  );
+                })}
+              </>
+            )}
+          </Drawer>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { createAppointment } from "../../actions/appointmentActions";
 // import { set } from "../../../../backend/app";
 import { getAllPatients } from "../../actions/patientActions";
 
@@ -11,9 +12,7 @@ const DoctorAppointment = () => {
 
   const [patientName, setPatientName] = useState([]);
   const [patientId, setPatientId] = useState("");
-
-  console.log("patients", patient);
-  // console.log("patients", error);
+  const [patientValue, setPatientValue] = useState("");
 
   useEffect(() => {
     if (!error) {
@@ -29,13 +28,20 @@ const DoctorAppointment = () => {
   } = useForm();
 
   const submitHandler = (data) => {
-    console.log(data, "data appoitment");
+    const obj = {
+      appointmentName: data.appointmentName,
+      appointmentWith: [
+        {
+          patientId: patientId,
+          patientName: patientValue,
+          appointmentOn: data.appointmentOn,
+        },
+      ],
+      anticipatedTime: data.anticipatedTime,
+      doctorsAttending: [{ doctorName: data.doctorName }],
+    };
 
-    console.log("patientId", patientId);
-  };
-
-  const confirmAppointment = (e) => {
-    console.log("eee", e.target.value);
+    dispatch(createAppointment(obj));
   };
 
   const searchPatient = (e) => {
@@ -44,6 +50,9 @@ const DoctorAppointment = () => {
       return val.patientName.toLowerCase().includes(searchWord.toLowerCase());
     });
     setPatientName(newFilter);
+    // setPatientValue(newFilter);
+    console.log("paient vaue", patientValue);
+    // setPatienValue();
     // setSendPatient(newFilter);
   };
 
@@ -63,37 +72,24 @@ const DoctorAppointment = () => {
               <label>appointmentWith: </label>
               <br />
               <label>patientName</label>
-              <input type="text" {...register("patientId")} />
+              <input type="hidden" {...register("patientId")} />
               <input
-                type="text"
+                type="search"
                 {...register("patientName")}
-                value={patientName.patientName}
                 onChange={searchPatient}
+                defaultValue={patientValue}
+                // onPatientValue={(e) => setPatientValue(e.target.value)}
               />
-
-              {/* {patient && patient.length > 0 ? (
-                patient.filter((val) => {
-                  console.log(val, "val");
-
-                  if (patientName === "") {
-                    return val;
-                  } else if (
-                    val.patientName
-                      .toLowerCase()
-                      .includes(patientName.toLowerCase())
-                  ) {
-                    return val;
-                  }
-                })
-              ) : (
-                <></>
-  )} */}
               {patientName.length !== 0 ? (
                 patientName.map((data, key) => {
                   return (
                     <button
+                      type="button"
                       key={data._id}
-                      onClick={() => setPatientId(data._id)}
+                      onClick={() => {
+                        setPatientId(data._id);
+                        setPatientValue(data.patientName);
+                      }}
                     >
                       {data.patientName}
                     </button>
@@ -103,25 +99,14 @@ const DoctorAppointment = () => {
                 <></>
               )}
 
-              {/* : (
-                 .map((val, key) => {
-                  return (
-                    <div key={val._id}>
-                      <h3>{val.patientName}</h3>
-                    </div>
-                  );
-                })
-                <></>
-              )} */}
-
               <label>appointment On</label>
-              <input type="text" {...register("appointment On")} />
+              <input type="datetime-local" {...register("appointmentOn")} />
               <label>anticipatedTime</label>
-              <input type="datetime-local" {...register("anticipated Time")} />
+              <input type="text" {...register("anticipatedTime")} />
               <label>doctorsAttending</label>
               <label>Doctor Name</label>
               <input type="text" {...register("doctorName")} />
-              <input type="text" {...register("doctorId")} />
+              <input type="hidden" {...register("doctorId")} />
               <button type="submit" class="btn btn-primary btn-block mb-4  ">
                 Submit
               </button>
