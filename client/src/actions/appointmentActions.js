@@ -3,6 +3,9 @@ import {
   CREATE_APPOINTMENT_FAIL,
   CREATE_APPOINTMENT_REQUEST,
   CREATE_APPOINTMENT_SUCCESS,
+  GET_ALL_APPOINTMENTS_FAIL,
+  GET_ALL_APPOINTMENTS_REQUEST,
+  GET_ALL_APPOINTMENTS_SUCCESS,
 } from "../constants/appointmentConstants";
 
 export const createAppointment = (appointmentData) => async (dispatch) => {
@@ -24,7 +27,25 @@ export const createAppointment = (appointmentData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CREATE_APPOINTMENT_FAIL,
-      payload: error.data,
+      payload: error.response,
+    });
+  }
+};
+
+export const getAllAppointments = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ALL_APPOINTMENTS_REQUEST });
+
+    const { data } = await axios.get(`api/v1/appointments`);
+
+    dispatch({
+      type: GET_ALL_APPOINTMENTS_SUCCESS,
+      payload: data.appointments,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_ALL_APPOINTMENTS_FAIL,
+      payload: error.response,
     });
   }
 };

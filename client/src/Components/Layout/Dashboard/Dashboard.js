@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
@@ -34,13 +34,31 @@ import ScienceIcon from "@mui/icons-material/Science";
 import { Divider } from "@mui/material";
 import "./Dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllAppointments } from "../../../actions/appointmentActions";
+import { getAllPatients } from "../../../actions/patientActions";
+import { getAllRooms } from "../../../actions/roomActions";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const dispatch = useDispatch();
 
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
+
+  const { appointments } = useSelector((state) => state.allappointments);
+  const { patient } = useSelector((state) => state.patients);
+  const { rooms } = useSelector((state) => state.allrooms);
+
+  console.log("props", rooms);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getAllAppointments());
+    }
+
+    dispatch(getAllPatients());
+    dispatch(getAllRooms());
+  }, [dispatch]);
 
   return (
     <div>
@@ -48,7 +66,7 @@ const Dashboard = () => {
       Hello: {user?.userName}
       <Divider />
       <br />
-      <div className="d-flex justify-content-evenly">
+      {/* <div className="d-flex justify-content-evenly">
         <div>
           <button
             type="button"
@@ -354,7 +372,10 @@ const Dashboard = () => {
           </button>
           <p>Laboratory Setup</p>
         </div>
-      </div>
+      </div> */}
+      <div className="">Number of Appointments : {appointments?.length} </div>
+      <div className="">Number of Patients : {patient?.length} </div>
+      <div className="">Number of Rooms Occupied : {rooms?.length} </div>
     </div>
   );
 };

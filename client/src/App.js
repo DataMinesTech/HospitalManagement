@@ -44,15 +44,17 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
 
 function App(props) {
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
+
+  const appointments = useSelector((state) => state.appointments);
 
   return (
     <Router>

@@ -3,14 +3,19 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { userReducer } from "./reducers/userReducer";
 import { patientReducer } from "./reducers/patientReducer";
-import { createAppointmentReducer } from "./reducers/appointmentReducer";
-import { createRoomReducer } from "./reducers/roomReducer";
+import {
+  createAppointmentReducer,
+  allAppointmentsReducer,
+} from "./reducers/appointmentReducer";
+import { allRoomReducer, createRoomReducer } from "./reducers/roomReducer";
 
 const reducer = combineReducers({
   user: userReducer,
   patients: patientReducer,
   appointments: createAppointmentReducer,
   rooms: createRoomReducer,
+  allappointments: allAppointmentsReducer,
+  allrooms: allRoomReducer,
 });
 
 const middleware = [thunk];

@@ -34,7 +34,6 @@ export const userReducer = (state = { user: {} }, action) => {
       };
     case LOAD_USER_FAIL:
       return {
-        ...state,
         loading: false,
         isAuthenticated: false,
         user: null,
