@@ -1,15 +1,28 @@
 import { Divider } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { columns, rows } from "../../../Helpers/DatagridMockData";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllAppointments } from "../../../actions/appointmentActions";
 
-const OutPatientMedicineDispense = () => {
+const AllAppointments = () => {
+  const dispatch = useDispatch();
+
+  const { appointments, loading } = useSelector(
+    (state) => state.allappointments
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  console.log("appointments", appointments);
+
+  useEffect(() => {
+    dispatch(getAllAppointments());
+  }, []);
 
   const submitHandler = (data) => {
     console.log(data);
@@ -19,7 +32,7 @@ const OutPatientMedicineDispense = () => {
     <div>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
-          <p className="h3">Medicine Dispense</p>
+          <p className="h3">All Appointments</p>
           <Divider />
           <div className="d-flex justify-content-evenly">
             <div>
@@ -67,17 +80,36 @@ const OutPatientMedicineDispense = () => {
           </div>
         </div>
         <div className=" justify-content-center" style={{ height: 400 }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
+          {appointments.map((data) => {
+            console.log(data, "appicancana");
+
+            return (
+              <>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Appointment Time</th>
+                      <th scope="col">Appointment With</th>
+                      <th scope="col">Doctors</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>{data.appointmentWith[0].appointmentOn}</td>
+                      <td>{data.appointmentWith[0].patientName}</td>
+                      <td>{data.doctorsAttending[0].doctorName}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </>
+            );
+          })}
         </div>
       </form>
     </div>
   );
 };
 
-export default OutPatientMedicineDispense;
+export default AllAppointments;

@@ -33,8 +33,8 @@ export const SidebarData = [
   },
   {
     icon: <MedicationIcon />,
-    title: "Medicine Dispense",
-    link: "/medicinedispense",
+    title: "All Appointments",
+    link: "/allappointments",
   },
   {
     icon: <ScheduleIcon />,

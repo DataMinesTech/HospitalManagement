@@ -8,12 +8,13 @@ import {
   ListItemText,
 } from "@mui/material";
 import ReorderIcon from "@material-ui/icons/Reorder";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import PatientSidebar from "./PatientSidebar";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "../../../actions/userActions";
 
 const MaterialDrawer = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
   console.log("user patient", user);
 
@@ -53,7 +58,7 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
             open={isOpen}
             onClose={closeDrawer}
           >
-            {user.userRole !== "admin" ? (
+            {user?.userRole !== "admin" ? (
               <>
                 {PatientSidebar.map((data) => {
                   return (

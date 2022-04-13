@@ -19,6 +19,7 @@ const Login = ({ history }) => {
     if (error) {
       console.log(error);
       dispatch(clearErrors());
+      debugger;
     }
 
     if (isAuthenticated) {
@@ -29,7 +30,7 @@ const Login = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("login form submitted");
-
+    debugger;
     dispatch(login(loginEmail, loginPassword));
   };
 

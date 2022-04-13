@@ -23,7 +23,6 @@ import ReferToDoctor from "./Components/PatientComponent/ReferToDoctor";
 import Dashboard from "./Components/Layout/Dashboard/Dashboard";
 import Inventory from "./Components/Layout/Dashboard/Inventory";
 import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
-import OutPatientMedicineDispense from "./Components/Layout/OutPatientModal/OutPatientMedicineDispense";
 import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
 import InvestigationAcknowledge from "./Components/Layout/Dashboard/InvestigationAcknowledge";
 import Room from "./Components/Layout/Dashboard/Room";
@@ -42,6 +41,7 @@ import { useSelector } from "react-redux";
 import store from "./store";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { loadUser } from "./actions/userActions";
+import AllAppointments from "./Components/Layout/OutPatientModal/AllAppointments";
 
 function App(props) {
   useEffect(() => {
@@ -54,15 +54,13 @@ function App(props) {
     (state) => state.user
   );
 
-  const appointments = useSelector((state) => state.appointments);
-
   return (
     <Router>
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
 
       <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
       <Switch>
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={Login} />
         <ProtectedRoute
           exact
           path="/dashboard"
@@ -93,11 +91,7 @@ function App(props) {
         <Route exact path="/refertodoctor" component={ReferToDoctor} />
         <Route exact path="/inventory" component={Inventory} />
         <Route exact path="/patientissue" component={PatientIssue} />
-        <Route
-          exact
-          path="/medicinedispense"
-          component={OutPatientMedicineDispense}
-        />
+        <Route exact path="/allappointments" component={AllAppointments} />
         <Route exact path="/samplecollection" component={SampleCollection} />
         <Route exact path="/sampleacknowledge" component={SampleAcknowledge} />
         <Route exact path="/appointment" component={DoctorAppointment} />
