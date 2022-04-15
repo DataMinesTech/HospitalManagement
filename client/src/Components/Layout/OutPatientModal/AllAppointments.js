@@ -80,32 +80,32 @@ const AllAppointments = () => {
           </div>
         </div>
         <div className=" justify-content-center" style={{ height: 400 }}>
-          {appointments.map((data) => {
-            console.log(data, "appicancana");
+          <>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Appointment Time</th>
+                  <th scope="col">Appointment With</th>
+                  <th scope="col">Doctors</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointments.map((data) => {
+                  console.log(data, "appicancana");
 
-            return (
-              <>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Appointment Time</th>
-                      <th scope="col">Appointment With</th>
-                      <th scope="col">Doctors</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                  return (
                     <tr>
                       <th scope="row">1</th>
                       <td>{data.appointmentWith[0].appointmentOn}</td>
                       <td>{data.appointmentWith[0].patientName}</td>
                       <td>{data.doctorsAttending[0].doctorName}</td>
                     </tr>
-                  </tbody>
-                </table>
-              </>
-            );
-          })}
+                  );
+                })}
+              </tbody>
+            </table>
+          </>
         </div>
       </form>
     </div>

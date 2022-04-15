@@ -21,11 +21,7 @@ export const SidebarData = [
     title: "Patient Registration",
     link: "/newpatient",
   },
-  // {
-  //   icon: <AirlineSeatFlatIcon />,
-  //   title: "Patient Visit",
-  //   link: "/patientvisit",
-  // },
+
   {
     icon: <PersonAddAltIcon />,
     title: "Patient Issue",
@@ -60,6 +56,11 @@ export const SidebarData = [
     icon: <PictureAsPdfIcon />,
     title: "Sample Acknowledge",
     link: "/sampleacknowledge",
+  },
+  {
+    icon: <AirlineSeatFlatIcon />,
+    title: "Room Status",
+    link: "/roomstatus",
   },
   {
     icon: <ArticleIcon />,

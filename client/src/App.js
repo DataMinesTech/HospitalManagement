@@ -1,47 +1,42 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { loadUser } from "./actions/userActions";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
-import Home from "./Components/Home/Home";
 import Login from "./Components/Auth/Login";
-import NewPatient from "./Components/PatientComponent/NewPatient";
-import Header from "./Components/Layout/Header/Header";
-import PatientVisit from "./Components/PatientComponent/PatientVisit";
-import PatientAllergies from "./Components/PatientComponent/PatientAllergies";
-import PresentingComplaint from "./Components/PatientComponent/PresentingComplaint";
-import Medication from "./Components/PatientComponent/Medication";
-import Diagnosis from "./Components/PatientComponent/Diagnosis";
-import HistoryAndExam from "./Components/PatientComponent/HistoryAndExam";
-import InvestigationProcedure from "./Components/PatientComponent/InvestigationProcedure";
-import PrescriptionMedicine from "./Components/PatientComponent/PrescriptionMedicine";
-import Advice from "./Components/PatientComponent/Advice";
-import MedicalCertificate from "./Components/PatientComponent/MedicalCertificate";
-import ReferToDoctor from "./Components/PatientComponent/ReferToDoctor";
+import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
+import Home from "./Components/Home/Home";
 import Dashboard from "./Components/Layout/Dashboard/Dashboard";
 import Inventory from "./Components/Layout/Dashboard/Inventory";
-import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
-import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
 import InvestigationAcknowledge from "./Components/Layout/Dashboard/InvestigationAcknowledge";
+import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
 import Room from "./Components/Layout/Dashboard/Room";
 import SampleAcknowledge from "./Components/Layout/Dashboard/SampleAcknowledge";
+import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
+import Header from "./Components/Layout/Header/Header";
+import AllAppointments from "./Components/Layout/OutPatientModal/AllAppointments";
 import OutPatientBilling from "./Components/Layout/OutPatientModal/OutPatientBilling";
-import PatientList from "./Components/PatientComponent/PatientList";
-import RoomStatus from "./Components/PatientComponent/RoomStatus";
-import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
+import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
+import Advice from "./Components/PatientComponent/Advice";
+import Diagnosis from "./Components/PatientComponent/Diagnosis";
 import DoctorTransfer from "./Components/PatientComponent/DoctorTransfer";
+import HistoryAndExam from "./Components/PatientComponent/HistoryAndExam";
+import InvestigationProcedure from "./Components/PatientComponent/InvestigationProcedure";
+import MedicalCertificate from "./Components/PatientComponent/MedicalCertificate";
+import Medication from "./Components/PatientComponent/Medication";
+import NewPatient from "./Components/PatientComponent/NewPatient";
 import PatientAdmission from "./Components/PatientComponent/PatientAdmission";
 import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
-import { useEffect, useState } from "react";
-import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
-import DoctorAppointment from "./Components/DoctorComponent/DoctorAppointment";
-import { useSelector } from "react-redux";
-import store from "./store";
+import PatientList from "./Components/PatientComponent/PatientList";
+import PatientVisit from "./Components/PatientComponent/PatientVisit";
+import PrescriptionMedicine from "./Components/PatientComponent/PrescriptionMedicine";
+import PresentingComplaint from "./Components/PatientComponent/PresentingComplaint";
+import ReferToDoctor from "./Components/PatientComponent/ReferToDoctor";
+import RoomStatus from "./Components/PatientComponent/RoomStatus";
+import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
+import RoomsOccupied from "./Components/RoomComponent/RoomsOccupied";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { loadUser } from "./actions/userActions";
-import AllAppointments from "./Components/Layout/OutPatientModal/AllAppointments";
+import store from "./store";
 
 function App(props) {
   useEffect(() => {
@@ -88,6 +83,7 @@ function App(props) {
           path="/medicalcertificate"
           component={MedicalCertificate}
         />
+        <Route exact path="/roomstatus" component={RoomsOccupied} />
         <Route exact path="/refertodoctor" component={ReferToDoctor} />
         <Route exact path="/inventory" component={Inventory} />
         <Route exact path="/patientissue" component={PatientIssue} />
