@@ -19,7 +19,7 @@ import OutPatientBilling from "./Components/Layout/OutPatientModal/OutPatientBil
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
 import Advice from "./Components/PatientComponent/Advice";
 import Diagnosis from "./Components/PatientComponent/Diagnosis";
-import DoctorTransfer from "./Components/PatientComponent/DoctorTransfer";
+import AllDoctors from "./Components/PatientComponent/AllDoctors";
 import HistoryAndExam from "./Components/PatientComponent/HistoryAndExam";
 import InvestigationProcedure from "./Components/PatientComponent/InvestigationProcedure";
 import MedicalCertificate from "./Components/PatientComponent/MedicalCertificate";
@@ -101,7 +101,7 @@ function App(props) {
         <Route exact path="/patientlist" component={PatientList} />
         <Route exact path="/roomstatus" component={RoomStatus} />
         <Route exact path="/roomtransfer" component={RoomTransfer} />
-        <Route exact path="/doctortransfer" component={DoctorTransfer} />
+        <Route exact path="/alldoctors" component={AllDoctors} />
         <Route exact path="/patientadmission" component={PatientAdmission} />
         <Route exact path="/patientdischarge" component={PatientDischarge} />
       </Switch>

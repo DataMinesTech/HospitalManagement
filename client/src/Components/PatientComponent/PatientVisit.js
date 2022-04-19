@@ -13,7 +13,7 @@ import InvestigationAcknowledge from "../Layout/Dashboard/InvestigationAcknowled
 import PrescriptionMedicine from "./PrescriptionMedicine";
 import Advice from "./Advice";
 import MedicalCertificate from "./MedicalCertificate";
-import DoctorTransfer from "./DoctorTransfer";
+import DoctorTransfer from "./AllDoctors";
 import { useSelector } from "react-redux";
 
 const PatientVisit = () => {
@@ -62,7 +62,7 @@ const PatientVisit = () => {
           {active === "Prescription Medicine" && <PrescriptionMedicine />}
           {active === "Advice" && <Advice />}
           {active === "Medical Certificate" && <MedicalCertificate />}
-          {active === "Refer to Doctor" && <DoctorTransfer />}
+          {/* {active === "Refer to Doctor" && <DoctorTransfer />} */}
         </div>
       </div>
     </>

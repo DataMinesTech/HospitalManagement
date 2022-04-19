@@ -63,6 +63,11 @@ export const SidebarData = [
     link: "/roomstatus",
   },
   {
+    icon: <MedicationIcon />,
+    title: "All Doctors",
+    link: "/alldoctors",
+  },
+  {
     icon: <ArticleIcon />,
     title: "Assign a Room",
     link: "/room",

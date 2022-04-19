@@ -8,6 +8,9 @@ import {
   LOAD_USER_SUCCESS,
   LOGOUT_USER_FAIL,
   LOGOUT_USER_SUCCESS,
+  GET_ALL_USERS_REQUEST,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAIL,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -47,6 +50,20 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.message });
+  }
+};
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_ALL_USERS_REQUEST });
+
+    const { data } = await axios.get(`api/v1/users`);
+
+    console.log(data, "all users current");
+
+    dispatch({ type: GET_ALL_USERS_SUCCESS, payload: data.users });
+  } catch (error) {
+    dispatch({ type: GET_ALL_USERS_FAIL });
   }
 };
 
