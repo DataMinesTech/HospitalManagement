@@ -10,7 +10,6 @@ header .header-nav {
 }
 header .header-nav .nav-item ul li {
   float: left;
-  font-family: "mouse-500", Arial, Helvetica, sans-serif;
   font-size: 16px;
   padding: 28px;
   list-style: none;
@@ -57,4 +56,14 @@ header .scroll-to-fixed-fixed {
   .small-menu {
     margin-top: 11px;
   }
+}
+
+.sub-header {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+.sub-header-title {
+  font-weight: 900;
+  font-size: 24px;
 }

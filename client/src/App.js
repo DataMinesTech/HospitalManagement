@@ -37,6 +37,18 @@ import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
 import RoomsOccupied from "./Components/RoomComponent/RoomsOccupied";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import store from "./store";
+import { Box, Toolbar } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "Nunito Sans, sans-serif",
+      textTransform: "none",
+      fontSize: 14,
+    },
+  },
+});
 
 function App(props) {
   useEffect(() => {
@@ -50,62 +62,100 @@ function App(props) {
   );
 
   return (
-    <Router>
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
-
-      <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <ProtectedRoute
-          exact
-          path="/dashboard"
-          component={Dashboard}
-          user={user}
-        />
-        <Route exact path="/home" component={Home} />
-        <ProtectedRoute exact path="/newpatient" component={NewPatient} />
-        <Route
-          exact
-          path="/patientvisit"
-          component={PatientVisit}
-          user={user}
-        />
-        {/* <Route exact path="/allergies" component={PatientAllergies} /> */}
-        <Route exact path="/complaint" component={PresentingComplaint} />
-        <Route exact path="/medication" component={Medication} />
-        <Route exact path="/diagnosis" component={Diagnosis} />
-        <Route exact path="/historyandexam" component={HistoryAndExam} />
-        <Route exact path="/investigation" component={InvestigationProcedure} />
-        <Route exact path="/prescription" component={PrescriptionMedicine} />
-        <Route exact path="/advice" component={Advice} />
-        <Route
-          exact
-          path="/medicalcertificate"
-          component={MedicalCertificate}
-        />
-        <Route exact path="/roomstatus" component={RoomsOccupied} />
-        <Route exact path="/refertodoctor" component={ReferToDoctor} />
-        <Route exact path="/inventory" component={Inventory} />
-        <Route exact path="/patientissue" component={PatientIssue} />
-        <Route exact path="/allappointments" component={AllAppointments} />
-        <Route exact path="/samplecollection" component={SampleCollection} />
-        <Route exact path="/sampleacknowledge" component={SampleAcknowledge} />
-        <Route exact path="/appointment" component={DoctorAppointment} />
-        <Route exact path="/room" component={Room} />
-        <Route
-          exact
-          path="/investigationacknowledge"
-          component={InvestigationAcknowledge}
-        />
-        <Route exact path="/outpatientbilling" component={OutPatientBilling} />
-        <Route exact path="/patientlist" component={PatientList} />
-        <Route exact path="/roomstatus" component={RoomStatus} />
-        <Route exact path="/roomtransfer" component={RoomTransfer} />
-        <Route exact path="/alldoctors" component={AllDoctors} />
-        <Route exact path="/patientadmission" component={PatientAdmission} />
-        <Route exact path="/patientdischarge" component={PatientDischarge} />
-      </Switch>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Box sx={{ display: "flex", position: "relative" }}>
+          <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
+          <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Box component="main" sx={{ flexGrow: 1, position: "relative" }}>
+            <Toolbar />
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <ProtectedRoute
+                exact
+                path="/dashboard"
+                component={Dashboard}
+                user={user}
+              />
+              <Route exact path="/home" component={Home} />
+              <ProtectedRoute exact path="/newpatient" component={NewPatient} />
+              <Route
+                exact
+                path="/patientvisit"
+                component={PatientVisit}
+                user={user}
+              />
+              {/* <Route exact path="/allergies" component={PatientAllergies} /> */}
+              <Route exact path="/complaint" component={PresentingComplaint} />
+              <Route exact path="/medication" component={Medication} />
+              <Route exact path="/diagnosis" component={Diagnosis} />
+              <Route exact path="/historyandexam" component={HistoryAndExam} />
+              <Route
+                exact
+                path="/investigation"
+                component={InvestigationProcedure}
+              />
+              <Route
+                exact
+                path="/prescription"
+                component={PrescriptionMedicine}
+              />
+              <Route exact path="/advice" component={Advice} />
+              <Route
+                exact
+                path="/medicalcertificate"
+                component={MedicalCertificate}
+              />
+              <Route exact path="/roomstatus" component={RoomsOccupied} />
+              <Route exact path="/refertodoctor" component={ReferToDoctor} />
+              <Route exact path="/inventory" component={Inventory} />
+              <Route exact path="/patientissue" component={PatientIssue} />
+              <Route
+                exact
+                path="/allappointments"
+                component={AllAppointments}
+              />
+              <Route
+                exact
+                path="/samplecollection"
+                component={SampleCollection}
+              />
+              <Route
+                exact
+                path="/sampleacknowledge"
+                component={SampleAcknowledge}
+              />
+              <Route exact path="/appointment" component={DoctorAppointment} />
+              <Route exact path="/room" component={Room} />
+              <Route
+                exact
+                path="/investigationacknowledge"
+                component={InvestigationAcknowledge}
+              />
+              <Route
+                exact
+                path="/outpatientbilling"
+                component={OutPatientBilling}
+              />
+              <Route exact path="/patientlist" component={PatientList} />
+              <Route exact path="/roomstatus" component={RoomStatus} />
+              <Route exact path="/roomtransfer" component={RoomTransfer} />
+              <Route exact path="/alldoctors" component={AllDoctors} />
+              <Route
+                exact
+                path="/patientadmission"
+                component={PatientAdmission}
+              />
+              <Route
+                exact
+                path="/patientdischarge"
+                component={PatientDischarge}
+              />
+            </Switch>
+          </Box>
+        </Box>
+      </Router>
+    </ThemeProvider>
   );
 }
 

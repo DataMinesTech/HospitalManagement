@@ -48,8 +48,6 @@ div.content {
   background-color: #f8f9fa;
   justify-content: center;
   align-items: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .sidebar-row:hover {
@@ -74,8 +72,6 @@ div.content {
 
   justify-content: center;
   align-items: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
 }
 
 .nav-link :hover {
