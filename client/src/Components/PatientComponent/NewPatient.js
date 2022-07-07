@@ -201,7 +201,7 @@ const NewPatient = () => {
         <button onClick={() => setOpenModal(!openModal)}>options</button>
       </div> */}
       <Divider></Divider>
-      {openModal !== false ? (
+      {/* {openModal !== false ? (
         <Modal open={openModal} onClose={() => setOpenModal(false)}>
           <Box sx={style}>
             <OutPatientModal />
@@ -709,7 +709,7 @@ const NewPatient = () => {
             </form>
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 };

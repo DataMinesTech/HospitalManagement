@@ -313,7 +313,7 @@ const AllDoctors = () => {
           </Box>
         </Layout>
       </div>
-      <>
+      {/* <>
         <table class="table">
           <thead>
             <tr>
@@ -336,7 +336,7 @@ const AllDoctors = () => {
             })}
           </tbody>
         </table>
-      </>
+      </> */}
     </div>
   );
 };

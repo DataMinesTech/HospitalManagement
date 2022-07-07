@@ -183,7 +183,7 @@ const DoctorAppointment = () => {
               </Box>
             </Box>
           </Layout>
-          <form onSubmit={handleSubmit(submitHandler)}>
+          {/* <form onSubmit={handleSubmit(submitHandler)}>
             <br />
             <label>appointmentName:</label>
             <input type="text" {...register("appointmentName")} />
@@ -229,7 +229,7 @@ const DoctorAppointment = () => {
             <button type="submit" class="btn btn-primary btn-block mb-4  ">
               Submit
             </button>
-          </form>
+          </form> */}
         </div>
       )}
     </>
