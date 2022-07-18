@@ -21,11 +21,13 @@ const user = require("./routes/userRoute");
 const patient = require("./routes/patientRoute");
 const room = require("./routes/roomRoute");
 const appointment = require("./routes/appointmentRoute");
+const inventory = require("./routes/inventoryRoute");
 
 app.use("/api/v1", user);
 app.use("/api/v1", patient);
 app.use("/api/v1", room);
 app.use("/api/v1", appointment);
+app.use("/api/v1", inventory);
 
 //Middleware Error
 app.use(errorMiddleware);

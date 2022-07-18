@@ -1,6 +1,7 @@
 const app = require("./app");
 const connectDB = require("./config/database");
 const dotenv = require("dotenv");
+const whatsapp = require("./utils/whatsappFeature");
 
 dotenv.config({ path: "backend/config/config.env" });
 
