@@ -35,10 +35,10 @@ export default function PatientDetailForm(props) {
   } = props;
   return (
     <Box mb={4} sx={{ width: "80%", mx: "auto" }}>
-      <div className="d-grid grid-cols-3 py-5 gap-4">
+      <div className="grid grid-cols-3 py-5 gap-4">
         <div>
           <div className="form-label">Patient Name</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Enter Name"
@@ -48,7 +48,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Mobile Number</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Mobile Number"
@@ -86,7 +86,7 @@ export default function PatientDetailForm(props) {
                   setValue(newValue);
                 }}
                 renderInput={({ inputRef, inputProps, InputProps }) => (
-                  <div className="d-flex align-items-center">
+                  <div className="flex items-center">
                     {InputProps?.endAdornment}
                     <Field
                       name={patientDOB.name}
@@ -102,7 +102,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Patient Gender</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Select Gender"
@@ -112,7 +112,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Patient Email</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Enter Email"
@@ -122,7 +122,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Diagnosis</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Enter Diagnosis"

@@ -6,7 +6,7 @@ const Medication = () => {
     <div>
       <h3>Current Medication</h3>
       <Divider />
-      <div className="d-flex justify-content-evenly">
+      <div className="flex justify-content-evenly">
         <div>
           <input type="radio" />
           &nbsp;

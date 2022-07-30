@@ -41,7 +41,7 @@ const Login = ({ history }) => {
       ) : (
         <>
           <div class="container py-5 h-100">
-            <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="row flex items-center justify-content-center h-100">
               <div class="col-md-8 col-lg-7 col-xl-6">
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
@@ -77,7 +77,7 @@ const Login = ({ history }) => {
                     </label>
                   </div>
 
-                  <div class="d-flex justify-content-around align-items-center mb-4">
+                  <div class="flex justify-content-around items-center mb-4">
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -100,7 +100,7 @@ const Login = ({ history }) => {
                     Sign in
                   </button>
 
-                  {/* <div class="divider d-flex align-items-center my-4">
+                  {/* <div class="divider flex items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
             </div>
 

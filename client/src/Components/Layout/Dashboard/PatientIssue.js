@@ -18,7 +18,7 @@ const PatientIssue = () => {
       <h2>Patient Issue</h2>
       <Divider></Divider>
       <form onSubmit={handleSubmit(submitHandler)}>
-        <div className="container align-items-center">
+        <div className="container items-center">
           <div className="row">
             <div className="col-sm">
               <label>Issue Sale</label>
@@ -215,7 +215,7 @@ const PatientIssue = () => {
             </div>
           </div>
           <br />
-          <div className="d-flex justify-content-center">
+          <div className="flex justify-content-center">
             <button type="submit" className="btn  btn-primary btn-block ">
               Save
             </button>

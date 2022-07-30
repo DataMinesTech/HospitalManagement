@@ -235,7 +235,7 @@ const AllDoctors = () => {
       <div className="position-relative">
         <PageHeader title={"Doctors List"} />
         <Layout>
-          <div className="d-flex justify-content-between align-item-center pb-3">
+          <div className="flex justify-content-between align-item-center pb-3">
             <div>
               <SearchBar />
             </div>
@@ -281,7 +281,7 @@ const AllDoctors = () => {
                       subheader={
                         <div>
                           <div>{doctor.department}</div>
-                          <div className="d-flex justify-content-start align-item-center gap-1 py-1">
+                          <div className="flex justify-content-start align-item-center gap-1 py-1">
                             <FiClock className="self-align-center" size={16} />{" "}
                             {doctor.timing}
                           </div>

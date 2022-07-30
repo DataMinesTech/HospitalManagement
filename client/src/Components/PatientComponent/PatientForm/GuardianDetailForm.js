@@ -22,10 +22,10 @@ export default function PatientGuardianDetailForm(props) {
   } = props;
   return (
     <Box mb={4} sx={{ width: "80%", mx: "auto" }}>
-      <div className="d-grid grid-cols-3 py-5 gap-4">
+      <div className="grid grid-cols-3 py-5 gap-4">
         <div>
           <div className="form-label">Guardian Name</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Guardian Name"
@@ -35,7 +35,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Guardian Mobile No.</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Guardian Mobile No."
@@ -73,7 +73,7 @@ export default function PatientGuardianDetailForm(props) {
                   setValue(newValue);
                 }}
                 renderInput={({ inputRef, inputProps, InputProps }) => (
-                  <div className="d-flex align-items-center">
+                  <div className="flex items-center">
                     {InputProps?.endAdornment}
                     <Field
                       name={patientGuardianDOB.name}
@@ -89,7 +89,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Guardian Address1</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Guardian Address1"
@@ -99,7 +99,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Guardian Address2</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Guardian Address2"
@@ -109,7 +109,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">City</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Enter City"
@@ -119,7 +119,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">State</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="State"
@@ -129,7 +129,7 @@ export default function PatientGuardianDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Zipcode</div>
-          <div className="d-flex position-relative">
+          <div className="flex position-relative">
             <Field
               className="form-field"
               placeholder="Zipcode"

@@ -34,7 +34,7 @@ const AllAppointments = () => {
         <div>
           <p className="h3">All Appointments</p>
           <Divider />
-          <div className="d-flex justify-content-evenly">
+          <div className="flex justify-content-evenly">
             <div>
               <label>UHID</label>
               <input

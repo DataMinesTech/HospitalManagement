@@ -65,10 +65,18 @@ function App(props) {
     <ThemeProvider theme={theme}>
       <Router>
         <Box sx={{ display: "flex", position: "relative" }}>
-          <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
+          {/* <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} /> */}
           <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
-          <Box component="main" sx={{ flexGrow: 1, position: "relative" }}>
-            <Toolbar />
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              position: "relative",
+              minHeight: "100vh",
+              backgroundColor: "#FAF6F4",
+            }}
+          >
+            {/* <Toolbar /> */}
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute

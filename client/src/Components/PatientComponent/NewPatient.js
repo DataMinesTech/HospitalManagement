@@ -132,9 +132,6 @@ const NewPatient = () => {
     }
   }
 
-  const [openModal, setOpenModal] = useState(false);
-  const [openCamera, setOpenCamera] = useState(false);
-
   const registerPatient = (data) => {
     console.log("hello", data);
 
@@ -158,7 +155,7 @@ const NewPatient = () => {
 
   return (
     <div className="position-relative">
-      <PageHeader title={"Add New Patient"} />
+      {/* <PageHeader title={"Add New Patient"} /> */}
       <Layout>
         <StepperComponent steps={steps} activeStep={activeStep}>
           <div className="pb-4">
@@ -197,7 +194,7 @@ const NewPatient = () => {
           </div>
         </StepperComponent>
       </Layout>
-      {/* <div className="d-flex justify-content-between py-2">
+      {/* <div className="flex justify-content-between py-2">
         <button onClick={() => setOpenModal(!openModal)}>options</button>
       </div> */}
       <Divider></Divider>
@@ -579,7 +576,7 @@ const NewPatient = () => {
                 </div>
 
                 <h3>Nearest Relative</h3>
-                <div className="d-flex justify-content-end">
+                <div className="flex justify-content-end">
                   <input type="checkbox" className="form-check-input" />
                   <label>Same address as patient</label>
                 </div>
@@ -701,7 +698,7 @@ const NewPatient = () => {
                 </div>
               </div>
 
-              <div className="d-flex py-2 justify-content-center">
+              <div className="flex py-2 justify-content-center">
                 <button type="submit" class="btn btn-primary btn-block mb-4  ">
                   Submit
                 </button>

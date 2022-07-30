@@ -113,20 +113,11 @@ export default Header;
 
 export const PageHeader = ({ title }) => {
   return (
-    <div className="sub-header">
-      <AppBar
-        elevation={0}
-        color="inherit"
-        position="sticky"
-        sx={{
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          boxShadow: "0px 1px 0px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+    <div className="fixed z-50 w-full py-5">
+      <div>
         <Container maxWidth="2xl">
           <Toolbar disableGutters>
             <div className="sub-header-title">{title}</div>
-
             <Box
               sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}
             ></Box>
@@ -140,7 +131,7 @@ export const PageHeader = ({ title }) => {
             </Box>
           </Toolbar>
         </Container>
-      </AppBar>
+      </div>
     </div>
   );
 };

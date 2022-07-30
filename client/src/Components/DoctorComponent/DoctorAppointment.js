@@ -73,10 +73,10 @@ const DoctorAppointment = () => {
           <PageHeader title={"Doctor Appointment"} />
           <Layout>
             <Box mb={4} sx={{ width: "80%", mx: "auto" }}>
-              <div className="d-grid grid-cols-3 py-5 gap-4">
+              <div className="grid grid-cols-3 py-5 gap-4">
                 <div>
                   <div className="form-label">Appointment Name</div>
-                  <div className="d-flex position-relative">
+                  <div className="flex position-relative">
                     <input
                       className="form-field"
                       placeholder="Enter Name"
@@ -87,7 +87,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Patient Name</div>
-                  <div className="d-flex position-relative">
+                  <div className="flex position-relative">
                     <input
                       className="form-field"
                       placeholder="Enter patient Name"
@@ -126,7 +126,7 @@ const DoctorAppointment = () => {
                           setValue(newValue);
                         }}
                         renderInput={({ inputRef, inputProps, InputProps }) => (
-                          <div className="d-flex align-items-center">
+                          <div className="flex items-center">
                             {InputProps?.endAdornment}
                             <input
                               {...register("appointmentOn")}
@@ -142,7 +142,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Anticipated Time</div>
-                  <div className="d-flex position-relative">
+                  <div className="flex position-relative">
                     <input
                       className="form-field"
                       placeholder="Enter Anticipated Time"
@@ -153,7 +153,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Doctor Name</div>
-                  <div className="d-flex position-relative">
+                  <div className="flex position-relative">
                     <input
                       className="form-field"
                       placeholder="Enter Doctor Name"

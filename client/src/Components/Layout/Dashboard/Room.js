@@ -59,7 +59,7 @@ const Room = () => {
             <h2>Room </h2>
             <Divider />
             <form onSubmit={handleSubmit(submitHandler)}>
-              <div className="d-flex justify-content-evenly">
+              <div className="flex justify-content-evenly">
                 <label>Patient Name </label>
                 <input type="hidden" {...register("patientId")} />
                 <input
