@@ -9,6 +9,10 @@ const appointmentScheduledWith = mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     required: [true, "Please Enter Patient Id"],
   },
+  visitFor: {
+    type: String,
+    default: "checkup",
+  },
   appointmentOn: {
     type: Date,
     required: [true, "Please Enter Schduled Appointment time"],
@@ -20,10 +24,6 @@ const doctorsAttendingTheAppointment = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Doctors Name"],
   },
-  // doctorId: {
-  //   type: mongoose.Schema.ObjectId,
-  //  default:
-  // },
 });
 
 const appointmentSchema = mongoose.Schema({
