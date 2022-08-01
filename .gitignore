@@ -3,4 +3,4 @@
 /client/.pnp
 /client/.pnp.js
 /.wwebjs_auth
-/backend/config
+/backend/config/config.env

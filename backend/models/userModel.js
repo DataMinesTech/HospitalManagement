@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "patient",
   },
+  biography: {
+    type: String,
+  },
   userAvailability: {
     type: String,
     required: [true, "Please Enter Availabilty"],
