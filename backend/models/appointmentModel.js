@@ -24,6 +24,10 @@ const doctorsAttendingTheAppointment = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Doctors Name"],
   },
+  doctorId: {
+    type: mongoose.Schema.ObjectId,
+    required: [true, "Please Enter Doctor Id"],
+  },
 });
 
 const appointmentSchema = mongoose.Schema({
