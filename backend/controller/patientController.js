@@ -7,6 +7,8 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.createPatient = catchAsyncErrors(async (req, res) => {
   const patient = await Patients.create(req.body);
 
+  console.log("patient", patient);
+
   res.status(201).json({
     success: true,
     patient,

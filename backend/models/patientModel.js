@@ -29,6 +29,21 @@ const patientSchema = mongoose.Schema({
     type: Number,
     required: [true, "Please Enter Your Age"],
   },
+  guardianName: {
+    type: String,
+  },
+  guardianAddress: {
+    type: String,
+  },
+  guardianPhone: {
+    type: Number,
+  },
+  medicalHistory: {
+    type: String,
+  },
+  vitals: {
+    type: String,
+  },
   patientBloodGroup: {
     type: String,
   },
