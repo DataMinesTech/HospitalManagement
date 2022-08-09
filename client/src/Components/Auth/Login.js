@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
 import { clearErrors, login } from "../../actions/userActions";
+import Button from "../Components/Button";
 
 const Login = ({ history }) => {
   const [loginEmail, setLoginEmail] = useState("");
@@ -40,44 +41,49 @@ const Login = ({ history }) => {
         <div>Loading...</div>
       ) : (
         <>
-          <div class="container py-5 h-100">
-            <div class="row flex items-center justify-content-center h-100">
-              <div class="col-md-8 col-lg-7 col-xl-6">
+          <div class="">
+            <div class="grid grid-cols-3 place-content-center place-items-center min-h-screen">
+              <div class="col-span-2">
                 <img
+                  width={700}
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                   class="img-fluid"
-                  alt="Phone image"
+                  alt="Phone "
                 />
               </div>
-              <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form onSubmit={submitHandler}>
-                  <div class="form-outline mb-4">
-                    <input
-                      type="email"
-                      id="form1Example13"
-                      class="form-control form-control-lg"
-                      value={loginEmail}
-                      onChange={(e) => setLoginEmail(e.target.value)}
-                    />
-                    <label class="form-label" for="form1Example13">
-                      Email address
-                    </label>
+              <div class="bg-white min-h-screen w-full flex items-center justify-center">
+                <form className="w-3/5 mx-auto" onSubmit={submitHandler}>
+                  <div className="pb-5 text-center">
+                    <div className="text-3xl font-black">Login</div>
+                    <div className="py-2">
+                      hey, enter your details to get sign in to your account.
+                    </div>
                   </div>
-
-                  <div class="form-outline mb-4">
-                    <input
-                      type="password"
-                      id="form1Example23"
-                      class="form-control form-control-lg"
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                    />
-                    <label class="form-label" for="form1Example23">
-                      Password
-                    </label>
+                  <div className="mb-2">
+                    <div className="form-label">Email address</div>
+                    <div className="pt-2">
+                      <input
+                        type="email"
+                        id="form1Example13"
+                        className="form-field"
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
+                      />
+                    </div>
                   </div>
-
-                  <div class="flex justify-content-around items-center mb-4">
+                  <div>
+                    <div className="form-label">Password</div>
+                    <div className="mb-5">
+                      <input
+                        className="form-field"
+                        type="password"
+                        id="form1Example23"
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {/* <div class="flex justify-between items-center mb-4">
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -86,20 +92,16 @@ const Login = ({ history }) => {
                         id="form1Example3"
                       />
                       <label class="form-check-label" for="form1Example3">
-                        {" "}
                         Remember me{" "}
                       </label>
                     </div>
-                    <a href="#!">Forgot password?</a>
-                  </div>
-
-                  <button
+                     <a href="#!">Forgot password?</a> 
+                  </div> */}
+                  <Button
                     type="submit"
-                    class="btn btn-primary btn-lg btn-block"
-                  >
-                    Sign in
-                  </button>
-
+                    className="rounded-button primary w-full"
+                    text={"Sign in"}
+                  />
                   {/* <div class="divider flex items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
             </div>

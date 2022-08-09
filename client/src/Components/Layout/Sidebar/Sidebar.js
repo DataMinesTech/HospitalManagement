@@ -24,7 +24,7 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
           return (
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <button
+                <Link
                   onClick={() => {
                     setActive(`${data.title}`);
                   }}
@@ -33,10 +33,10 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
                       ? `sidebar-row-active `
                       : "sidebar-row"
                   }
-                  to={data.link}
+                  href={data.link}
                 >
                   {data.title}
-                </button>
+                </Link>
               </li>
             </ul>
           );

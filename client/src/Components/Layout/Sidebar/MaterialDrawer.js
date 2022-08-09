@@ -3,22 +3,18 @@ import {
   Box,
   Collapse,
   CssBaseline,
-  Divider,
   Drawer,
   IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Toolbar,
 } from "@mui/material";
 import "./Sidebar.css";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import PatientSidebar from "./PatientSidebar";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../../actions/userActions";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -29,9 +25,11 @@ import Logo from "../../../images/Datamines-logo.svg";
 const MaterialDrawer = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
 
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  console.log("kuch bhi likhdiya");
+  const { loading, user } = useSelector((state) => state.user);
+
+  console.log(user);
+
   const [open, setOpen] = React.useState("");
 
   const handleClick = (e) => {
@@ -113,16 +111,17 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
                 <div className="flex justify-center pb-3">
                   <Avatar
                     className="border-2 border-white rounded-full"
-                    sx={{ width: 60, height: 60 }}
-                    alt="Remy Sharp"
-                    src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                    sx={{ width: 60, height: 60, objectFit: "cover" }}
+                    alt={user?.userName}
+                    src={user?.email}
                   />
                 </div>
-                <div className="text-lg font-bold">Dayitava Upadhyay</div>
-                <div className="text-md font-normal">Premium member</div>
+                <div className="text-lg font-bold">{user?.userName}</div>
+                <div className="text-md font-normal">{user?.userRole}</div>
               </div>
             </div>
             <Box
+              id="1"
               sx={{
                 paddingTop: "20px",
                 paddingBottom: "40px",
@@ -147,7 +146,7 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
             >
               {SidebarData.map((data, index) => {
                 return (
-                  <Link key={index} to={data.link} style={styles.link}>
+                  <Link key={data.id} to={data.link} style={styles.link}>
                     <List key={index} disablePadding>
                       {data.item != null ? (
                         <ListItem
@@ -172,7 +171,7 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
                           ) : null}
                         </ListItem>
                       ) : (
-                        <ListItem key={index} style={styles.item} button>
+                        <ListItem key={data.id} style={styles.item} button>
                           <ListItemIcon style={styles.icon}>
                             <img src={data.icon} alt={data.title} width={22} />
                           </ListItemIcon>
@@ -182,19 +181,19 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
                       {data.item &&
                         data.item.map((item, index) => (
                           <Collapse
-                            key={data.id}
+                            key={item.id}
                             in={open === data.id}
                             timeout="auto"
                             unmountOnExit
                           >
                             <Link
-                              key={index}
+                              key={item.id}
                               to={item.link}
                               style={styles.link}
                             >
-                              <List sx={{ pl: 5 }} key={index} disablePadding>
+                              <List sx={{ pl: 5 }} key={item.id} disablePadding>
                                 <ListItem
-                                  key={index}
+                                  key={item.id}
                                   style={styles.item}
                                   button
                                   sx={{ pl: 4 }}

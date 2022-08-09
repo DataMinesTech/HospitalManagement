@@ -27,6 +27,8 @@ import { Line } from "react-chartjs-2";
 import { IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import { DataGrid } from "@mui/x-data-grid";
+import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -39,8 +41,9 @@ ChartJS.register(
 );
 
 const Dashboard = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-
+  console.log("props", props);
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
@@ -60,12 +63,12 @@ const Dashboard = (props) => {
     dispatch(getAllRooms());
   }, [dispatch]);
 
-  const columns = [
+  const columns = () => [
     {
       field: "patientName",
       headerName: "Patient name",
-      headerClassName: "super-app-theme-header",
-      width: 170,
+      headerClassName: "super-app-header",
+      width: 250,
       // renderCell: (params) => {
       //   console.log(params);
       //   return (
@@ -80,42 +83,61 @@ const Dashboard = (props) => {
       // valueGetter: (params) =>
       //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
-
     {
-      field: "appointmentOn",
-      headerClassName: "super-app-theme-header",
-      headerName: "Appointment On",
-      width: 200,
+      field: "appointmentOnDate",
+      headerClassName: "super-app-header",
+      headerName: "Appointment Date",
+      width: 170,
+    },
+    {
+      field: "appointmentOnTime",
+      headerClassName: "super-app-header",
+      headerName: "Appointment Time",
+      width: 170,
     },
     {
       field: "doctorsAttending",
-      headerClassName: "super-app-theme-header",
+      headerClassName: "super-app-header",
       headerName: "Doctor Attending",
-      width: 200,
+      width: 250,
     },
     {
       field: "anticipatedTime",
-      headerClassName: "super-app-theme-header",
+      headerClassName: "super-app-header",
       headerName: "Anticipated Time",
+      width: 150,
+    },
+    {
+      field: "visitFor",
+      headerClassName: "super-app-header",
+      headerName: "Visit For",
+      width: 200,
     },
   ];
 
-  const rows = appointments.map(
-    ({ appointmentWith, doctorsAttending, anticipatedTime, _id }) => {
-      return {
-        id: _id,
-        patientName: appointmentWith[0].patientName,
-        // firstName: appointmentWith[0].patientName.split(" ")[0],
-        // lastName: appointmentWith[0].patientName.split(" ")[1],
-        doctorsAttending: doctorsAttending[0].doctorName,
-        anticipatedTime: anticipatedTime,
-        appointmentOn: Date(appointmentWith[0].appointmentOn.substring(0, 10)),
-      };
-    }
-  );
+  const rows = () =>
+    appointments?.map(
+      ({ appointmentWith, doctorsAttending, anticipatedTime, _id }) => {
+        return {
+          id: _id,
+          patientName: appointmentWith[0].patientName,
+          // firstName: appointmentWith[0].patientName.split(" ")[0],
+          // lastName: appointmentWith[0].patientName.split(" ")[1],
+          doctorsAttending: doctorsAttending[0].doctorName,
+          anticipatedTime: anticipatedTime,
+          visitFor: appointmentWith[0].visitFor,
+          appointmentOnDate: moment(
+            new Date(appointmentWith[0].appointmentOn)
+          ).format("MMMM Do YYYY"),
+          appointmentOnTime: moment(
+            new Date(appointmentWith[0].appointmentOn)
+          ).format("LT"),
+        };
+      }
+    );
   return (
     <div className="relative">
-      {/* <PageHeader title={"Dashboard"} /> */}
+      <PageHeader title={"Dashboard"} />
       <Layout>
         <div className="grid grid-cols-5 gap-5">
           <div className="col-span-3 bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg grid grid-cols-2 gap-5 place-items-center">
@@ -127,7 +149,10 @@ const Dashboard = (props) => {
                 Find a doctor and make an appointment online!
               </div>
               <Button
-                className="primary py-3 px-4 rounded-md font-bold shadow-lg shadow-red-100 hover:shadow-none transition-shadow duration-300"
+                onClick={() => {
+                  history.push("/appointments");
+                }}
+                className="primary-button"
                 text={"Today's Appointment"}
               />
             </div>
@@ -143,7 +168,7 @@ const Dashboard = (props) => {
                 <img
                   src={PatientDashboardIcon}
                   alt="Rooms Occupied"
-                  srcset=""
+                  srcSet=""
                   width={50}
                 />
                 <div>
@@ -159,7 +184,7 @@ const Dashboard = (props) => {
                 <img
                   src={AppointmentDashboardIcon}
                   alt="Rooms Occupied"
-                  srcset=""
+                  srcSet=""
                   width={50}
                 />
                 <div>
@@ -175,7 +200,7 @@ const Dashboard = (props) => {
                 <img
                   src={OperationDashboardIcon}
                   alt="Rooms Occupied"
-                  srcset=""
+                  srcSet=""
                   width={50}
                 />
                 <div>
@@ -189,7 +214,7 @@ const Dashboard = (props) => {
                 <img
                   src={ReportsDashboardIcon}
                   alt="Rooms Occupied"
-                  srcset=""
+                  srcSet=""
                   width={50}
                 />
                 <div>
@@ -201,7 +226,7 @@ const Dashboard = (props) => {
           </div>
         </div>
         <div className="grid grid-cols-6 gap-5 my-10">
-          <div className="col-span-4">
+          <div className="col-span-6">
             <div>
               <div className="text-sm font-bold pb-5 uppercase">
                 Appointment Activity
@@ -211,69 +236,68 @@ const Dashboard = (props) => {
                   sx={{
                     border: "none",
                     width: "100%",
-                    "& .super-app-theme-header": {
+                    "& .super-app-header": {
                       fontWeight: "700",
-                      width: "100%",
                       fontSize: "14px",
                     },
                   }}
                   autoHeight
                   rowHeight={70}
-                  rows={rows}
-                  columns={columns}
+                  rows={rows()}
+                  columns={columns()}
                   pageSize={5}
                   rowsPerPageOptions={[5]}
                 />
               </div>
             </div>
-            <div className="my-10">
-              <div className="text-sm font-bold pb-5 uppercase">
-                Patient Statistics
-              </div>
-              <div className="bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg">
-                <Line
-                  options={{
-                    // animations: {
-                    //   tension: {
-                    //     easing: "linear",
-                    //     from: 1,
-                    //     to: 0,
-                    //     loop: false,
-                    //   },
-                    // },
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                      },
+          </div>
+          <div className="my-5 col-span-4">
+            <div className="text-sm font-bold pb-5 uppercase">
+              Patient Statistics
+            </div>
+            <div className="bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg">
+              <Line
+                options={{
+                  // animations: {
+                  //   tension: {
+                  //     easing: "linear",
+                  //     from: 1,
+                  //     to: 0,
+                  //     loop: false,
+                  //   },
+                  // },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
                     },
-                  }}
-                  data={{
-                    labels: [
-                      "Red",
-                      "Blue",
-                      "Yellow",
-                      "Green",
-                      "Purple",
-                      "Orange",
-                    ],
-                    datasets: [
-                      {
-                        label: "Indicator",
-                        data: [33, 53, 85, 41, 44, 65],
-                        fill: true,
-                        backgroundColor: "#FF7B54",
-                        borderColor: "#FF7B54",
-                        borderWidth: 3,
-                        bezierCurve: true,
-                        tension: 0.5,
-                      },
-                    ],
-                  }}
-                />
-              </div>
+                  },
+                }}
+                data={{
+                  labels: [
+                    "Red",
+                    "Blue",
+                    "Yellow",
+                    "Green",
+                    "Purple",
+                    "Orange",
+                  ],
+                  datasets: [
+                    {
+                      label: "Indicator",
+                      data: [33, 53, 85, 41, 44, 65],
+                      fill: true,
+                      backgroundColor: "#FF7B54",
+                      borderColor: "#FF7B54",
+                      borderWidth: 3,
+                      bezierCurve: true,
+                      tension: 0.5,
+                    },
+                  ],
+                }}
+              />
             </div>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-2 my-5">
             <div>
               <div className="text-sm font-bold pb-5 uppercase">Reports</div>
               <div className="grid grid-cols-1 gap-5">
@@ -324,7 +348,7 @@ const Dashboard = (props) => {
                 </div>
               </div>
             </div>
-            <div className="my-10">
+            {/* <div className="my-10">
               <div className="text-sm font-bold pb-5 uppercase">Balance</div>
               <div className="grid grid-cols-1 gap-5">
                 <div className="bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg flex flex-col justify-between">
@@ -429,7 +453,7 @@ const Dashboard = (props) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Layout>

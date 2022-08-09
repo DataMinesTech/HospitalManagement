@@ -38,7 +38,7 @@ export default function PatientDetailForm(props) {
       <div className="grid grid-cols-3 py-5 gap-4">
         <div>
           <div className="form-label">Patient Name</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Name"
@@ -48,7 +48,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Mobile Number</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Mobile Number"
@@ -102,7 +102,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Patient Gender</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Select Gender"
@@ -112,7 +112,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Patient Email</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Email"
@@ -122,7 +122,7 @@ export default function PatientDetailForm(props) {
         </div>
         <div>
           <div className="form-label">Diagnosis</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Diagnosis"

@@ -6,20 +6,24 @@ import OperationIcon from "../../../images/icons/operation-icon.svg";
 import ReportsIcon from "../../../images/icons/reports-icon.svg";
 import AccountsIcon from "../../../images/icons/accounts-icon.svg";
 import ExpenseIcon from "../../../images/icons/expense-icon.svg";
+import AppointmentIcon from "../../../images/icons/appointment-icon.svg";
 
 export const SidebarData = [
   { id: 1, icon: DashboardIcon, title: "Dashboard", link: "/dashboard" },
   {
     id: 2,
-    icon: PatientIcon,
-    title: "Patients",
-    item: [
-      { id: 1, title: "Patient List", link: "/patientlist" },
-      { id: 2, title: "Add Patient", link: "/newpatient" },
-    ],
+    icon: AppointmentIcon,
+    title: "Today's Appointments",
+    link: "/appointments",
   },
   {
     id: 3,
+    icon: PatientIcon,
+    title: "Patients",
+    link: "/patientlist",
+  },
+  {
+    id: 4,
     icon: DoctorIcon,
     title: "Doctor",
     item: [
@@ -29,7 +33,7 @@ export const SidebarData = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     icon: EmergencyIcon,
     title: "Emergency",
     item: [
@@ -38,25 +42,25 @@ export const SidebarData = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     icon: OperationIcon,
     title: "Operation",
     link: "/dashboard",
   },
   {
-    id: 6,
+    id: 7,
     icon: ReportsIcon,
     title: "Reports",
     link: "/dashboard",
   },
   {
-    id: 7,
+    id: 8,
     icon: AccountsIcon,
     title: "Accounts",
     link: "/dashboard",
   },
   {
-    id: 8,
+    id: 9,
     icon: ExpenseIcon,
     title: "Expense",
     item: [

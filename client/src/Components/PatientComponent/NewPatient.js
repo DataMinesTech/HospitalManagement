@@ -154,45 +154,56 @@ const NewPatient = () => {
   };
 
   return (
-    <div className="position-relative">
-      {/* <PageHeader title={"Add New Patient"} /> */}
+    <div className="relative">
+      <PageHeader title={"Add New Patient"} />
       <Layout>
-        <StepperComponent steps={steps} activeStep={activeStep}>
-          <div className="pb-4">
-            <Formik initialValues={intialValues} onSubmit={_handleSubmit}>
-              {({ isSubmitting }) => (
-                <Form id={formId}>
-                  {_renderStepContent(activeStep)}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "end",
-                      mr: 3,
-                      pt: 2,
-                      width: "80%",
-                      mx: "auto",
-                    }}
-                  >
-                    <Button
-                      className="rounded-button"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      text={"Back"}
-                    />
-                    <Button
-                      disabled={isSubmitting}
-                      type="submit"
-                      className="rounded-button primary"
-                      // onClick={handleNext}
-                      text={activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    />
-                  </Box>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </StepperComponent>
+        <Box
+          style={{
+            overflow: "auto",
+            backgroundColor: "#fff",
+            borderRadius: "4px",
+            padding: "16px 16px",
+          }}
+        >
+          <StepperComponent steps={steps} activeStep={activeStep}>
+            <div className="pb-4">
+              <Formik initialValues={intialValues} onSubmit={_handleSubmit}>
+                {({ isSubmitting }) => (
+                  <Form id={formId}>
+                    {_renderStepContent(activeStep)}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "end",
+                        mr: 3,
+                        pt: 2,
+                        width: "80%",
+                        mx: "auto",
+                      }}
+                    >
+                      <Button
+                        className="rounded-button"
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        text={"Back"}
+                      />
+                      <Button
+                        disabled={isSubmitting}
+                        type="submit"
+                        className="rounded-button primary"
+                        // onClick={handleNext}
+                        text={
+                          activeStep === steps.length - 1 ? "Finish" : "Next"
+                        }
+                      />
+                    </Box>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </StepperComponent>
+        </Box>
       </Layout>
       {/* <div className="flex justify-content-between py-2">
         <button onClick={() => setOpenModal(!openModal)}>options</button>

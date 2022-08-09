@@ -18,7 +18,7 @@ export default function PatientAddressForm(props) {
       <div className="grid grid-cols-3 py-5 gap-4">
         <div>
           <div className="form-label">Patient Address1</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Patient Address1"
@@ -28,7 +28,7 @@ export default function PatientAddressForm(props) {
         </div>
         <div>
           <div className="form-label">Patient Address2</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Patient Address2"
@@ -38,7 +38,7 @@ export default function PatientAddressForm(props) {
         </div>
         <div>
           <div className="form-label">City</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter City"
@@ -48,7 +48,7 @@ export default function PatientAddressForm(props) {
         </div>
         <div>
           <div className="form-label">State</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter State"
@@ -58,7 +58,7 @@ export default function PatientAddressForm(props) {
         </div>
         <div>
           <div className="form-label">Zipcode</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Zipcode"
@@ -68,7 +68,7 @@ export default function PatientAddressForm(props) {
         </div>
         <div>
           <div className="form-label">Country</div>
-          <div className="flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Country"

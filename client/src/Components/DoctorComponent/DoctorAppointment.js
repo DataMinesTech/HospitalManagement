@@ -69,14 +69,14 @@ const DoctorAppointment = () => {
       {loading ? (
         <></>
       ) : (
-        <div className="position-relative">
+        <div className="relative">
           <PageHeader title={"Doctor Appointment"} />
           <Layout>
             <Box mb={4} sx={{ width: "80%", mx: "auto" }}>
               <div className="grid grid-cols-3 py-5 gap-4">
                 <div>
                   <div className="form-label">Appointment Name</div>
-                  <div className="flex position-relative">
+                  <div className="flex relative">
                     <input
                       className="form-field"
                       placeholder="Enter Name"
@@ -87,7 +87,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Patient Name</div>
-                  <div className="flex position-relative">
+                  <div className="flex relative">
                     <input
                       className="form-field"
                       placeholder="Enter patient Name"
@@ -142,7 +142,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Anticipated Time</div>
-                  <div className="flex position-relative">
+                  <div className="flex relative">
                     <input
                       className="form-field"
                       placeholder="Enter Anticipated Time"
@@ -153,7 +153,7 @@ const DoctorAppointment = () => {
                 </div>
                 <div>
                   <div className="form-label">Doctor Name</div>
-                  <div className="flex position-relative">
+                  <div className="flex relative">
                     <input
                       className="form-field"
                       placeholder="Enter Doctor Name"

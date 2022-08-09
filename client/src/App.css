@@ -47,7 +47,7 @@
 
 .form-field {
   width: 100%;
-  min-height: 70px;
+  height: 40px;
   border-radius: 8px;
   border: 2px solid #ccc;
   padding: 20px 15px;
@@ -71,11 +71,11 @@
 }
 
 
-.rounded-button {
+/* .rounded-button {
   border-radius: 30px;
-  border: 2px solid #4988FC;
+  border: 2px solid #FF7B54;
   padding: 10px 20px;
-  margin: 5px 0.5rem;
+  margin: 5px 0rem;
   min-width: 120px;
   font-size: 14px;
   font-weight: 600;
@@ -84,15 +84,15 @@
 }
 
 .outline-button {
-  border: 2px solid #4988FC;
-  color: #4988FC;
+  border: 2px solid #FF7B54;
+  color: #FF7B54;
   background-color: transparent;
   transition: 0.3s;
   outline: none;
 }
 
 .outline-button:hover {
-  background-color: #4988FC;
+  background-color: #FF7B54;
   color: white;
 }
 
@@ -102,5 +102,10 @@
   background-color: #FF7B54;
 }
 .primary:hover{
-  background-color: #FF7B54;
-}
+  background-color: #e46b46;
+} */
+.MuiDataGrid-columnHeaderTitle { font-weight: bold !important; overflow: visible !important; }
+
+/* .MuiTableCell-root.MuiTableCell-body.MuiTableCell-sizeMedium.Cell-cell.Cell-brightRightBorder.css-156ill3-MuiTableCell-root {
+  display: none !important;
+} */

@@ -39,6 +39,8 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import store from "./store";
 import { Box, Toolbar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import TodaysAppointment from "./Components/Layout/Appointments/TodaysAppointments";
+import PatientView from "./Components/PatientComponent/PatientView";
 
 const theme = createTheme({
   typography: {
@@ -73,7 +75,7 @@ function App(props) {
               flexGrow: 1,
               position: "relative",
               minHeight: "100vh",
-              backgroundColor: "#FAF6F4",
+              backgroundColor: "#F5F0ED",
             }}
           >
             {/* <Toolbar /> */}
@@ -134,6 +136,7 @@ function App(props) {
                 component={SampleAcknowledge}
               />
               <Route exact path="/appointment" component={DoctorAppointment} />
+              <Route exact path="/appointments" component={TodaysAppointment} />
               <Route exact path="/room" component={Room} />
               <Route
                 exact
@@ -146,6 +149,7 @@ function App(props) {
                 component={OutPatientBilling}
               />
               <Route exact path="/patientlist" component={PatientList} />
+              <Route exact path="/patient/:id" component={PatientView} />
               <Route exact path="/roomstatus" component={RoomStatus} />
               <Route exact path="/roomtransfer" component={RoomTransfer} />
               <Route exact path="/alldoctors" component={AllDoctors} />

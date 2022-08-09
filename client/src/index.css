@@ -39,3 +39,12 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   padding: 10px 15px;
 }
+
+@layer components {
+  .primary-button {
+    @apply bg-[#FF7B54] text-white py-3 px-4 rounded-md font-bold shadow-lg shadow-red-100 hover:shadow-none transition-shadow duration-300;
+  }
+  .outline-button {
+    @apply border-2 bg-[#FFF1EC] border-[#FF7B54] text-[#FF7B54] py-2 px-6 rounded-md text-sm font-bold hover:bg-[#FF7B54] hover:text-white transition-colors duration-300;
+  }
+}

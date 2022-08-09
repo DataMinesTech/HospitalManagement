@@ -1,43 +1,65 @@
 import React, { useEffect } from "react";
 
 import Layout from "../Layout/LayoutComponent/Layout";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import SearchBar from "../Components/SearchBar";
-import FilterModal from "../Components/FilterModal";
-import Button from "@mui/material/Button";
-import { BiFilterAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPatients } from "../../actions/patientActions";
+import { deletePatient, getAllPatients } from "../../actions/patientActions";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { PageHeader } from "../Layout/Header/Header";
+import Button from "../Components/Button";
+import { useHistory } from "react-router-dom";
 
 const PatientList = () => {
+  const history = useHistory();
+  // const navigate = useLocation();
   const dispatch = useDispatch();
   const { patient } = useSelector((state) => state.patients);
 
   console.log("Patient List", patient);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     dispatch(getAllPatients());
   }, [dispatch]);
 
+  const deleteUser = React.useCallback(
+    (id) => () => {
+      dispatch(deletePatient(id));
+      dispatch(getAllPatients());
+    },
+    [dispatch]
+  );
+
   const columns = () => [
     {
       field: "patientName",
       headerName: "Patient name",
-      headerClassName: "super-app-theme-header",
-      width: 250,
+      className: "super-app-theme-header",
+      width: 170,
       renderCell: (params) => {
         return (
-          <>
+          <div
+            onClick={() => {
+              // console.log("onCellClick", abc);
+              history.push(`/patient/${params.id}-${params.row.firstName}`, {
+                data: patient.find((item) => item._id === params.id),
+              });
+            }}
+          >
             {/* <Avatar sx={{ width: 35, height: 35 }} src={params.value.avatar} /> */}
-            <span className="px-3">
+            <span className="px-3 underline cursor-pointer text-blue-600">
               {params.row.firstName} {params.row.lastName}
             </span>
-          </>
+          </div>
         );
       },
     },
@@ -49,24 +71,70 @@ const PatientList = () => {
     // },
     {
       field: "patientEmail",
-      headerClassName: "super-app-theme-header",
+      className: "super-app-theme-header",
       headerName: "Patient Email",
       width: 200,
     },
     {
       field: "patientPhoneNo",
-      headerClassName: "super-app-theme-header",
+      className: "super-app-theme-header",
       headerName: "Phone No.",
+      width: 170,
     },
     {
-      field: "patientAdmissionStatus",
-      headerClassName: "super-app-theme-header",
-      headerName: "Status",
+      field: "patientAge",
+      className: "super-app-theme-header",
+      headerName: "Patient Age",
+    },
+    {
+      field: "patientBloodGroup",
+      className: "super-app-theme-header",
+      headerName: "Patient Blood Group",
     },
     {
       field: "patientInRoom",
-      headerClassName: "super-app-theme-header",
+      className: "super-app-theme-header",
       headerName: "Room No.",
+    },
+
+    {
+      field: "patientAdmissionStatus",
+      className: "super-app-theme-header",
+      headerName: "Status",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <>
+            {/* <Avatar sx={{ width: 35, height: 35 }} src={params.value.avatar} /> */}
+            <div
+              className={`flex justify-center items-center px-4 py-2 rounded-full font-bold text-xs ${
+                params.row.patientAdmissionStatus === "Admitted"
+                  ? "bg-blue-100 text-blue-600 "
+                  : "bg-amber-100 text-amber-600"
+              } `}
+            >
+              {params.row.patientAdmissionStatus}
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      field: "actions",
+      type: "actions",
+      width: 100,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<FiEdit size={16} />}
+          label="Edit"
+          onClick={(e) => {}}
+        />,
+        <GridActionsCellItem
+          icon={<FiTrash2 size={16} />}
+          label="Delete"
+          onClick={deleteUser(params.id)}
+        />,
+      ],
     },
   ];
 
@@ -79,6 +147,8 @@ const PatientList = () => {
         patientPhoneNo,
         patientAdmissionStatus,
         patientInRoom,
+        patientAge,
+        patientBloodGroup,
       }) => {
         return {
           id: _id,
@@ -89,41 +159,55 @@ const PatientList = () => {
           patientPhoneNo: patientPhoneNo,
           patientAdmissionStatus: patientAdmissionStatus,
           patientInRoom: patientInRoom,
+          patientAge: patientAge,
+          patientBloodGroup: patientBloodGroup,
         };
       }
     );
 
   return (
-    <div className="position-relative">
-      {/* <PageHeader title={"Patient List"} /> */}
+    <div className="relative">
+      <PageHeader title={"Patient List"} />
       <Layout>
-        <div className="flex justify-content-between align-item-center pb-3">
-          <div>
-            <SearchBar />
-          </div>
-          <div>
-            <Button
-              sx={{ fontWeight: "700", fontSize: "14px" }}
-              startIcon={<BiFilterAlt />}
-              variant="outlined"
-              onClick={handleOpen}
-            >
-              Filter
-            </Button>
-            <FilterModal open={open} onClose={handleClose} />
-          </div>
-        </div>
         <Box
           style={{
             overflow: "auto",
-            "& .super-app-theme--header": {
-              backgroundColor: "rgba(255, 7, 0, 0.55)",
-            },
+            backgroundColor: "#fff",
+            borderRadius: "4px",
+            padding: "16px 16px",
           }}
         >
+          <div className="flex justify-between items-center pb-5 border-b border-gray-200">
+            <div className="font-bold text-xl">All Patients</div>
+            <div className="flex space-x-6">
+              <Button className="primary-button" text={"Add Patient"} />
+              <Button className="primary-button" text={"Patient Addmission"} />
+            </div>
+          </div>
           {patient.length > 0 && (
             <>
               <DataGrid
+                sx={{
+                  border: "none",
+                  "& .super-app-theme-header": {
+                    fontWeight: "bold",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                }}
+                componentsProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                    quickFilterProps: { debounceMs: 500 },
+                  },
+                }}
+                // onCellClick={(data) => {
+                //   // console.log("onCellClick", abc);
+                //   history.push(`/patient/${data.id}-${data.row.firstName}`, {
+                //     data: patient.find((item) => item._id === data.id),
+                //   });
+                // }}
                 autoHeight
                 rowHeight={70}
                 rows={rows()}

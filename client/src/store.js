@@ -8,6 +8,7 @@ import {
   allAppointmentsReducer,
 } from "./reducers/appointmentReducer";
 import { allRoomReducer, createRoomReducer } from "./reducers/roomReducer";
+import { doctorReducer } from "./reducers/doctorReducer";
 
 const reducer = combineReducers({
   user: userReducer,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   rooms: createRoomReducer,
   allappointments: allAppointmentsReducer,
   allrooms: allRoomReducer,
+  allDoctors: doctorReducer,
   allUsers: allUsers,
 });
 
