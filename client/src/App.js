@@ -13,7 +13,6 @@ import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
 import Room from "./Components/Layout/Dashboard/Room";
 import SampleAcknowledge from "./Components/Layout/Dashboard/SampleAcknowledge";
 import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
-import Header from "./Components/Layout/Header/Header";
 import AllAppointments from "./Components/Layout/OutPatientModal/AllAppointments";
 import OutPatientBilling from "./Components/Layout/OutPatientModal/OutPatientBilling";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
@@ -37,7 +36,7 @@ import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
 import RoomsOccupied from "./Components/RoomComponent/RoomsOccupied";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import store from "./store";
-import { Box, Toolbar } from "@mui/material";
+import { Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import TodaysAppointment from "./Components/Layout/Appointments/TodaysAppointments";
 import PatientView from "./Components/PatientComponent/PatientView";
@@ -59,9 +58,7 @@ function App(props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  const { user } = useSelector((state) => state.user);
 
   return (
     <ThemeProvider theme={theme}>

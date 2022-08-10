@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function FilterModal({ open, onClose, children }) {
+export default function AddPatientModal({ open, onClose, children }) {
   return (
     <Modal
       aria-labelledby="transition-modal-title"

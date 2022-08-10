@@ -9,23 +9,16 @@ import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { PageHeader } from "../Layout/Header/Header";
 import Button from "../Components/Button";
 import { useHistory } from "react-router-dom";
+import AddPatientModal from "../Components/FilterModal";
 
 const PatientList = () => {
   const history = useHistory();
   // const navigate = useLocation();
   const dispatch = useDispatch();
   const { patient } = useSelector((state) => state.patients);
-
-  console.log("Patient List", patient);
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getAllPatients());
@@ -180,9 +173,19 @@ const PatientList = () => {
           <div className="flex justify-between items-center pb-5 border-b border-gray-200">
             <div className="font-bold text-xl">All Patients</div>
             <div className="flex space-x-6">
-              <Button className="primary-button" text={"Add Patient"} />
+              <Button
+                onClick={
+                  handleOpen
+                  //   () => {
+                  //   history.push("/newpatient");
+                  // }
+                }
+                className="primary-button"
+                text={"Add Patient"}
+              />
               <Button className="primary-button" text={"Patient Addmission"} />
             </div>
+            <AddPatientModal open={open} onClose={handleClose} />
           </div>
           {patient.length > 0 && (
             <>

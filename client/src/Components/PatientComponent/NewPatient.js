@@ -176,14 +176,14 @@ const NewPatient = () => {
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "end",
-                        mr: 3,
                         pt: 2,
-                        width: "80%",
+                        width: "40%",
                         mx: "auto",
                       }}
                     >
                       <Button
-                        className="rounded-button"
+                        type="button"
+                        className="primary-button w-full mr-10"
                         disabled={activeStep === 0}
                         onClick={handleBack}
                         text={"Back"}
@@ -191,7 +191,7 @@ const NewPatient = () => {
                       <Button
                         disabled={isSubmitting}
                         type="submit"
-                        className="rounded-button primary"
+                        className="primary-button w-full"
                         // onClick={handleNext}
                         text={
                           activeStep === steps.length - 1 ? "Finish" : "Next"

@@ -64,20 +64,18 @@ const Login = ({ history }) => {
                     <div className="pt-2">
                       <input
                         type="email"
-                        id="form1Example13"
                         className="form-field"
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
                       />
                     </div>
                   </div>
-                  <div>
+                  <div className="mb-5">
                     <div className="form-label">Password</div>
-                    <div className="mb-5">
+                    <div className="pt-2">
                       <input
-                        className="form-field"
                         type="password"
-                        id="form1Example23"
+                        className="form-field"
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
                       />
@@ -99,7 +97,7 @@ const Login = ({ history }) => {
                   </div> */}
                   <Button
                     type="submit"
-                    className="rounded-button primary w-full"
+                    className="primary-button w-full"
                     text={"Sign in"}
                   />
                   {/* <div class="divider flex items-center my-4">

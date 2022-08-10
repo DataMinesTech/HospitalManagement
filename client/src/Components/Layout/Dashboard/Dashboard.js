@@ -25,7 +25,6 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { IconButton } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
@@ -44,9 +43,7 @@ const Dashboard = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   console.log("props", props);
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  const { user } = useSelector((state) => state.user);
 
   const { appointments } = useSelector((state) => state.allappointments);
   const { patient } = useSelector((state) => state.patients);
@@ -61,7 +58,7 @@ const Dashboard = (props) => {
     }
     dispatch(getAllPatients());
     dispatch(getAllRooms());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const columns = () => [
     {

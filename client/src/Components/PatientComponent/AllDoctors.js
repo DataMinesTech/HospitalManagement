@@ -16,6 +16,7 @@ import SearchBar from "../Components/SearchBar";
 import { FiClock } from "react-icons/fi";
 import Button from "../Components/Button";
 import { getAllDoctors } from "../../actions/doctorActions";
+import { useHistory } from "react-router-dom";
 
 // const doctorsList = [
 //   {
@@ -219,10 +220,11 @@ import { getAllDoctors } from "../../actions/doctorActions";
 // ];
 
 const AllDoctors = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { allDoctors } = useSelector((state) => state.allDoctors);
 
-  console.log("doctors", allDoctors);
+  console.log("doctors list", allDoctors);
 
   useEffect(() => {
     dispatch(getAllDoctors());
@@ -233,79 +235,81 @@ const AllDoctors = () => {
       <div className="relative">
         <PageHeader title={"Doctors List"} />
         <Layout>
-          <div className="flex justify-between items-center pb-3">
-            <div>
-              <SearchBar />
-            </div>
-          </div>
           <Box
             style={{
-              marginTop: "20px",
+              overflow: "auto",
+              backgroundColor: "#fff",
+              borderRadius: "4px",
+              padding: "16px 16px",
             }}
           >
-            <div className="grid grid-cols-3 gap-10">
+            <div className="flex justify-between items-center pb-5 border-b border-gray-200">
+              <div className="font-bold text-xl">All Doctors</div>
+              <div className="flex space-x-6">
+                <Button className="primary-button" text={"Add Doctors"} />
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-10 pt-10">
               {allDoctors?.map((doctor) => (
-                <div className="col-lg-4">
-                  <Card
-                    className="mb-3"
+                <Card
+                  className="mb-3"
+                  style={{
+                    borderRadius: "12px",
+                    border: "1px solid #e6e6e6",
+                    boxShadow: "none",
+                    backgroundColor: "#fff",
+                  }}
+                >
+                  <CardHeader
                     style={{
-                      borderRadius: "12px",
-                      border: "1px solid #e6e6e6",
-                      boxShadow: "none",
                       backgroundColor: "#fff",
+                      borderBottom: "1px solid #e6e6e6",
                     }}
-                  >
-                    <CardHeader
-                      style={{
-                        backgroundColor: "#fff",
-                        borderBottom: "1px solid #e6e6e6",
-                      }}
-                      titleTypographyProps={{
-                        fontSize: "16px",
-                        fontWeight: "700",
-                      }}
-                      avatar={
-                        <Avatar
-                          // src={doctor.avatar}
-                          sx={{
-                            background: "#212121",
-                            width: "60px",
-                            height: "60px",
-                          }}
-                          aria-label="doctor Profile"
-                        />
-                      }
-                      title={doctor?.userName}
-                      subheader={
-                        <div>
-                          <div>{doctor.department}</div>
-                          <div className="flex justify-start items-center gap-1 py-1">
-                            <FiClock className="self-center" size={16} />{" "}
-                            {doctor.timing}
-                          </div>
+                    titleTypographyProps={{
+                      fontSize: "16px",
+                      fontWeight: "700",
+                    }}
+                    avatar={
+                      <Avatar
+                        // src={doctor.avatar}
+                        sx={{
+                          background: "#212121",
+                          width: "60px",
+                          height: "60px",
+                        }}
+                        aria-label="doctor Profile"
+                      />
+                    }
+                    title={doctor?.userName}
+                    subheader={
+                      <div>
+                        <div>{doctor?.department}</div>
+                        <div className="flex justify-start items-center gap-1 py-1">
+                          {/* <FiClock className="self-center" size={16} />{" "} */}
+                          {doctor?.userAvailability}
                         </div>
-                      }
+                      </div>
+                    }
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontSize: "14px", lineHeight: 1.75 }}
+                    >
+                      {doctor.biography}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      className="primary-button w-full"
+                      text={"View Profile"}
                     />
-                    <CardContent>
-                      <Typography
-                        variant="body2"
-                        sx={{ fontSize: "14px", lineHeight: 1.75 }}
-                      >
-                        {doctor.bio}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        className="rounded-button primary"
-                        text={"View Profile"}
-                      />
-                      <Button
-                        className="rounded-button outline-button"
-                        text={"Appointment"}
-                      />
-                    </CardActions>
-                  </Card>
-                </div>
+                    <Button
+                      className="outline-button w-full"
+                      text={"Appointment"}
+                    />
+                  </CardActions>
+                </Card>
               ))}
             </div>
           </Box>
