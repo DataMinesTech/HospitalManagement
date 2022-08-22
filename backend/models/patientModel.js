@@ -17,6 +17,10 @@ const patientSchema = mongoose.Schema({
     unique: true,
     validate: [validator.isEmail, "Please Enter a valid Email"],
   },
+  patientDOB: {
+    type: String,
+    required: [true, "Please Enter Your Age"],
+  },
   patientPhoneNo: {
     type: Number,
     required: [true, "Please Enter your Phone No"],
@@ -25,9 +29,13 @@ const patientSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter your Address"],
   },
-  patientAge: {
-    type: Number,
-    required: [true, "Please Enter Your Age"],
+  patientZIP: {
+    type: String,
+    required: [true, "Please Enter patient zip code"],
+  },
+  patientCity: {
+    type: String,
+    required: [true, "Please Enter your city"],
   },
   guardianName: {
     type: String,
@@ -52,6 +60,14 @@ const patientSchema = mongoose.Schema({
   },
   patientOccupation: {
     type: String,
+  },
+  guardianZIP: {
+    type: String,
+    required: [true, "Please Enter guardian zip code"],
+  },
+  guardianCity: {
+    type: String,
+    required: [true, "Please Enter guardian city"],
   },
   patientAdmissionStatus: {
     type: String,
