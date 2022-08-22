@@ -4,6 +4,10 @@ import AppointmentCalendar from "./Components/AppointmentCalendar";
 import Layout from "../LayoutComponent/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAppointments } from "../../../actions/appointmentActions";
+import Button from "../../Components/Button";
+import AddPatientModal from "../../Components/FilterModal";
+import { Box } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 export const appointments = [
   {
@@ -54,8 +58,12 @@ export const owners = [
 ];
 
 const TodaysAppointment = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { appointments } = useSelector((state) => state.allappointments);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getAllAppointments());
@@ -64,11 +72,31 @@ const TodaysAppointment = () => {
     <div className="relative">
       <PageHeader title={"Today's Appoinments"} />
       <Layout>
-        {appointments.length ? (
-          <AppointmentCalendar appointments={appointments} />
-        ) : (
-          <div>loading...</div>
-        )}
+        <Box
+          style={{
+            overflow: "auto",
+            backgroundColor: "#fff",
+            borderRadius: "4px",
+            padding: "16px 16px",
+          }}
+        >
+          <div className="flex justify-between items-center pb-5 border-b border-gray-200">
+            <div className="font-bold text-xl">All Appointments</div>
+            <div className="flex space-x-6">
+              <Button
+                className="primary-button"
+                onClick={() => history.push("/newAppointment")}
+                text={"Add Appointment"}
+              />
+            </div>
+            <AddPatientModal open={open} onClose={handleClose} />
+          </div>
+          {appointments.length ? (
+            <AppointmentCalendar appointments={appointments} />
+          ) : (
+            <div>loading...</div>
+          )}
+        </Box>
       </Layout>
     </div>
   );

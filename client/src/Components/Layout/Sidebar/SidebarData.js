@@ -26,48 +26,49 @@ export const SidebarData = [
     id: 4,
     icon: DoctorIcon,
     title: "Doctor",
-    item: [
-      { id: 1, title: "Doctor List", link: "/alldoctors" },
-      { id: 2, title: "Add Doctor", link: "/newpatient" },
-      { id: 3, title: "Appointment", link: "/appointment" },
-    ],
+    link: "/alldoctors",
+    // item: [
+    //   { id: 1, title: "Doctor List", link: "/alldoctors" },
+    //   { id: 2, title: "Add Doctor", link: "/newpatient" },
+    //   { id: 3, title: "Appointment", link: "/appointment" },
+    // ],
   },
-  {
-    id: 5,
-    icon: EmergencyIcon,
-    title: "Emergency",
-    item: [
-      { id: 1, title: "Emergency Form", link: "/alldoctors" },
-      { id: 2, title: "Emergency List", link: "/newpatient" },
-    ],
-  },
-  {
-    id: 6,
-    icon: OperationIcon,
-    title: "Operation",
-    link: "/dashboard",
-  },
-  {
-    id: 7,
-    icon: ReportsIcon,
-    title: "Reports",
-    link: "/dashboard",
-  },
-  {
-    id: 8,
-    icon: AccountsIcon,
-    title: "Accounts",
-    link: "/dashboard",
-  },
-  {
-    id: 9,
-    icon: ExpenseIcon,
-    title: "Expense",
-    item: [
-      { id: 1, title: "Expense List", link: "/alldoctors" },
-      { id: 2, title: "Add Expense", link: "/newpatient" },
-    ],
-  },
+  // {
+  //   id: 5,
+  //   icon: EmergencyIcon,
+  //   title: "Emergency",
+  //   item: [
+  //     { id: 1, title: "Emergency Form", link: "/alldoctors" },
+  //     { id: 2, title: "Emergency List", link: "/newpatient" },
+  //   ],
+  // },
+  // {
+  //   id: 6,
+  //   icon: OperationIcon,
+  //   title: "Operation",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 7,
+  //   icon: ReportsIcon,
+  //   title: "Reports",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 8,
+  //   icon: AccountsIcon,
+  //   title: "Accounts",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 9,
+  //   icon: ExpenseIcon,
+  //   title: "Expense",
+  //   item: [
+  //     { id: 1, title: "Expense List", link: "/alldoctors" },
+  //     { id: 2, title: "Add Expense", link: "/newpatient" },
+  //   ],
+  // },
   // {
   //   icon: <FiActivity color="white" />,
   //   title: "Patient Registration",

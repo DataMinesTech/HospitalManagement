@@ -175,10 +175,10 @@ const PatientList = () => {
             <div className="flex space-x-6">
               <Button
                 onClick={
-                  handleOpen
-                  //   () => {
-                  //   history.push("/newpatient");
-                  // }
+                  // handleOpen
+                  () => {
+                    history.push("/newpatient");
+                  }
                 }
                 className="primary-button"
                 text={"Add Patient"}

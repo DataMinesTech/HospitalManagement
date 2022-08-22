@@ -21,7 +21,7 @@ export const createNewPatient = (patientData) => async (dispatch) => {
     console.log("patientData", patientData);
 
     const { data } = await axios.post(
-      `api/v1/patient/new`,
+      `/api/v1/patient/new`,
       patientData,
       config
     );

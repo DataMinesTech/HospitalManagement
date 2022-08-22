@@ -40,6 +40,7 @@ import { Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import TodaysAppointment from "./Components/Layout/Appointments/TodaysAppointments";
 import PatientView from "./Components/PatientComponent/PatientView";
+import DoctorView from "./Components/PatientComponent/DoctorView";
 
 const theme = createTheme({
   typography: {
@@ -132,7 +133,11 @@ function App(props) {
                 path="/sampleacknowledge"
                 component={SampleAcknowledge}
               />
-              <Route exact path="/appointment" component={DoctorAppointment} />
+              <Route
+                exact
+                path="/newAppointment"
+                component={DoctorAppointment}
+              />
               <Route exact path="/appointments" component={TodaysAppointment} />
               <Route exact path="/room" component={Room} />
               <Route
@@ -150,6 +155,7 @@ function App(props) {
               <Route exact path="/roomstatus" component={RoomStatus} />
               <Route exact path="/roomtransfer" component={RoomTransfer} />
               <Route exact path="/alldoctors" component={AllDoctors} />
+              <Route exact path="/doctor/:id" component={DoctorView} />
               <Route
                 exact
                 path="/patientadmission"

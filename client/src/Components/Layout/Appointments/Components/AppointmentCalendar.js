@@ -144,10 +144,9 @@ const AppointmentCalendar = ({ appointments }) => {
         <Resources data={resources} mainResourceName="doctorName" />
         <Toolbar />
         <DateNavigator />
-        <EditRecurrenceMenu />
+        {/* <EditRecurrenceMenu /> */}
         <IntegratedGrouping />
         <IntegratedEditing />
-
         <AppointmentTooltip showOpenButton />
         <AppointmentForm />
         <GroupingPanel />

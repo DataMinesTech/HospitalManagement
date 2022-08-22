@@ -47,6 +47,9 @@ body::-webkit-scrollbar-thumb {
     @apply border-2 bg-secondaryColor border-primaryColor text-primaryColor py-3 px-6 rounded-md text-sm font-bold hover:bg-primaryColor hover:text-white transition-colors duration-300;
   }
   .form-field {
-    @apply w-full py-2 px-2 border-gray-300 border-2 rounded-lg outline-none focus:border-primaryColor transition;
+    @apply w-full h-full py-3 px-2 border-gray-300 border-2 rounded-lg outline-none focus:border-primaryColor transition;
+  }
+  .date-field {
+    @apply w-full h-full py-3 px-2 pl-8 rounded-lg outline-none focus:border-primaryColor transition;
   }
 }

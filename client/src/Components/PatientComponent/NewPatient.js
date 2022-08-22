@@ -17,6 +17,7 @@ import PatientGuardianDetailForm from "./PatientForm/GuardianDetailForm";
 import PatientAddressForm from "./PatientForm/PatientAddressForm";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Button from "../Components/Button";
+import moment from "moment";
 
 const steps = ["Patient Detail", "Home Address", "Guardian Detail"];
 const { formId, formField } = patientFormField;
@@ -36,7 +37,6 @@ const {
     patientCountry,
     patientGuardianName,
     patientGuardianMobile,
-    patientGuardianDOB,
     patientGuardianAddress1,
     patientGuardianAddress2,
     patientGuardianCity,
@@ -59,7 +59,6 @@ export const intialValues = {
   [patientZipcode.name]: "",
   [patientCountry.name]: "",
   [patientGuardianName.name]: "",
-  [patientGuardianDOB.name]: "",
   [patientGuardianMobile.name]: "",
   [patientGuardianAddress1.name]: "",
   [patientGuardianAddress2.name]: "",
@@ -68,14 +67,24 @@ export const intialValues = {
   [patientGuardianZipcode.name]: "",
 };
 
-function _renderStepContent(step) {
+function _renderStepContent(step, setFieldValue) {
   switch (step) {
     case 0:
-      return <PatientDetailForm formField={formField} />;
+      return (
+        <PatientDetailForm
+          setFieldValue={setFieldValue}
+          formField={formField}
+        />
+      );
     case 1:
       return <PatientAddressForm formField={formField} />;
     case 2:
-      return <PatientGuardianDetailForm formField={formField} />;
+      return (
+        <PatientGuardianDetailForm
+          setFieldValue={setFieldValue}
+          formField={formField}
+        />
+      );
     default:
       return <div>Not Found</div>;
   }
@@ -116,9 +125,8 @@ const NewPatient = () => {
   } = useForm();
 
   async function _submitForm(values, actions) {
-    alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
-
+    registerPatient(values);
     setActiveStep(activeStep + 1);
   }
 
@@ -134,20 +142,31 @@ const NewPatient = () => {
 
   const registerPatient = (data) => {
     console.log("hello", data);
-
-    const patientName = `${data.firstName} ${data.middleName} ${data.lastName}`;
-    const patientAddress = `${data.address} ${data.province} ${data.district} ${data.postalcode}`;
-    const patientAge = new Date().getFullYear() - data.years;
-
+    // patientAddress1,
+    //       patientAddress2,
+    //       patientCity,
+    //       patientState,
+    //       patientZipcode,
+    //       patientCountry,
+    const patientAddress = `${data.patientAddress1} ${data.patientAddress2} ${data.patientZipcode} ${data.patientCity} ${data.patientState} ${data.patientCountry}`;
+    const patientGuardianAddress = `${data.patientGuardianAddress1} ${data.patientGuardianAddress2} ${data.patientGuardianZipcode} ${data.patientGuardianCity} ${data.patientGuardianState} ${data.patientGuardianCountry}`;
+    // const patientAge = new Date().getFullYear() - data.years;
+    const patientDOB = moment(data.patientDOB).format("YYYY-MM-DD");
+    const patientAge = moment().diff(patientDOB, "years", false);
     const newData = {
-      patientName,
+      patientName: data.patientName,
       patientAddress,
-      patientGender: data.gender,
-      patientEmail: data.email,
-      patientPhoneNo: data.phone,
+      patientGender: data.patientGender,
+      patientEmail: data.patientEmail,
+      patientPhoneNo: data.patientMobile,
       patientAge,
-      patientOccupation: data.occupation,
-      patientAdmissionStatus: data.Admitted ?? "Not Admitted",
+      patientDiagnosis: data.patientDiagnosis,
+      guardianName: data.patientGuardianName,
+      guardianPhone: data.patientGuardianMobile,
+      guardianAddress: data.patientGuardianAddress,
+
+      // patientOccupation,
+      // patientAdmissionStatus: data.Admitted ?? "Not Admitted",
     };
 
     dispatch(createNewPatient(newData));
@@ -168,9 +187,9 @@ const NewPatient = () => {
           <StepperComponent steps={steps} activeStep={activeStep}>
             <div className="pb-4">
               <Formik initialValues={intialValues} onSubmit={_handleSubmit}>
-                {({ isSubmitting }) => (
+                {({ isSubmitting, setFieldValue }) => (
                   <Form id={formId}>
-                    {_renderStepContent(activeStep)}
+                    {_renderStepContent(activeStep, setFieldValue)}
                     <Box
                       sx={{
                         display: "flex",

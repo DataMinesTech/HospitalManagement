@@ -246,13 +246,18 @@ const AllDoctors = () => {
             <div className="flex justify-between items-center pb-5 border-b border-gray-200">
               <div className="font-bold text-xl">All Doctors</div>
               <div className="flex space-x-6">
-                <Button className="primary-button" text={"Add Doctors"} />
+                <Button className="primary-button" text={"Add Doctor"} />
+                <Button
+                  className="primary-button"
+                  onClick={() => history.push("/newAppointment")}
+                  text={"Add Appointment"}
+                />
               </div>
             </div>
             <div className="grid grid-cols-3 gap-10 pt-10">
               {allDoctors?.map((doctor) => (
                 <Card
-                  className="mb-3"
+                  className="mb-3 relative"
                   style={{
                     borderRadius: "12px",
                     border: "1px solid #e6e6e6",
@@ -299,16 +304,31 @@ const AllDoctors = () => {
                       {doctor.biography}
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button
-                      className="primary-button w-full"
-                      text={"View Profile"}
-                    />
-                    <Button
-                      className="outline-button w-full"
-                      text={"Appointment"}
-                    />
-                  </CardActions>
+                  <div className="py-10">
+                    <CardActions className="absolute w-full bottom-0">
+                      <Button
+                        className="primary-button w-full"
+                        text={"View Profile"}
+                        onClick={() =>
+                          history.push(
+                            `/doctor/${doctor._id}-${doctor.userName.replace(
+                              /\s/g,
+                              "-"
+                            )}`,
+                            {
+                              data: allDoctors.find(
+                                (item) => item._id === doctor._id
+                              ),
+                            }
+                          )
+                        }
+                      />
+                      <Button
+                        className="outline-button w-full"
+                        text={"Appointment"}
+                      />
+                    </CardActions>
+                  </div>
                 </Card>
               ))}
             </div>
