@@ -10,6 +10,7 @@ import { PageHeader } from "../Layout/Header/Header";
 import Button from "../Components/Button";
 import { useHistory } from "react-router-dom";
 import AddPatientModal from "../Components/FilterModal";
+import moment from "moment";
 
 const PatientList = () => {
   const history = useHistory();
@@ -120,7 +121,14 @@ const PatientList = () => {
         <GridActionsCellItem
           icon={<FiEdit size={16} />}
           label="Edit"
-          onClick={(e) => {}}
+          onClick={() => {
+            history.push(
+              `/updatepatient/${params.id}-${params.row.firstName}`,
+              {
+                data: patient.find((item) => item._id === params.id),
+              }
+            );
+          }}
         />,
         <GridActionsCellItem
           icon={<FiTrash2 size={16} />}
@@ -140,6 +148,7 @@ const PatientList = () => {
         patientPhoneNo,
         patientAdmissionStatus,
         patientInRoom,
+        patientDOB,
         patientAge,
         patientBloodGroup,
       }) => {
@@ -152,7 +161,7 @@ const PatientList = () => {
           patientPhoneNo: patientPhoneNo,
           patientAdmissionStatus: patientAdmissionStatus,
           patientInRoom: patientInRoom,
-          patientAge: patientAge,
+          patientAge: patientAge || moment().diff(patientDOB, "years", false),
           patientBloodGroup: patientBloodGroup,
         };
       }
@@ -183,7 +192,16 @@ const PatientList = () => {
                 className="primary-button"
                 text={"Add Patient"}
               />
-              <Button className="primary-button" text={"Patient Addmission"} />
+              <Button
+                onClick={
+                  // handleOpen
+                  () => {
+                    history.push("/patientadmission");
+                  }
+                }
+                className="primary-button"
+                text={"Patient Addmission"}
+              />
             </div>
             <AddPatientModal open={open} onClose={handleClose} />
           </div>

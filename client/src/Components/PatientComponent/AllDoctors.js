@@ -246,7 +246,7 @@ const AllDoctors = () => {
             <div className="flex justify-between items-center pb-5 border-b border-gray-200">
               <div className="font-bold text-xl">All Doctors</div>
               <div className="flex space-x-6">
-                <Button className="primary-button" text={"Add Doctor"} />
+                {/* <Button className="primary-button" text={"Add Doctor"} /> */}
                 <Button
                   className="primary-button"
                   onClick={() => history.push("/newAppointment")}

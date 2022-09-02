@@ -13,7 +13,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { FiBell, FiChevronLeft } from "react-icons/fi";
+import { FiBell, FiChevronLeft, FiLogOut } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../actions/userActions";
+import { useHistory } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,13 +62,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const PageHeader = ({ title, searchHidden, back, onClick }) => {
+export const PageHeader = ({ title, searchHidden, back, onClick, value }) => {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [searchValue, setSearchValue] = React.useState(value);
+  console.log("search Page head query", value);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+  const dispatch = useDispatch();
+  const { patient } = useSelector((state) => state.patients);
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -187,6 +193,13 @@ export const PageHeader = ({ title, searchHidden, back, onClick }) => {
               <StyledInputBase
                 className="bg-white rounded-xl shadow-xl shadow-orange-50 placeholder:font-bold placeholder-black"
                 placeholder="Search for Patients, Doctors, etc."
+                onKeyDown={(e) => {
+                  if (e.code === "Enter") {
+                    history.push(`/search?search=${searchValue}`);
+                  }
+                }}
+                onChange={(e) => setSearchValue(e.target.value)}
+                value={searchValue || ""}
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
@@ -203,13 +216,12 @@ export const PageHeader = ({ title, searchHidden, back, onClick }) => {
               </Badge>
             </IconButton> */}
             <IconButton
+              onClick={() => dispatch(logout())}
               size="large"
               className="bg-white rounded-full shadow-md p-2"
-              aria-label="show 17 new notifications"
+              aria-label="logout button"
             >
-              <Badge badgeContent={17} color="error">
-                <FiBell color="black" size={24} />
-              </Badge>
+              <FiLogOut color="black" size={24} />
             </IconButton>
             {/* <IconButton
               size="large"

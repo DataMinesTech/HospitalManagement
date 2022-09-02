@@ -33,6 +33,12 @@ export const SidebarData = [
     //   { id: 3, title: "Appointment", link: "/appointment" },
     // ],
   },
+  {
+    id: 5,
+    icon: DoctorIcon,
+    title: "Contract Management",
+    link: "contractmanagement",
+  },
   // {
   //   id: 5,
   //   icon: EmergencyIcon,

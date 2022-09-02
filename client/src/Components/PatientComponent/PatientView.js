@@ -1,10 +1,12 @@
 import { Avatar } from "@mui/material";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../Components/Button";
 import { PageHeader } from "../Layout/Header/Header";
 import Layout from "../Layout/LayoutComponent/Layout";
 import { Tab } from "@headlessui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../actions/patientActions";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -37,6 +39,11 @@ const PatientView = ({ location }) => {
   const history = useHistory();
   const patientData = location.state.data;
   console.log("patient data", patientData);
+  const dispatch = useDispatch();
+  const { patient } = useSelector((state) => state.patients);
+  useEffect(() => {
+    dispatch(getAllPatients());
+  }, [dispatch]);
   return (
     <div className="relative">
       <PageHeader
@@ -97,7 +104,20 @@ const PatientView = ({ location }) => {
             </div>
           </div>
           <div className="flex items-center justify-end">
-            <Button className="outline-button" text={"Edit"} />
+            <Button
+              onClick={() => {
+                history.push(
+                  `/updatepatient/${patientData._id}-${
+                    patientData.patientName.split(" ")[0]
+                  }`,
+                  {
+                    data: patient.find((item) => item._id === patientData._id),
+                  }
+                );
+              }}
+              className="outline-button"
+              text={"Edit"}
+            />
           </div>
         </div>
 

@@ -5,7 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiCalendar } from "react-icons/fi";
+import { FiCalendar, FiClock } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createAppointment } from "../../actions/appointmentActions";
@@ -16,6 +16,7 @@ import { PageHeader } from "../Layout/Header/Header";
 import Layout from "../Layout/LayoutComponent/Layout";
 import Select from "react-select";
 import { getAllDoctors } from "../../actions/doctorActions";
+import { TimePicker } from "@mui/x-date-pickers";
 
 const selectStyle = {
   control: (base, state) => ({
@@ -46,6 +47,7 @@ const DoctorAppointment = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [value, setValue] = React.useState(null);
+
   const { error, patient, loading } = useSelector((state) => state.patients);
 
   const { allDoctors } = useSelector((state) => state.allDoctors);
@@ -76,13 +78,16 @@ const DoctorAppointment = () => {
       appointmentName: data.appointmentName,
       appointmentWith: [
         {
-          patientId: patientId,
-          patientName: patientValue,
-          appointmentOn: data.appointmentOn,
+          patientId: data.patientUHID,
+          patientName: data.patientName,
+          appointmentOn: data.appointmentOn.toISOString(),
+          visitFor: data.visitFor,
         },
       ],
-      anticipatedTime: data.anticipatedTime,
-      doctorsAttending: [{ doctorName: data.doctorName }],
+      anticipatedTime: data.anticipatedTime.toISOString(),
+      doctorsAttending: [
+        { doctorId: data.doctorId, doctorName: data.doctorName },
+      ],
     };
 
     dispatch(createAppointment(obj));
@@ -128,25 +133,18 @@ const DoctorAppointment = () => {
       });
   };
 
-  const searchPatient = (e) => {
-    const searchWord = e.target.value;
-    const newFilter = patient.filter((val) => {
-      return val.patientName.toLowerCase().includes(searchWord.toLowerCase());
-    });
-    setPatientName(newFilter);
-    // setPatientValue(newFilter);
-    console.log("paient vaue", patientValue);
-    // setPatienValue();
-    // setSendPatient(newFilter);
-  };
-
   return (
     <>
       {loading ? (
         <></>
       ) : (
         <div className="relative">
-          <PageHeader title={"Add Appointment"} back onClick={history.goBack} />
+          <PageHeader
+            title={"Add Appointment"}
+            searchHidden
+            back
+            onClick={history.goBack}
+          />
           <Layout>
             <Box
               sx={{
@@ -156,298 +154,265 @@ const DoctorAppointment = () => {
               }}
             >
               <Formik
-                initialValues={{ email: "", password: "" }}
-                validate={(values) => {
-                  const errors = {};
-                  if (!values.email) {
-                    errors.email = "Required";
-                  } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                      values.email
-                    )
-                  ) {
-                    errors.email = "Invalid email address";
-                  }
-                  return errors;
+                initialValues={{
+                  appointmentName: "",
+                  doctorName: "",
+                  appointmentOn: new Date().toLocaleDateString(),
+                  anticipatedTime: new Date().toLocaleTimeString(),
+                  patientName: "",
+                  patientUHID: "",
+                  visitFor: "",
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                  }, 400);
+                onSubmit={(values, { setSubmitting, resetForm }) => {
+                  console.log({ values });
+                  submitHandler(values);
+                  resetForm();
                 }}
               >
-                {({ isSubmitting }) => (
-                  <Form>
-                    <div className="grid grid-cols-3 gap-10">
-                      <div className="w-full h-full">
-                        <div className="form-label">Select Doctor</div>
-                        <div className="flex relative"></div>
-                        <Field
-                          className="form-field"
-                          placeholder="Enter Name"
-                          type="text"
-                          {...register("appointmentName")}
-                        />
-                      </div>
+                {({ isSubmitting, setFieldValue, values, handleChange }) => (
+                  <Form className="flex flex-col space-y-5">
+                    <div className="text-lg font-bold pb-2 border-b border-gray-200">
+                      Appointment Details
+                    </div>
+                    <div className="grid grid-cols-3 gap-10 pb-5">
                       <div className="w-full">
-                        <div className="form-label">Appointment On</div>
-                        <Paper
-                          component="form"
-                          className="form-field"
-                          elevation={0}
-                        >
-                          <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                              OpenPickerButtonProps={{
-                                style: {
-                                  color: "#4988FC",
-                                  background: "#E1EBFF",
-                                  borderRadius: "8px",
-                                },
-                              }}
-                              components={{
-                                OpenPickerIcon: FiCalendar,
-                              }}
-                              className="form-field"
-                              openTo="date"
-                              views={["year", "month", "day"]}
-                              value={value}
-                              inputFormat="dd/MM/yyyy"
-                              // onChange={(newValue) => {
-                              //   console.log("newValue", newValue);
-                              //   setFieldValue(patientDOB.name, newValue);
-                              // }}
-                              renderInput={({
-                                inputRef,
-                                inputProps,
-                                InputProps,
-                              }) => (
-                                <div className="flex items-center">
-                                  {InputProps?.endAdornment}
-                                  <Field
-                                    name="appointmentOn"
-                                    ref={inputRef}
-                                    {...inputProps}
-                                    className="date-field"
-                                  />
-                                </div>
-                              )}
-                            />
-                          </LocalizationProvider>
-                        </Paper>
+                        <div className="form-label">Appointment Name</div>
+                        <div className="flex relative">
+                          <Field
+                            className="form-field"
+                            placeholder="Enter Appointment Name"
+                            name="appointmentName"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <Field type="email" name="email" />
-                    <ErrorMessage name="email" component="div" />
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
-                    <button type="submit" disabled={isSubmitting}>
-                      Submit
-                    </button>
+                    <div className="text-lg font-bold pb-2 border-b border-gray-300">
+                      Doctor Details
+                    </div>
+                    <div className="grid grid-cols-3 gap-10 pb-5">
+                      <div className="w-full h-full">
+                        <div className="form-label">Select Doctor</div>
+                        <div className="flex relative w-full">
+                          <Select
+                            styles={selectStyle}
+                            options={patient.length && getDoctorOptions()}
+                            name="doctorName"
+                            placeholder="Select Doctor"
+                            className="w-full"
+                            isLoading={false}
+                            loadingMessage={() => "Fetching Doctor"}
+                            noOptionsMessage={() => "This doctor is not Exist"}
+                            onChange={(selectedOption) => {
+                              setFieldValue("doctorName", selectedOption.value);
+                              setFieldValue("doctorId", selectedOption.id);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full h-full">
+                        <div className="form-label">Appointment On</div>
+                        <div className="flex relative w-full">
+                          <Paper
+                            sx={{
+                              borderRadius: "8px",
+                              display: "flex",
+
+                              alignItems: "center",
+                            }}
+                            className="border-2 border-gray-300 w-full"
+                            elevation={0}
+                          >
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                              <DatePicker
+                                OpenPickerButtonProps={{
+                                  style: {
+                                    color: "#FF7B54",
+                                    background: "#FFF1EC",
+                                    borderRadius: "8px",
+                                    marginRight: "4px",
+                                    position: "relative",
+                                  },
+                                }}
+                                components={{
+                                  OpenPickerIcon: FiCalendar,
+                                }}
+                                openTo="date"
+                                views={["day", "month", "year"]}
+                                value={value}
+                                onChange={(newValue) => {
+                                  setValue(newValue);
+                                  setFieldValue("appointmentOn", newValue);
+                                }}
+                                inputFormat="dd/MM/yyyy"
+                                // onChange={(newValue) => {
+                                //   console.log("newValue", newValue);
+                                //   props.setFieldValue(
+                                //     patientDOB.name,
+                                //     newValue
+                                //   );
+                                // }}
+                                renderInput={({
+                                  inputRef,
+                                  inputProps,
+                                  InputProps,
+                                }) => (
+                                  <div className="flex items-center relative">
+                                    {InputProps?.endAdornment}
+                                    <Field
+                                      className="py-3 px-3 w-full outline-none"
+                                      name="appointmentOn"
+                                      ref={inputRef}
+                                      {...inputProps}
+                                    />
+                                  </div>
+                                )}
+                              />
+                            </LocalizationProvider>
+                          </Paper>
+                        </div>
+                      </div>
+                      <div className="w-full">
+                        <div className="form-label">Anticipated Time</div>
+                        <div className="flex relative w-full">
+                          <Paper
+                            sx={{
+                              borderRadius: "8px",
+                              display: "flex",
+
+                              alignItems: "center",
+                            }}
+                            className="border-2 border-gray-300 w-full"
+                            elevation={0}
+                          >
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                              <TimePicker
+                                OpenPickerButtonProps={{
+                                  style: {
+                                    color: "#FF7B54",
+                                    background: "#FFF1EC",
+                                    borderRadius: "8px",
+                                    marginRight: "4px",
+                                    position: "relative",
+                                  },
+                                }}
+                                components={{
+                                  OpenPickerIcon: FiClock,
+                                }}
+                                label="Enter Anticipated time"
+                                value={value}
+                                onChange={(newValue) => {
+                                  setValue(newValue);
+                                  setFieldValue("anticipatedTime", newValue);
+                                  console.log("time", newValue);
+                                }}
+                                // onChange={(newValue) => {
+                                //   console.log("newValue", newValue);
+                                //   props.setFieldValue(
+                                //     patientDOB.name,
+                                //     newValue
+                                //   );
+                                // }}
+                                renderInput={({
+                                  inputRef,
+                                  inputProps,
+                                  InputProps,
+                                }) => (
+                                  <div className="flex items-center relative">
+                                    {InputProps?.endAdornment}
+                                    <Field
+                                      className="py-3 px-3 w-full outline-none"
+                                      name="anticipatedTime"
+                                      ref={inputRef}
+                                      {...inputProps}
+                                    />
+                                  </div>
+                                )}
+                              />
+                            </LocalizationProvider>
+                          </Paper>
+                        </div>
+                        {/* <div className="flex relative">
+                          <Field
+                            className="form-field"
+                            placeholder="Enter Anticipated time"
+                            name="anticipatedTime"
+                          />
+                        </div> */}
+                      </div>
+                    </div>
+
+                    <div className="text-lg font-bold pb-2 border-b border-gray-200">
+                      Patient Details
+                    </div>
+                    <div className="grid grid-cols-3 gap-10 pb-5">
+                      <div className="w-full h-full">
+                        <div className="form-label">Select Patient</div>
+                        <div className="flex relative w-full">
+                          <Select
+                            className="w-full"
+                            styles={selectStyle}
+                            options={patient.length && getPatientOptions()}
+                            name="patientName"
+                            placeholder="Select Patient"
+                            isLoading={false}
+                            loadingMessage={() => "Fetching Patient"}
+                            noOptionsMessage={() => "This patient is not Exist"}
+                            onChange={(selectedOption) => {
+                              setFieldValue("patientUHID", selectedOption.id);
+                              setFieldValue(
+                                "patientName",
+                                selectedOption.value
+                              );
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full h-full">
+                        <div className="form-label">Patient UHID</div>
+                        <div className="flex relative">
+                          <Field
+                            className="form-field bg-gray-200 border-transparent focus:border-transparent"
+                            placeholder={"Patient UHID"}
+                            value={values.patientUHID}
+                            readOnly
+                            name="patientUHID"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full">
+                        <div className="form-label">Appointment For</div>
+                        <div className="flex relative">
+                          <Field
+                            className="form-field"
+                            placeholder="Ex: Checkup"
+                            name="visitFor"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "end",
+                        mr: 3,
+                        pt: 2,
+                        mx: "auto",
+                      }}
+                    >
+                      <Button
+                        // disabled={isSubmitting}
+                        type="submit"
+                        className="primary-button"
+                        // onClick={handleNext}
+                        text={"Submit"}
+                      />
+                    </Box>
                   </Form>
                 )}
               </Formik>
-              <div className="grid grid-cols-2 gap-5">
-                <div>
-                  <div className="form-label">Appointment Name</div>
-                  <div className="flex relative">
-                    <input
-                      className="form-field"
-                      placeholder="Enter Name"
-                      type="text"
-                      {...register("appointmentName")}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="form-label">Appointsadment On</div>
-                  <Paper component="form" className="form-field" elevation={0}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        OpenPickerButtonProps={{
-                          style: {
-                            color: "#4988FC",
-                            background: "#E1EBFF",
-                            borderRadius: "8px",
-                          },
-                        }}
-                        components={{
-                          OpenPickerIcon: FiCalendar,
-                        }}
-                        openTo="date"
-                        views={["day", "month", "year"]}
-                        value={value}
-                        onChange={(newValue) => {
-                          setValue(newValue);
-                        }}
-                        renderInput={({ inputRef, inputProps, InputProps }) => (
-                          <div className="flex items-center">
-                            {InputProps?.endAdornment}
-                            <input
-                              {...register("appointmentOn")}
-                              ref={inputRef}
-                              placeholder="DD | MM | YYYY"
-                              className="date-field"
-                            />
-                          </div>
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </Paper>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 py-5 gap-4">
-                <div>
-                  <div className="form-label">Patient Name</div>
-                  <div className="flex relative">
-                    <Select
-                      styles={selectStyle}
-                      options={patient.length && getPatientOptions()}
-                      name="patientName"
-                      placeholder="Select Patient"
-                      isLoading={false}
-                      loadingMessage={() => "Fetching Patient"}
-                      noOptionsMessage={() => "This patient is not Exist"}
-                      value={patient?.patientName}
-                      // onChange={(selectedOption) => {
-                      //   handleCountryChange(selectedOption, values);
-                      //   values.Country = selectedOption.value;
-                      //   values.CountryCode = selectedOption.code;
-                      //   // handleChange = (value) => {
-                      //   //   setFieldValue("CountryCode", values.CountryCode);
-                      //   // };
-                      // }}
-                    />
-                    {/* <input
-                      className="form-field"
-                      placeholder="Enter patient Name"
-                      type="text"
-                      {...register("patientName")}
-                    /> */}
-                  </div>
-                </div>
-                <div>
-                  <div className="form-label">Doctor Name</div>
-                  <div className="flex relative">
-                    <Select
-                      styles={selectStyle}
-                      options={patient.length && getDoctorOptions()}
-                      name="doctorName"
-                      placeholder="Select Doctor"
-                      isLoading={false}
-                      loadingMessage={() => "Fetching Doctor"}
-                      noOptionsMessage={() => "This doctor is not Exist"}
-                      value={patient?.patientName}
-                      // onChange={(selectedOption) => {
-                      //   handleCountryChange(selectedOption, values);
-                      //   values.Country = selectedOption.value;
-                      //   values.CountryCode = selectedOption.code;
-                      //   // handleChange = (value) => {
-                      //   //   setFieldValue("CountryCode", values.CountryCode);
-                      //   // };
-                      // }}
-                    />
-                    {/* <input
-                      className="form-field"
-                      placeholder="Enter patient Name"
-                      type="text"
-                      {...register("patientName")}
-                    /> */}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="form-label">Anticipated Time</div>
-                  <div className="flex relative">
-                    <input
-                      className="form-field"
-                      placeholder="Enter Anticipated Time"
-                      type="text"
-                      {...register("anticipatedTime")}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="form-label">Doctor Name</div>
-                  <div className="flex relative">
-                    <input
-                      className="form-field"
-                      placeholder="Enter Doctor Name"
-                      type="text"
-                      {...register("doctorName")}
-                    />
-                  </div>
-                </div>
-              </div>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "end",
-                  mr: 3,
-                  pt: 2,
-                  mx: "auto",
-                }}
-              >
-                <Button
-                  // disabled={isSubmitting}
-                  type="submit"
-                  className="primary-button"
-                  // onClick={handleNext}
-                  text={"Submit"}
-                />
-              </Box>
             </Box>
           </Layout>
-          {/* <form onSubmit={handleSubmit(submitHandler)}>
-            <br />
-            <label>appointmentName:</label>
-            <input type="text" {...register("appointmentName")} />
-            <br />
-            <label>appointmentWith: </label>
-            <br />
-            <label>patientName</label>
-            <input type="hidden" {...register("patientId")} />
-            <input
-              type="search"
-              {...register("patientName")}
-              onChange={searchPatient}
-              defaultValue={patientValue}
-              // onPatientValue={(e) => setPatientValue(e.target.value)}
-            />
-            {patientName.length !== 0 ? (
-              patientName.map((data, key) => {
-                return (
-                  <button
-                    type="button"
-                    key={data._id}
-                    onClick={() => {
-                      setPatientId(data._id);
-                      setPatientValue(data.patientName);
-                    }}
-                  >
-                    {data.patientName}
-                  </button>
-                );
-              })
-            ) : (
-              <></>
-            )}
-
-            <label>appointment On</label>
-            <input type="datetime-local" {...register("appointmentOn")} />
-            <label>anticipatedTime</label>
-            <input type="text" {...register("anticipatedTime")} />
-            <label>doctorsAttending</label>
-            <label>Doctor Name</label>
-            <input type="text" {...register("doctorName")} />
-            <input type="hidden" {...register("doctorId")} />
-            <button type="submit" class="btn btn-primary btn-block mb-4  ">
-              Submit
-            </button>
-          </form> */}
         </div>
       )}
     </>

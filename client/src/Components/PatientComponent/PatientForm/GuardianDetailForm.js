@@ -83,7 +83,7 @@ export default function PatientGuardianDetailForm(props) {
           <div className="flex relative">
             <Field
               className="form-field"
-              placeholder="Zipcode"
+              placeholder="Enter Zipcode"
               name={patientGuardianZipcode.name}
             />
           </div>

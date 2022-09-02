@@ -6,9 +6,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React from "react";
 import { FiCalendar } from "react-icons/fi";
 import { Paper } from "@mui/material";
+import { format } from "date-fns";
+import moment from "moment";
 
 export default function PatientDetailForm(props) {
-  const [value, setValue] = React.useState(null);
+  // const [value, setValue] = React.useState(props.values.patientDOB);
   const {
     formField: {
       patientName,
@@ -80,12 +82,13 @@ export default function PatientDetailForm(props) {
                       position: "relative",
                     },
                   }}
+                  value={moment(props.values.patientDOB, "DD/MM/YYYY").toDate()}
                   components={{
                     OpenPickerIcon: FiCalendar,
                   }}
                   openTo="date"
-                  views={["year", "month", "day"]}
-                  value={value}
+                  views={["day", "month", "year"]}
+                  // value={value}
                   inputFormat="dd/MM/yyyy"
                   onChange={(newValue) => {
                     console.log("newValue", newValue);
@@ -99,6 +102,13 @@ export default function PatientDetailForm(props) {
                         name={patientDOB.name}
                         ref={inputRef}
                         {...inputProps}
+                        value={
+                          props.values.patientDOB &&
+                          format(
+                            new Date(props.values.patientDOB),
+                            "dd/MM/yyyy"
+                          )
+                        }
                       />
                     </div>
                   )}

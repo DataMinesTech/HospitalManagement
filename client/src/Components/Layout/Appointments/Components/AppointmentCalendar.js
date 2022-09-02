@@ -17,57 +17,7 @@ import {
   AppointmentForm,
   Toolbar,
   DateNavigator,
-  EditRecurrenceMenu,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { teal, indigo } from "@mui/material/colors";
-
-const appointments = [
-  {
-    id: 0,
-    title: "Watercolor Landscape",
-    members: [1],
-    roomId: 1,
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    id: 1,
-    title: "Oil Painting for Beginners",
-    members: [1],
-    roomId: 2,
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    id: 2,
-    title: "Testing",
-    members: [1, 2],
-    roomId: 1,
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    id: 3,
-    title: "Final exams",
-    members: [1, 2],
-    roomId: 2,
-    startDate: new Date(2017, 4, 29, 9, 30),
-    endDate: new Date(2017, 4, 29, 12, 0),
-  },
-];
-
-const owners = [
-  {
-    text: "Andrew Glover",
-    id: 1,
-    color: indigo,
-  },
-  {
-    text: "Arnie Schwartz",
-    id: 2,
-    color: teal,
-  },
-];
 
 const AppointmentCalendar = ({ appointments }) => {
   console.log("appointments", appointments);
@@ -75,7 +25,7 @@ const AppointmentCalendar = ({ appointments }) => {
     return appointment.doctorsAttending[0];
   });
   console.log("doctors", doctors);
-  console.log(owners);
+
   const [state, setState] = useState({
     data: appointments?.map((appointment) => {
       const startDate = new Date(appointment.appointmentWith[0].appointmentOn);
@@ -102,7 +52,7 @@ const AppointmentCalendar = ({ appointments }) => {
               text: doctor.doctorName,
             };
           }),
-        allowMultiple: true,
+        allowMultiple: false,
       },
     ],
     grouping: [

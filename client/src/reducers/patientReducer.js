@@ -10,6 +10,9 @@ import {
   GET_ALL_PATIENTS_REQUEST,
   GET_ALL_PATIENTS_SUCCESS,
   GET_ALL_PATIENTS_FAIL,
+  UPDATE_PATIENTS_REQUEST,
+  UPDATE_PATIENTS_SUCCESS,
+  UPDATE_PATIENTS_FAIL,
 } from "../constants/patientConstants";
 
 export const createPatientReducer = (state = { patient: {} }, action) => {
@@ -19,7 +22,19 @@ export const createPatientReducer = (state = { patient: {} }, action) => {
         loading: true,
         isAuthenticated: false,
       };
+    case UPDATE_PATIENTS_REQUEST:
+      return {
+        loading: true,
+        isAuthenticated: false,
+      };
     case CREATE_PATIENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        patient: action.payload,
+      };
+    case UPDATE_PATIENTS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -34,7 +49,14 @@ export const createPatientReducer = (state = { patient: {} }, action) => {
         patient: null,
         error: action.payload,
       };
-
+    case UPDATE_PATIENTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: false,
+        patient: null,
+        error: action.payload,
+      };
     case CLEAR_ERRORS:
       return {
         ...state,

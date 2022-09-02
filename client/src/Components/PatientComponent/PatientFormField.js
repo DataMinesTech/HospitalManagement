@@ -93,7 +93,7 @@ export const patientFormField = {
       label: "Guardian State",
     },
     patientGuardianZipcode: {
-      name: "patientGuardianCity",
+      name: "patientGuardianZipcode",
       label: "Guardian State",
     },
   },

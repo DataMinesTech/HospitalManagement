@@ -9,6 +9,9 @@ import {
   GET_ALL_PATIENTS_FAIL,
   DELETE_PATIENT_REQUEST,
   DELETE_PATIENT_FAIL,
+  UPDATE_PATIENTS_REQUEST,
+  UPDATE_PATIENTS_SUCCESS,
+  UPDATE_PATIENTS_FAIL,
 } from "../constants/patientConstants";
 import axios from "axios";
 
@@ -75,6 +78,23 @@ export const deletePatient = (id) => async (dispatch) => {
     console.log("patient Delete data", data);
   } catch (error) {
     dispatch({ type: DELETE_PATIENT_FAIL, payload: error.data });
+
+    console.log(error);
+  }
+};
+
+export const updatePatient = (payload) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PATIENTS_REQUEST });
+
+    const { data } = await axios.put(
+      `/api/v1/patient/${payload.patientUHID}`,
+      payload
+    );
+    console.log("patient update data", data);
+    dispatch({ type: UPDATE_PATIENTS_SUCCESS });
+  } catch (error) {
+    dispatch({ type: UPDATE_PATIENTS_FAIL, payload: error.data });
 
     console.log(error);
   }

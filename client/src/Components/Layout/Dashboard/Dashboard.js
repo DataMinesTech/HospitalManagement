@@ -248,7 +248,7 @@ const Dashboard = (props) => {
               </div>
             </div>
           </div>
-          <div className="my-5 col-span-4">
+          {/* <div className="my-5 col-span-4">
             <div className="text-sm font-bold pb-5 uppercase">
               Patient Statistics
             </div>
@@ -293,9 +293,9 @@ const Dashboard = (props) => {
                 }}
               />
             </div>
-          </div>
-          <div className="col-span-2 my-5">
-            <div>
+          </div> */}
+          {/* <div className="col-span-2 my-5"> */}
+          {/* <div>
               <div className="text-sm font-bold pb-5 uppercase">Reports</div>
               <div className="grid grid-cols-1 gap-5">
                 <div className="bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg flex flex-col justify-between">
@@ -344,8 +344,8 @@ const Dashboard = (props) => {
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="my-10">
+            </div> */}
+          {/* <div className="my-10">
               <div className="text-sm font-bold pb-5 uppercase">Balance</div>
               <div className="grid grid-cols-1 gap-5">
                 <div className="bg-white shadow-xl shadow-orange-50 py-5 px-5 rounded-lg flex flex-col justify-between">
@@ -451,7 +451,7 @@ const Dashboard = (props) => {
                 </div>
               </div>
             </div> */}
-          </div>
+          {/* </div> */}
         </div>
       </Layout>
     </div>
