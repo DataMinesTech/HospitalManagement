@@ -25,12 +25,12 @@ const PatientVisit = () => {
 
   return (
     <>
-      <div className="d-flex bd-highlight ">
+      <div className="flex bd-highlight ">
         <div className="flex-shrink-1 p-2 bd-highlight">
           <Sidebar setActive={setActive} isActive={active} />
         </div>
         <div className="w-100 p-2 bd-highlight">
-          <div className="d-flex bd-highlight mb-3">
+          <div className="flex bd-highlight mb-3">
             <div className="p-2 bd-highlight">
               <h2>Patient Visits</h2>
             </div>
@@ -40,13 +40,13 @@ const PatientVisit = () => {
               <span>Age : 35 years &nbsp;</span>{" "}
             </div>
           </div>
-          <div className="d-flex bd-highlight">
+          <div className="flex bd-highlight">
             <button className="p-2 bd-highlight col-3">Medical Record</button>
             <button className="p-2 bd-highlight col-3">Package</button>
             <button className="p-2 bd-highlight col-3">Consultation</button>
             <button className="p-2 bd-highlight col-3">Vaccination</button>{" "}
           </div>
-          <div className="d-flex justify-content-end py-2">
+          <div className="flex justify-content-end py-2">
             <button className="btn btn-block btn-primary" type="submit">
               Save
             </button>

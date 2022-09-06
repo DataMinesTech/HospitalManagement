@@ -13,7 +13,6 @@ import PatientIssue from "./Components/Layout/Dashboard/PatientIssue";
 import Room from "./Components/Layout/Dashboard/Room";
 import SampleAcknowledge from "./Components/Layout/Dashboard/SampleAcknowledge";
 import SampleCollection from "./Components/Layout/Dashboard/SampleCollection";
-import Header from "./Components/Layout/Header/Header";
 import AllAppointments from "./Components/Layout/OutPatientModal/AllAppointments";
 import OutPatientBilling from "./Components/Layout/OutPatientModal/OutPatientBilling";
 import MaterialDrawer from "./Components/Layout/Sidebar/MaterialDrawer";
@@ -37,8 +36,14 @@ import RoomTransfer from "./Components/PatientComponent/RoomTransfer";
 import RoomsOccupied from "./Components/RoomComponent/RoomsOccupied";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import store from "./store";
-import { Box, Toolbar } from "@mui/material";
+import { Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import TodaysAppointment from "./Components/Layout/Appointments/TodaysAppointments";
+import PatientView from "./Components/PatientComponent/PatientView";
+import DoctorView from "./Components/PatientComponent/DoctorView";
+import ContractManagement from "./Components/ContractManagementSystem/ContractManagement";
+import SearchPage from "./Components/Layout/SearchComponent/SearchPage";
+import UpdatePatient from "./Components/PatientComponent/UpdatePatient";
 
 const theme = createTheme({
   typography: {
@@ -57,18 +62,24 @@ function App(props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { error, loading, isAuthenticated, user } = useSelector(
-    (state) => state.user
-  );
+  const { user } = useSelector((state) => state.user);
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Box sx={{ display: "flex", position: "relative" }}>
-          <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
+          {/* <Header isOpen={isOpen} setIsOpen={setIsOpen} user={user} /> */}
           <MaterialDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
-          <Box component="main" sx={{ flexGrow: 1, position: "relative" }}>
-            <Toolbar />
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              position: "relative",
+              minHeight: "100vh",
+              backgroundColor: "#F5F0ED",
+            }}
+          >
+            {/* <Toolbar /> */}
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute
@@ -77,80 +88,134 @@ function App(props) {
                 component={Dashboard}
                 user={user}
               />
-              <Route exact path="/home" component={Home} />
+              <ProtectedRoute exact path="/home" component={Home} />
               <ProtectedRoute exact path="/newpatient" component={NewPatient} />
-              <Route
+              <ProtectedRoute
+                exact
+                path="/updatepatient/:id"
+                component={UpdatePatient}
+              />
+              <ProtectedRoute
                 exact
                 path="/patientvisit"
                 component={PatientVisit}
                 user={user}
               />
               {/* <Route exact path="/allergies" component={PatientAllergies} /> */}
-              <Route exact path="/complaint" component={PresentingComplaint} />
-              <Route exact path="/medication" component={Medication} />
-              <Route exact path="/diagnosis" component={Diagnosis} />
-              <Route exact path="/historyandexam" component={HistoryAndExam} />
-              <Route
+              <ProtectedRoute
+                exact
+                path="/complaint"
+                component={PresentingComplaint}
+              />
+              <ProtectedRoute exact path="/medication" component={Medication} />
+              <ProtectedRoute exact path="/diagnosis" component={Diagnosis} />
+              <ProtectedRoute
+                exact
+                path="/historyandexam"
+                component={HistoryAndExam}
+              />
+              <ProtectedRoute
                 exact
                 path="/investigation"
                 component={InvestigationProcedure}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/prescription"
                 component={PrescriptionMedicine}
               />
-              <Route exact path="/advice" component={Advice} />
-              <Route
+              <ProtectedRoute exact path="/advice" component={Advice} />
+              <ProtectedRoute
                 exact
                 path="/medicalcertificate"
                 component={MedicalCertificate}
               />
-              <Route exact path="/roomstatus" component={RoomsOccupied} />
-              <Route exact path="/refertodoctor" component={ReferToDoctor} />
-              <Route exact path="/inventory" component={Inventory} />
-              <Route exact path="/patientissue" component={PatientIssue} />
-              <Route
+              <ProtectedRoute
+                exact
+                path="/roomstatus"
+                component={RoomsOccupied}
+              />
+              <ProtectedRoute
+                exact
+                path="/refertodoctor"
+                component={ReferToDoctor}
+              />
+              <ProtectedRoute exact path="/inventory" component={Inventory} />
+              <ProtectedRoute
+                exact
+                path="/patientissue"
+                component={PatientIssue}
+              />
+              <ProtectedRoute
                 exact
                 path="/allappointments"
                 component={AllAppointments}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/samplecollection"
                 component={SampleCollection}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/sampleacknowledge"
                 component={SampleAcknowledge}
               />
-              <Route exact path="/appointment" component={DoctorAppointment} />
-              <Route exact path="/room" component={Room} />
-              <Route
+              <ProtectedRoute
+                exact
+                path="/newAppointment"
+                component={DoctorAppointment}
+              />
+              <ProtectedRoute
+                exact
+                path="/appointments"
+                component={TodaysAppointment}
+              />
+              <ProtectedRoute exact path="/room" component={Room} />
+              <ProtectedRoute
                 exact
                 path="/investigationacknowledge"
                 component={InvestigationAcknowledge}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/outpatientbilling"
                 component={OutPatientBilling}
               />
-              <Route exact path="/patientlist" component={PatientList} />
-              <Route exact path="/roomstatus" component={RoomStatus} />
-              <Route exact path="/roomtransfer" component={RoomTransfer} />
-              <Route exact path="/alldoctors" component={AllDoctors} />
-              <Route
+              <ProtectedRoute
+                exact
+                path="/patientlist"
+                component={PatientList}
+              />
+              <ProtectedRoute
+                exact
+                path="/patient/:id"
+                component={PatientView}
+              />
+              <ProtectedRoute exact path="/roomstatus" component={RoomStatus} />
+              <ProtectedRoute
+                exact
+                path="/roomtransfer"
+                component={RoomTransfer}
+              />
+              <ProtectedRoute exact path="/alldoctors" component={AllDoctors} />
+              <ProtectedRoute exact path="/doctor/:id" component={DoctorView} />
+              <ProtectedRoute
                 exact
                 path="/patientadmission"
                 component={PatientAdmission}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path="/patientdischarge"
                 component={PatientDischarge}
               />
+              <ProtectedRoute
+                exact
+                path="/contractmanagement"
+                component={ContractManagement}
+              />
+              <ProtectedRoute exact path="/search" component={SearchPage} />
             </Switch>
           </Box>
         </Box>

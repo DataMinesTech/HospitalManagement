@@ -12,7 +12,7 @@ const Advice = () => {
         id="exampleFormControlTextarea1"
         rows="3"
       ></textarea>
-      <div className="d-flex py-2 justify-content-evenly">
+      <div className="flex py-2 justify-content-evenly">
         <div>
           <label>Follow up date</label>
           <input

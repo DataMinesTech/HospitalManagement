@@ -43,7 +43,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`api/v1/me`);
+    const { data } = await axios.get(`/api/v1/me`);
 
     console.log(data, "load user data current");
 
@@ -57,7 +57,7 @@ export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_USERS_REQUEST });
 
-    const { data } = await axios.get(`api/v1/users`);
+    const { data } = await axios.get(`/api/v1/users`);
 
     console.log(data, "all users current");
 
@@ -69,7 +69,7 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get(`api/v1/logout`);
+    await axios.get(`/api/v1/logout`);
 
     dispatch({ type: LOGOUT_USER_SUCCESS });
   } catch (error) {

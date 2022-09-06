@@ -6,7 +6,7 @@ const PrescriptionMedicine = () => {
     <div>
       <p className="h2">Prescription Medicine</p>
       <Divider />
-      <div className="d-flex justify-content-evenly">
+      <div className="flex justify-content-evenly">
         <div>
           <label>Store &nbsp;</label>
           <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">
@@ -24,7 +24,7 @@ const PrescriptionMedicine = () => {
         </div>
       </div>
       <br />
-      <div className="d-flex justify-content-evenly">
+      <div className="flex justify-content-evenly">
         <div>
           <label>Dosage</label>
           <input
@@ -56,7 +56,7 @@ const PrescriptionMedicine = () => {
           </select>
         </div>
       </div>
-      <div className="d-flex justify-content-evenly">
+      <div className="flex justify-content-evenly">
         <div>
           <label>Food Relation</label>
           <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">

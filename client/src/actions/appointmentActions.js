@@ -36,7 +36,7 @@ export const getAllAppointments = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_APPOINTMENTS_REQUEST });
 
-    const { data } = await axios.get(`api/v1/appointments`);
+    const { data } = await axios.get(`/api/v1/appointments`);
 
     dispatch({
       type: GET_ALL_APPOINTMENTS_SUCCESS,

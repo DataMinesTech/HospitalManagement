@@ -1,203 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import OutPatientModal from "../Layout/OutPatientModal/OutPatientModal";
-import { Divider, Modal, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import "./NewPatient.css";
-import WebcamCapture from "../../Helpers/WebcamCapture";
-import { useForm } from "react-hook-form";
-import { createNewPatient } from "../../actions/patientActions";
-import { loadUser } from "../../actions/userActions";
+import React from "react";
+import { Divider } from "@mui/material";
 import { PageHeader } from "../Layout/Header/Header";
-import Layout from "../Layout/LayoutComponent/Layout";
-import StepperComponent from "../Components/Stepper";
-import { patientFormField } from "./PatientFormField";
-import PatientDetailForm from "./PatientForm/PatientDetailForm";
-import PatientGuardianDetailForm from "./PatientForm/GuardianDetailForm";
-import PatientAddressForm from "./PatientForm/PatientAddressForm";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import Button from "../Components/Button";
-
-const steps = ["Patient Detail", "Home Address", "Guardian Detail"];
-const { formId, formField } = patientFormField;
-const {
-  formField: {
-    patientName,
-    patientDOB,
-    patientGender,
-    patientMobile,
-    patientEmail,
-    patientDiagnosis,
-    patientAddress1,
-    patientAddress2,
-    patientCity,
-    patientState,
-    patientZipcode,
-    patientCountry,
-    patientGuardianName,
-    patientGuardianMobile,
-    patientGuardianDOB,
-    patientGuardianAddress1,
-    patientGuardianAddress2,
-    patientGuardianCity,
-    patientGuardianState,
-    patientGuardianZipcode,
-  },
-} = patientFormField;
-
-export const intialValues = {
-  [patientName.name]: "",
-  [patientDOB.name]: "",
-  [patientGender.name]: "",
-  [patientMobile.name]: "",
-  [patientEmail.name]: "",
-  [patientDiagnosis.name]: "",
-  [patientAddress1.name]: "",
-  [patientAddress2.name]: "",
-  [patientCity.name]: "",
-  [patientState.name]: "",
-  [patientZipcode.name]: "",
-  [patientCountry.name]: "",
-  [patientGuardianName.name]: "",
-  [patientGuardianDOB.name]: "",
-  [patientGuardianMobile.name]: "",
-  [patientGuardianAddress1.name]: "",
-  [patientGuardianAddress2.name]: "",
-  [patientGuardianCity.name]: "",
-  [patientGuardianState.name]: "",
-  [patientGuardianZipcode.name]: "",
-};
-
-function _renderStepContent(step) {
-  switch (step) {
-    case 0:
-      return <PatientDetailForm formField={formField} />;
-    case 1:
-      return <PatientAddressForm formField={formField} />;
-    case 2:
-      return <PatientGuardianDetailForm formField={formField} />;
-    default:
-      return <div>Not Found</div>;
-  }
-}
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#fff",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: "1rem",
-};
+import { useHistory } from "react-router-dom";
+import { PatientForm } from "./PatientForm";
 
 const NewPatient = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  function handleBack() {
-    setActiveStep(activeStep - 1);
-  }
-
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     dispatch(loadUser());
-  //   }
-  // }, [isAuthenticated, dispatch]);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  async function _submitForm(values, actions) {
-    alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
-
-    setActiveStep(activeStep + 1);
-  }
-
-  function _handleSubmit(values, actions) {
-    if (activeStep === steps.length - 1) {
-      _submitForm(values, actions);
-    } else {
-      setActiveStep(activeStep + 1);
-      actions.setTouched({});
-      actions.setSubmitting(false);
-    }
-  }
-
-  const [openModal, setOpenModal] = useState(false);
-  const [openCamera, setOpenCamera] = useState(false);
-
-  const registerPatient = (data) => {
-    console.log("hello", data);
-
-    const patientName = `${data.firstName} ${data.middleName} ${data.lastName}`;
-    const patientAddress = `${data.address} ${data.province} ${data.district} ${data.postalcode}`;
-    const patientAge = new Date().getFullYear() - data.years;
-
-    const newData = {
-      patientName,
-      patientAddress,
-      patientGender: data.gender,
-      patientEmail: data.email,
-      patientPhoneNo: data.phone,
-      patientAge,
-      patientOccupation: data.occupation,
-      patientAdmissionStatus: data.Admitted ?? "Not Admitted",
-    };
-
-    dispatch(createNewPatient(newData));
-  };
+  const history = useHistory();
 
   return (
-    <div className="position-relative">
-      <PageHeader title={"Add New Patient"} />
-      <Layout>
-        <StepperComponent steps={steps} activeStep={activeStep}>
-          <div className="pb-4">
-            <Formik initialValues={intialValues} onSubmit={_handleSubmit}>
-              {({ isSubmitting }) => (
-                <Form id={formId}>
-                  {_renderStepContent(activeStep)}
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "end",
-                      mr: 3,
-                      pt: 2,
-                      width: "80%",
-                      mx: "auto",
-                    }}
-                  >
-                    <Button
-                      className="rounded-button"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      text={"Back"}
-                    />
-                    <Button
-                      disabled={isSubmitting}
-                      type="submit"
-                      className="rounded-button primary"
-                      // onClick={handleNext}
-                      text={activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    />
-                  </Box>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </StepperComponent>
-      </Layout>
-      {/* <div className="d-flex justify-content-between py-2">
+    <div className="relative">
+      <PageHeader
+        title={"Add New Patient"}
+        back
+        searchHidden
+        onClick={history.goBack}
+      />
+      <PatientForm />
+
+      {/* <div className="flex justify-content-between py-2">
         <button onClick={() => setOpenModal(!openModal)}>options</button>
       </div> */}
       <Divider></Divider>
@@ -579,7 +399,7 @@ const NewPatient = () => {
                 </div>
 
                 <h3>Nearest Relative</h3>
-                <div className="d-flex justify-content-end">
+                <div className="flex justify-content-end">
                   <input type="checkbox" className="form-check-input" />
                   <label>Same address as patient</label>
                 </div>
@@ -701,7 +521,7 @@ const NewPatient = () => {
                 </div>
               </div>
 
-              <div className="d-flex py-2 justify-content-center">
+              <div className="flex py-2 justify-content-center">
                 <button type="submit" class="btn btn-primary btn-block mb-4  ">
                   Submit
                 </button>

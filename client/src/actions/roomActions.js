@@ -32,7 +32,7 @@ export const getAllRooms = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_ROOM_REQUEST });
 
-    const { data } = await axios.get(`api/v1/rooms`);
+    const { data } = await axios.get(`/api/v1/rooms`);
 
     dispatch({ type: GET_ALL_ROOM_SUCCESS, payload: data.rooms });
   } catch (error) {

@@ -6,9 +6,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React from "react";
 import { FiCalendar } from "react-icons/fi";
 import { Paper } from "@mui/material";
+import { format } from "date-fns";
+import moment from "moment";
 
 export default function PatientDetailForm(props) {
-  const [value, setValue] = React.useState(null);
+  // const [value, setValue] = React.useState(props.values.patientDOB);
   const {
     formField: {
       patientName,
@@ -35,10 +37,10 @@ export default function PatientDetailForm(props) {
   } = props;
   return (
     <Box mb={4} sx={{ width: "80%", mx: "auto" }}>
-      <div className="d-grid grid-cols-3 py-5 gap-4">
-        <div>
+      <div className="grid grid-cols-3 py-5 gap-4">
+        <div className="w-full h-full">
           <div className="form-label">Patient Name</div>
-          <div className="d-flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Name"
@@ -46,9 +48,9 @@ export default function PatientDetailForm(props) {
             />
           </div>
         </div>
-        <div>
+        <div className="w-full h-full">
           <div className="form-label">Mobile Number</div>
-          <div className="d-flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Mobile Number"
@@ -56,53 +58,68 @@ export default function PatientDetailForm(props) {
             />
           </div>
         </div>
-        <div>
+        <div className="w-full h-full">
           <div className="form-label">Date Of Birth</div>
-          <Paper
-            component="form"
-            className="form-field"
-            sx={{ borderRadius: "8px", padding: "20px 5px" }}
-            elevation={0}
-          >
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                OpenPickerButtonProps={{
-                  style: {
-                    color: "#4988FC",
-                    background: "#E1EBFF",
-                    borderRadius: "8px",
-                    width: "50px",
-                    height: "50px",
-                  },
-                }}
-                components={{
-                  OpenPickerIcon: FiCalendar,
-                }}
-                className="form-field"
-                openTo="date"
-                views={["day", "month", "year"]}
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={({ inputRef, inputProps, InputProps }) => (
-                  <div className="d-flex align-items-center">
-                    {InputProps?.endAdornment}
-                    <Field
-                      name={patientDOB.name}
-                      ref={inputRef}
-                      placeholder="DD | MM | YYYY"
-                      className="date-form-field"
-                    />
-                  </div>
-                )}
-              />
-            </LocalizationProvider>
-          </Paper>
+          <div className="flex relative w-full">
+            <Paper
+              sx={{
+                borderRadius: "8px",
+                display: "flex",
+
+                alignItems: "center",
+              }}
+              className="border-2 border-gray-300 w-full"
+              elevation={0}
+            >
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  OpenPickerButtonProps={{
+                    style: {
+                      color: "#FF7B54",
+                      background: "#FFF1EC",
+                      borderRadius: "8px",
+                      marginRight: "4px",
+                      position: "relative",
+                    },
+                  }}
+                  value={moment(props.values.patientDOB, "DD/MM/YYYY").toDate()}
+                  components={{
+                    OpenPickerIcon: FiCalendar,
+                  }}
+                  openTo="date"
+                  views={["day", "month", "year"]}
+                  // value={value}
+                  inputFormat="dd/MM/yyyy"
+                  onChange={(newValue) => {
+                    console.log("newValue", newValue);
+                    props.setFieldValue(patientDOB.name, newValue);
+                  }}
+                  renderInput={({ inputRef, inputProps, InputProps }) => (
+                    <div className="flex items-center relative">
+                      {InputProps?.endAdornment}
+                      <Field
+                        className="py-3 px-3 w-full outline-none"
+                        name={patientDOB.name}
+                        ref={inputRef}
+                        {...inputProps}
+                        value={
+                          props.values.patientDOB &&
+                          format(
+                            new Date(props.values.patientDOB),
+                            "dd/MM/yyyy"
+                          )
+                        }
+                      />
+                    </div>
+                  )}
+                />
+              </LocalizationProvider>
+            </Paper>
+          </div>
         </div>
-        <div>
+        <div className="w-full h-full">
           <div className="form-label">Patient Gender</div>
-          <div className="d-flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Select Gender"
@@ -110,9 +127,9 @@ export default function PatientDetailForm(props) {
             />
           </div>
         </div>
-        <div>
+        <div className="w-full h-full">
           <div className="form-label">Patient Email</div>
-          <div className="d-flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Email"
@@ -120,9 +137,9 @@ export default function PatientDetailForm(props) {
             />
           </div>
         </div>
-        <div>
+        <div className="w-full h-full">
           <div className="form-label">Diagnosis</div>
-          <div className="d-flex position-relative">
+          <div className="flex relative">
             <Field
               className="form-field"
               placeholder="Enter Diagnosis"

@@ -20,7 +20,7 @@ const OutPatientBilling = () => {
       <h2>Out-Patient Billing</h2>
       <Divider />
       <form onSubmit={handleSubmit(submitHandler)}>
-        <div className="d-flex justify-content-evenly">
+        <div className="flex justify-content-evenly">
           <div>
             <label>UHID</label>
             <input
@@ -51,14 +51,14 @@ const OutPatientBilling = () => {
         </div>
         <br />
         <div>
-          <div className="d-flex justify-content-around">
+          <div className="flex justify-content-around">
             <p className="h2 pr-5 -px-8">John Doe</p>
 
             <span>payer std,sponsor : std ,Network:</span>
           </div>
         </div>
         <br />
-        <div className="d-flex justify-content-evenly">
+        <div className="flex justify-content-evenly">
           <div>
             <span>Male 34 years</span>
             <span>Mobile no</span>

@@ -6,7 +6,7 @@ const PatientAllergies = () => {
     <div>
       <h2>Allergies</h2>
       <Divider />
-      <div className="d-flex justify-content-evenly py-2">
+      <div className="flex justify-content-evenly py-2">
         <div>
           <label>Allergy Type</label>
           <select className="selectpicker border-1 mb-1 px-4 py-1 rounded shadow">

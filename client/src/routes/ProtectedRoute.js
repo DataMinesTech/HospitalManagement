@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
-
+  console.log("loading........sadad", loading);
   return (
     <div>
       <Route
         {...rest}
         render={(props) => {
-          if (!isAuthenticated) {
+          if (loading === false && !isAuthenticated) {
             return <Redirect to="/" />;
           }
 

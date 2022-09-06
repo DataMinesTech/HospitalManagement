@@ -16,7 +16,7 @@ const InvestigationAcknowledge = () => {
     <div>
       <form onSubmit={handleSubmit(submitHandler)}>
         <h2 className="h2">Investigation Acknowledge </h2>
-        <div className="d-flex justify-content-evenly">
+        <div className="flex justify-content-evenly">
           <div>
             <input type="radio" {...register("all")} />
             <label>All</label>
@@ -34,10 +34,10 @@ const InvestigationAcknowledge = () => {
             <label>Emergency</label>
           </div>
         </div>
-        <div className=" d-flex justify-content-start">
+        <div className=" flex justify-content-start">
           <label>Stats</label>
         </div>
-        <div className="d-flex justify-content-evenly">
+        <div className="flex justify-content-evenly">
           <div>
             <label>Search by</label>
             <select

@@ -1,135 +1,244 @@
-import React from "react";
-import { PageHeader } from "../Layout/Header/Header";
+import React, { useEffect } from "react";
+
 import Layout from "../Layout/LayoutComponent/Layout";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import SearchBar from "../Components/SearchBar";
-import FilterModal from "../Components/FilterModal";
-import Button from "@mui/material/Button";
-import { BiFilterAlt } from "react-icons/bi";
-import Avatar from "@mui/material/Avatar";
-
-const columns = [
-  {
-    field: "patientName",
-    headerName: "Patient name",
-    headerClassName: "super-app-theme--header",
-    sortable: false,
-    width: 250,
-    renderCell: (params) => {
-      console.log(params);
-      return (
-        <>
-          <Avatar sx={{ width: 35, height: 35 }} src={params.value.avatar} />
-          <span className="px-3">
-            {params.row.firstName} {params.row.lastName}
-          </span>
-        </>
-      );
-    },
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  },
-  {
-    field: "id",
-    headerClassName: "super-app-theme--header",
-    headerName: "Patient ID",
-    width: 120,
-  },
-  {
-    field: "checkInDate",
-    headerClassName: "super-app-theme--header",
-    headerName: "Check-In Date",
-    width: 120,
-  },
-  { field: "doctorAssigned", headerName: "Doctor Assigned", width: 180 },
-  {
-    field: "diagnosis",
-    headerClassName: "super-app-theme--header",
-    headerName: "Diagnosis",
-    width: 160,
-  },
-  {
-    field: "status",
-    headerClassName: "super-app-theme--header",
-    headerName: "Status",
-    width: 120,
-  },
-  {
-    field: "roomNo",
-    headerClassName: "super-app-theme--header",
-    headerName: "Room No.",
-    width: 100,
-  },
-  {
-    field: "action",
-    headerClassName: "super-app-theme--header",
-    headerName: "",
-    width: 100,
-    sortable: false,
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    avatar:
-      "https://assets.materialup.com/uploads/bebad102-7f40-4941-99cd-54366113003e/avatar-08.png",
-    lastName: "Snow",
-    firstName: "Jon",
-    age: 35,
-  },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { deletePatient, getAllPatients } from "../../actions/patientActions";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { PageHeader } from "../Layout/Header/Header";
+import Button from "../Components/Button";
+import { useHistory } from "react-router-dom";
+import AddPatientModal from "../Components/FilterModal";
+import moment from "moment";
 
 const PatientList = () => {
+  const history = useHistory();
+  // const navigate = useLocation();
+  const dispatch = useDispatch();
+  const { patient } = useSelector((state) => state.patients);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    dispatch(getAllPatients());
+  }, [dispatch]);
+
+  const deleteUser = React.useCallback(
+    (id) => () => {
+      dispatch(deletePatient(id));
+      dispatch(getAllPatients());
+    },
+    [dispatch]
+  );
+
+  const columns = () => [
+    {
+      field: "patientName",
+      headerName: "Patient name",
+      className: "super-app-theme-header",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <div
+            onClick={() => {
+              // console.log("onCellClick", abc);
+              history.push(`/patient/${params.id}-${params.row.firstName}`, {
+                data: patient.find((item) => item._id === params.id),
+              });
+            }}
+          >
+            {/* <Avatar sx={{ width: 35, height: 35 }} src={params.value.avatar} /> */}
+            <span className="px-3 underline cursor-pointer text-blue-600">
+              {params.row.firstName} {params.row.lastName}
+            </span>
+          </div>
+        );
+      },
+    },
+    // {
+    //   field: "patientID",
+    //   headerClassName: "super-app-theme-header",
+    //   headerName: "Patient ID",
+    //   width: 200,
+    // },
+    {
+      field: "patientEmail",
+      className: "super-app-theme-header",
+      headerName: "Patient Email",
+      width: 200,
+    },
+    {
+      field: "patientPhoneNo",
+      className: "super-app-theme-header",
+      headerName: "Phone No.",
+      width: 170,
+    },
+    {
+      field: "patientAge",
+      className: "super-app-theme-header",
+      headerName: "Patient Age",
+    },
+    {
+      field: "patientBloodGroup",
+      className: "super-app-theme-header",
+      headerName: "Patient Blood Group",
+    },
+    {
+      field: "patientInRoom",
+      className: "super-app-theme-header",
+      headerName: "Room No.",
+    },
+
+    {
+      field: "patientAdmissionStatus",
+      className: "super-app-theme-header",
+      headerName: "Status",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <>
+            {/* <Avatar sx={{ width: 35, height: 35 }} src={params.value.avatar} /> */}
+            <div
+              className={`flex justify-center items-center px-4 py-2 rounded-full font-bold text-xs ${
+                params.row.patientAdmissionStatus === "Admitted"
+                  ? "bg-blue-100 text-blue-600 "
+                  : "bg-amber-100 text-amber-600"
+              } `}
+            >
+              {params.row.patientAdmissionStatus}
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      field: "actions",
+      type: "actions",
+      width: 100,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<FiEdit size={16} />}
+          label="Edit"
+          onClick={() => {
+            history.push(
+              `/updatepatient/${params.id}-${params.row.firstName}`,
+              {
+                data: patient.find((item) => item._id === params.id),
+              }
+            );
+          }}
+        />,
+        <GridActionsCellItem
+          icon={<FiTrash2 size={16} />}
+          label="Delete"
+          onClick={deleteUser(params.id)}
+        />,
+      ],
+    },
+  ];
+
+  const rows = () =>
+    patient?.map(
+      ({
+        _id,
+        patientName,
+        patientEmail,
+        patientPhoneNo,
+        patientAdmissionStatus,
+        patientInRoom,
+        patientDOB,
+        patientAge,
+        patientBloodGroup,
+      }) => {
+        return {
+          id: _id,
+          // patientName: patientName,
+          firstName: patientName.split(" ")[0],
+          lastName: patientName.split(" ")[1],
+          patientEmail: patientEmail,
+          patientPhoneNo: patientPhoneNo,
+          patientAdmissionStatus: patientAdmissionStatus,
+          patientInRoom: patientInRoom,
+          patientAge: patientAge || moment().diff(patientDOB, "years", false),
+          patientBloodGroup: patientBloodGroup,
+        };
+      }
+    );
+
   return (
-    <div className="position-relative">
+    <div className="relative">
       <PageHeader title={"Patient List"} />
       <Layout>
-        <div className="d-flex justify-content-between align-item-center pb-3">
-          <div>
-            <SearchBar />
-          </div>
-          <div>
-            <Button
-              sx={{ fontWeight: "700", fontSize: "14px" }}
-              startIcon={<BiFilterAlt />}
-              variant="outlined"
-              onClick={handleOpen}
-            >
-              Filter
-            </Button>
-            <FilterModal open={open} onClose={handleClose} />
-          </div>
-        </div>
         <Box
           style={{
             overflow: "auto",
-            "& .super-app-theme--header": {
-              backgroundColor: "rgba(255, 7, 0, 0.55)",
-            },
+            backgroundColor: "#fff",
+            borderRadius: "4px",
+            padding: "16px 16px",
           }}
         >
-          <DataGrid
-            autoHeight
-            rowHeight={70}
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-          />
+          <div className="flex justify-between items-center pb-5 border-b border-gray-200">
+            <div className="font-bold text-xl">All Patients</div>
+            <div className="flex space-x-6">
+              <Button
+                onClick={
+                  // handleOpen
+                  () => {
+                    history.push("/newpatient");
+                  }
+                }
+                className="primary-button"
+                text={"Add Patient"}
+              />
+              <Button
+                onClick={
+                  // handleOpen
+                  () => {
+                    history.push("/patientadmission");
+                  }
+                }
+                className="primary-button"
+                text={"Patient Addmission"}
+              />
+            </div>
+            <AddPatientModal open={open} onClose={handleClose} />
+          </div>
+          {patient.length > 0 && (
+            <>
+              <DataGrid
+                sx={{
+                  border: "none",
+                  "& .super-app-theme-header": {
+                    fontWeight: "bold",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                }}
+                componentsProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                    quickFilterProps: { debounceMs: 500 },
+                  },
+                }}
+                // onCellClick={(data) => {
+                //   // console.log("onCellClick", abc);
+                //   history.push(`/patient/${data.id}-${data.row.firstName}`, {
+                //     data: patient.find((item) => item._id === data.id),
+                //   });
+                // }}
+                autoHeight
+                rowHeight={70}
+                rows={rows()}
+                columns={columns()}
+                pageSize={10}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+              />
+            </>
+          )}
         </Box>
       </Layout>
     </div>

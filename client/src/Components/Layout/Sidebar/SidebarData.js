@@ -6,64 +6,75 @@ import OperationIcon from "../../../images/icons/operation-icon.svg";
 import ReportsIcon from "../../../images/icons/reports-icon.svg";
 import AccountsIcon from "../../../images/icons/accounts-icon.svg";
 import ExpenseIcon from "../../../images/icons/expense-icon.svg";
+import AppointmentIcon from "../../../images/icons/appointment-icon.svg";
 
 export const SidebarData = [
   { id: 1, icon: DashboardIcon, title: "Dashboard", link: "/dashboard" },
   {
     id: 2,
-    icon: PatientIcon,
-    title: "Patients",
-    item: [
-      { id: 1, title: "Patient List", link: "/patientlist" },
-      { id: 2, title: "Add Patient", link: "/newpatient" },
-    ],
+    icon: AppointmentIcon,
+    title: "Today's Appointments",
+    link: "/appointments",
   },
   {
     id: 3,
-    icon: DoctorIcon,
-    title: "Doctor",
-    item: [
-      { id: 1, title: "Doctor List", link: "/alldoctors" },
-      { id: 2, title: "Add Doctor", link: "/newpatient" },
-      { id: 3, title: "Appointment", link: "/appointment" },
-    ],
+    icon: PatientIcon,
+    title: "Patients",
+    link: "/patientlist",
   },
   {
     id: 4,
-    icon: EmergencyIcon,
-    title: "Emergency",
-    item: [
-      { id: 1, title: "Emergency Form", link: "/alldoctors" },
-      { id: 2, title: "Emergency List", link: "/newpatient" },
-    ],
+    icon: DoctorIcon,
+    title: "Doctor",
+    link: "/alldoctors",
+    // item: [
+    //   { id: 1, title: "Doctor List", link: "/alldoctors" },
+    //   { id: 2, title: "Add Doctor", link: "/newpatient" },
+    //   { id: 3, title: "Appointment", link: "/appointment" },
+    // ],
   },
   {
     id: 5,
-    icon: OperationIcon,
-    title: "Operation",
-    link: "/dashboard",
+    icon: DoctorIcon,
+    title: "Contract Management",
+    link: "contractmanagement",
   },
-  {
-    id: 6,
-    icon: ReportsIcon,
-    title: "Reports",
-    link: "/dashboard",
-  },
-  {
-    id: 7,
-    icon: AccountsIcon,
-    title: "Accounts",
-    link: "/dashboard",
-  },
-  {
-    id: 8,
-    icon: ExpenseIcon,
-    title: "Expense",
-    item: [
-      { id: 1, title: "Expense List", link: "/alldoctors" },
-      { id: 2, title: "Add Expense", link: "/newpatient" },
-    ],
-  },
+  // {
+  //   id: 5,
+  //   icon: EmergencyIcon,
+  //   title: "Emergency",
+  //   item: [
+  //     { id: 1, title: "Emergency Form", link: "/alldoctors" },
+  //     { id: 2, title: "Emergency List", link: "/newpatient" },
+  //   ],
+  // },
+  // {
+  //   id: 6,
+  //   icon: OperationIcon,
+  //   title: "Operation",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 7,
+  //   icon: ReportsIcon,
+  //   title: "Reports",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 8,
+  //   icon: AccountsIcon,
+  //   title: "Accounts",
+  //   link: "/dashboard",
+  // },
+  // {
+  //   id: 9,
+  //   icon: ExpenseIcon,
+  //   title: "Expense",
+  //   item: [
+  //     { id: 1, title: "Expense List", link: "/alldoctors" },
+  //     { id: 2, title: "Add Expense", link: "/newpatient" },
+  //   ],
+  // },
   // {
   //   icon: <FiActivity color="white" />,
   //   title: "Patient Registration",

@@ -12,10 +12,10 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
   return (
     <div>
       <div
-        class="d-flex flex-column flex-shrink-0 p-3 bg-light "
+        class="flex flex-column flex-shrink-0 p-3 bg-light "
         style={{ width: "280px" }}
       >
-        <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <a class="flex items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32"></svg>
           <span class="fs-4"> Treatment Details</span>
         </a>
@@ -24,7 +24,7 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
           return (
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <button
+                <Link
                   onClick={() => {
                     setActive(`${data.title}`);
                   }}
@@ -33,10 +33,10 @@ const Sidebar = ({ link, title, isOpen, setActive, isActive }) => {
                       ? `sidebar-row-active `
                       : "sidebar-row"
                   }
-                  to={data.link}
+                  href={data.link}
                 >
                   {data.title}
-                </button>
+                </Link>
               </li>
             </ul>
           );

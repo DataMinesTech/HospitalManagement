@@ -25,6 +25,8 @@
     "mongoose": "^6.2.0",
     "nodemon": "^2.0.15",
     "qrcode-terminal": "^0.12.0",
+    "react-big-calendar": "^1.5.0",
+    "react-schedule-view": "^1.1.1",
     "validator": "^13.7.0",
     "whatsapp-web.js": "^1.17.1"
   }
