@@ -61,6 +61,41 @@ exports.updatePatient = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.updatePatientMedicalHistory = catchAsyncErrors(
+  async (req, res, next) => {
+    console.log("medicalHistory", req.body);
+
+    // const patient = await Patients.findById(req.params.id);
+
+    // if (!patient) {
+    //   return res.status(500).json({
+    //     success: false,
+    //     message: "Patient not found",
+    //   });
+    // }
+
+    // patient = await Patients.findByIdAndUpdate(req.params.id, req.body, {
+    //   new: true,
+    //   runValidators: true,
+    //   useFindAndModify: false,
+    // });
+
+    const patient = await Patients.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { medicalHistory: req.body } },
+      { new: true }
+    );
+
+    console.log("patient Error", patient);
+    // console.log(pat)
+
+    res.status(200).json({
+      success: true,
+      patient,
+    });
+  }
+);
+
 //Delete Patient
 
 exports.deletePatient = catchAsyncErrors(async (req, res, next) => {

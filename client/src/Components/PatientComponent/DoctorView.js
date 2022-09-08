@@ -70,32 +70,7 @@ const DoctorView = ({ location }) => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center col-span-2">
-            {/* <div className="px-5">
-              <div className="font-bold text-sm uppercase text-primaryColor">
-                room
-              </div>
-              <div className="font-black uppercase text-lg">
-                {doctorData.patientInRoom}
-              </div>
-            </div>
-            <div className="px-5">
-              <div className="font-bold text-sm uppercase text-primaryColor">
-                Blood Group
-              </div>
-              <div className="font-black uppercase text-lg">
-                {doctorData.patientBloodGroup}
-              </div>
-            </div>
-            <div className="px-5">
-              <div className="font-bold text-sm uppercase text-primaryColor">
-                Status
-              </div>
-              <div className="font-black uppercase text-lg">
-                {doctorData.patientAdmissionStatus}
-              </div>
-            </div> */}
-          </div>
+          <div className="flex items-center justify-center col-span-2"></div>
           <div className="flex items-center justify-end">
             <Button className="outline-button" text={"Edit"} />
           </div>

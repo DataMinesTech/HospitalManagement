@@ -99,3 +99,21 @@ export const updatePatient = (payload) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateMedicalHistory = (id, meddata) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PATIENTS_REQUEST });
+
+    console.log(id, meddata);
+
+    const { data } = await axios.put(`/api/v1/patient/medical/${id}`, meddata);
+
+    console.log("patient update data", data);
+
+    dispatch({ type: UPDATE_PATIENTS_SUCCESS });
+  } catch (error) {
+    dispatch({ type: UPDATE_PATIENTS_FAIL, payload: error.data });
+
+    console.log(error);
+  }
+};

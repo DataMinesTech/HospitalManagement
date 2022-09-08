@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { PageHeader } from "../Header/Header";
-import AppointmentCalendar from "./Components/AppointmentCalendar";
 import Layout from "../LayoutComponent/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAppointments } from "../../../actions/appointmentActions";
