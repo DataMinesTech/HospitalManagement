@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { updateMedicalHistory } from "../../actions/patientActions";
+import { updatePrescribedTests } from "../../actions/patientActions";
 
-const MedicalHistory = ({ patientData }) => {
+const PrescribedTests = ({ patientData }) => {
   const { id } = useParams();
 
   const patientId = id.slice(0, 24);
-
-  console.log("patientData in med history", patientData);
 
   const dispatch = useDispatch();
 
@@ -39,7 +37,7 @@ const MedicalHistory = ({ patientData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(updateMedicalHistory(patientId, inputFields));
+    dispatch(updatePrescribedTests(patientId, inputFields));
   };
 
   const handleRemoveFields = (id) => {
@@ -97,4 +95,4 @@ const MedicalHistory = ({ patientData }) => {
   );
 };
 
-export default MedicalHistory;
+export default PrescribedTests;

@@ -8,6 +8,7 @@ import { Tab } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../actions/patientActions";
 import MedicalHistory from "./MedicalHistory";
+import PrescribedTests from "./PrescribedTests";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -39,7 +40,7 @@ const PatientView = ({ location }) => {
     },
     {
       label: "Prescribed Tests",
-      data: "Prescribed Tests Informations",
+      data: <PrescribedTests patientData={patientData} />,
     },
     {
       label: "Summary",

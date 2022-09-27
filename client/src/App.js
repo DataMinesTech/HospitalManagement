@@ -44,6 +44,7 @@ import DoctorView from "./Components/PatientComponent/DoctorView";
 import ContractManagement from "./Components/ContractManagementSystem/ContractManagement";
 import SearchPage from "./Components/Layout/SearchComponent/SearchPage";
 import UpdatePatient from "./Components/PatientComponent/UpdatePatient";
+import Billing from "./Components/Layout/Billing/Billing";
 
 const theme = createTheme({
   typography: {
@@ -216,6 +217,7 @@ function App(props) {
                 component={ContractManagement}
               />
               <ProtectedRoute exact path="/search" component={SearchPage} />
+              <ProtectedRoute exact path="/billing" component={Billing} />
             </Switch>
           </Box>
         </Box>
