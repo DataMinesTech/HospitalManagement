@@ -11,6 +11,9 @@ import {
   GET_ALL_USERS_REQUEST,
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAIL,
+  CREATE_USER_REQUEST,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAIL,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -79,4 +82,26 @@ export const logout = () => async (dispatch) => {
 
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const createNewUser = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_USER_REQUEST });
+
+    const config = { headers: { "Content-Type": "application/json" } };
+
+    console.log("userData", userData);
+
+    const { data } = await axios.post(`/api/v1/user/new`, userData, config);
+
+    dispatch({
+      type: CREATE_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CREATE_USER_FAIL,
+      payload: error.data,
+    });
+  }
 };

@@ -1,104 +1,36 @@
 import React, { useEffect } from "react";
 import { PageHeader } from "../Header/Header";
-import AppointmentCalendar from "./Components/AppointmentCalendar";
 import Layout from "../LayoutComponent/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAppointments } from "../../../actions/appointmentActions";
 import Button from "../../Components/Button";
 import AddPatientModal from "../../Components/FilterModal";
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import { Calendar, momentLocalizer, Views } from "react-big-calendar";
+import { Calendar, momentLocalizer, Views, Navigate } from "react-big-calendar";
+import Toolbar from "react-big-calendar/lib/Toolbar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { addHours } from "date-fns";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const events = [
-  {
-    id: 0,
-    title: "Board meeting",
-    start: new Date(2022, 8, 1, 9, 0, 0),
-    end: new Date(2022, 8, 1, 13, 0, 0),
-    resourceId: 1,
-  },
-  {
-    id: 1,
-    title: "MS training",
-    allDay: true,
-    start: new Date(2018, 0, 29, 14, 0, 0),
-    end: new Date(2018, 0, 29, 16, 30, 0),
-    resourceId: 2,
-  },
-  {
-    id: 2,
-    title: "Team lead meeting",
-    start: new Date(2018, 0, 29, 8, 30, 0),
-    end: new Date(2018, 0, 29, 12, 30, 0),
-    resourceId: 3,
-  },
-  {
-    id: 11,
-    title: "Birthday Party",
-    start: new Date(2018, 0, 30, 7, 0, 0),
-    end: new Date(2018, 0, 30, 10, 30, 0),
-    resourceId: 4,
-  },
-];
+export const CustomToolbar = ({
+  date,
+  view,
+  views,
+  label,
+  onView,
+  onNavigate,
+  localizer,
+}) => {
+  // const onPickerChange = (newDate) => onNavigate(Navigate.DATE, newDate);
+  return <div>TodaysAppointments</div>;
+  // this only works if `newDate` is a true JS Date
 
-// export const appointments = [
-//   {
-//     id: 0,
-//     title: "Watercolor Landscape",
-//     members: [1],
-//     roomId: 1,
-//     startDate: new Date(),
-//     endDate: new Date(),
-//   },
-//   {
-//     id: 1,
-//     title: "Oil Painting for Beginners",
-//     members: [1],
-//     roomId: 2,
-//     startDate: new Date(),
-//     endDate: new Date(),
-//   },
-//   {
-//     id: 2,
-//     title: "Testing",
-//     members: [1, 2],
-//     roomId: 1,
-//     startDate: new Date(),
-//     endDate: new Date(),
-//   },
-//   {
-//     id: 3,
-//     title: "Final exams",
-//     members: [1, 2],
-//     roomId: 2,
-//     startDate: new Date(2017, 4, 29, 9, 30),
-//     endDate: new Date(2017, 4, 29, 12, 0),
-//   },
-// ];
-
-// export const owners = [
-//   {
-//     text: "Andrew Glover",
-//     id: 1,
-//     color: "#7159c1",
-//   },
-//   {
-//     text: "Arnie Schwartz",
-//     id: 2,
-//     color: "#ab59c1",
-//   },
-// ];
-
-const resourceMap = [
-  { resourceId: 1, resourceTitle: "Board room" },
-  { resourceId: 2, resourceTitle: "Training room" },
-  { resourceId: 3, resourceTitle: "Meeting room 1" },
-  { resourceId: 4, resourceTitle: "Meeting room 2" },
-];
+  // ... the rest of your Toolbar display
+};
 
 const TodaysAppointment = () => {
   const history = useHistory();
@@ -142,7 +74,17 @@ const TodaysAppointment = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [date, newDate] = React.useState(new Date());
 
+  const handleNavigation = (date, view, action) => {
+    console.log({ date, view, action });
+    newDate(date);
+    //it returns current date, view options[month,day,week,agenda] and action like prev, next or today
+  };
+  const handleChange = () => {
+    console.log("this block code executed");
+  };
+  console.log({ datee: date });
   useEffect(() => {
     dispatch(getAllAppointments());
   }, [dispatch]);
@@ -175,6 +117,16 @@ const TodaysAppointment = () => {
           {appointments.length ? (
             <div className="height600">
               <Calendar
+                // toolbar={CustomToolbar}
+                components={{
+                  event: EventComponent({ eventsForCalendar, handleChange }),
+                  toolbar: CalenderToolbar({
+                    eventsForCalendar,
+                    handleChange,
+                    newDate,
+                    date,
+                  }),
+                }}
                 // defaultDate={defaultDate}
                 defaultView={Views.DAY}
                 events={eventsForCalendar}
@@ -182,8 +134,10 @@ const TodaysAppointment = () => {
                 resourceIdAccessor="resourceId"
                 resources={doctorsForAppointment}
                 resourceTitleAccessor="resourceTitle"
+                onNavigate={handleNavigation}
                 step={60}
                 views={["day"]}
+                date={date}
               />
             </div>
           ) : (
@@ -201,3 +155,91 @@ const TodaysAppointment = () => {
 };
 
 export default TodaysAppointment;
+
+const EventComponent =
+  ({ events, change }) =>
+  (props) => {
+    return (
+      <div className="customEventTile" title="This is EventTile">
+        <h5>{props.event.title}</h5>
+        <button onClick={props.change}>Do Something</button>
+      </div>
+    );
+  };
+
+const CalenderToolbar = ({ handleChange, newDate, date }) => {
+  return class BaseToolBar extends Toolbar {
+    constructor(props) {
+      super(props);
+    }
+    handleDayChange = (event, mconte) => {
+      mconte(event.target.value);
+    };
+    handleNamvigate = (detail, elem) => {
+      detail.navigate(elem);
+    };
+
+    render() {
+      console.log({ props: this.props });
+      return (
+        <div className="posr">
+          <div className="rbc-btn-group">
+            <button
+              type="button"
+              className="defaultbtn"
+              onClick={() => this.handleNamvigate(this, "TODAY")}
+            >
+              Today
+            </button>
+            <button
+              type="button"
+              className="nextp-btn"
+              onClick={() => this.handleNamvigate(this, "PREV")}
+            >
+              Prev
+            </button>
+            <button
+              type="button"
+              className="nextp-btn"
+              onClick={() => this.handleNamvigate(this, "NEXT")}
+            >
+              Next
+            </button>
+          </div>
+          <div className="rbc-toolbar-label">{this.props.label}</div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Basic example"
+              value={date}
+              onChange={(newValue, event) => {
+                console.log({ n: newValue.$d, event });
+                newDate(newValue.$d);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          <div className="rbc-btn-group">
+            <select
+              className="form-control"
+              onChange={(e) => this.handleDayChange(e, this.view)}
+              defaultValue={"week"}
+            >
+              <option className="optionbar" value="day">
+                Day
+              </option>
+              <option className="optionbar" value="week">
+                Week
+              </option>
+              <option className="optionbar" value="month">
+                Month
+              </option>
+              <option className="optionbar" value="agenda">
+                Agenda
+              </option>
+            </select>
+          </div>
+        </div>
+      );
+    }
+  };
+};

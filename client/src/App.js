@@ -44,6 +44,10 @@ import DoctorView from "./Components/PatientComponent/DoctorView";
 import ContractManagement from "./Components/ContractManagementSystem/ContractManagement";
 import SearchPage from "./Components/Layout/SearchComponent/SearchPage";
 import UpdatePatient from "./Components/PatientComponent/UpdatePatient";
+import AddDoctor from "./Components/DoctorComponent/AddDoctor";
+import { AdmittedPatientList } from "./Components/Layout/InPatient/AdmittedPatientList";
+import DischargePatient from "./Components/Layout/InPatient/DischargePatient";
+import InventoryManagement from "./Components/InventoryManagementSystem/InventoryManagement";
 
 const theme = createTheme({
   typography: {
@@ -199,7 +203,13 @@ function App(props) {
                 component={RoomTransfer}
               />
               <ProtectedRoute exact path="/alldoctors" component={AllDoctors} />
+              <ProtectedRoute exact path="/newdoctor" component={AddDoctor} />
               <ProtectedRoute exact path="/doctor/:id" component={DoctorView} />
+              <ProtectedRoute
+                exact
+                path="/admittedpatient"
+                component={AdmittedPatientList}
+              />
               <ProtectedRoute
                 exact
                 path="/patientadmission"
@@ -208,12 +218,17 @@ function App(props) {
               <ProtectedRoute
                 exact
                 path="/patientdischarge"
-                component={PatientDischarge}
+                component={DischargePatient}
               />
               <ProtectedRoute
                 exact
                 path="/contractmanagement"
                 component={ContractManagement}
+              />
+              <ProtectedRoute
+                exact
+                path="/inventorymanagement"
+                component={InventoryManagement}
               />
               <ProtectedRoute exact path="/search" component={SearchPage} />
             </Switch>

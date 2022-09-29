@@ -36,8 +36,36 @@ export const SidebarData = [
   {
     id: 5,
     icon: DoctorIcon,
+    title: "In-Patient Management",
+    // link: "/alldoctors",
+    item: [
+      { id: 1, title: "Admitted Patient list", link: "/admittedpatient" },
+      { id: 2, title: "Room Status", link: "/roomstatus" },
+    ],
+  },
+  {
+    id: 6,
+    icon: DashboardIcon,
+    title: "Services",
+    link: "/services",
+  },
+  {
+    id: 7,
+    icon: DoctorIcon,
     title: "Contract Management",
-    link: "contractmanagement",
+    link: "/contractmanagement",
+  },
+  {
+    id: 8,
+    icon: DoctorIcon,
+    title: "Inventory Management",
+    link: "/inventorymanagement",
+  },
+  {
+    id: 9,
+    icon: DoctorIcon,
+    title: "Billing",
+    link: "/outpatientbilling",
   },
   // {
   //   id: 5,
