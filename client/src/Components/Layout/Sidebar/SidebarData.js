@@ -67,15 +67,16 @@ export const SidebarData = [
     title: "Billing",
     link: "/outpatientbilling",
   },
-  // {
-  //   id: 5,
-  //   icon: EmergencyIcon,
-  //   title: "Emergency",
-  //   item: [
-  //     { id: 1, title: "Emergency Form", link: "/alldoctors" },
-  //     { id: 2, title: "Emergency List", link: "/newpatient" },
-  //   ],
-  // },
+  {
+    id: 5,
+    icon: EmergencyIcon,
+    title: "Billing",
+    link: "/billing",
+    // item: [
+    //   { id: 1, title: "Emergency Form", link: "/alldoctors" },
+    //   { id: 2, title: "Emergency List", link: "/newpatient" },
+    // ],
+  },
   // {
   //   id: 6,
   //   icon: OperationIcon,

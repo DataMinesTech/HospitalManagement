@@ -223,12 +223,6 @@ const PatientList = () => {
                     quickFilterProps: { debounceMs: 500 },
                   },
                 }}
-                // onCellClick={(data) => {
-                //   // console.log("onCellClick", abc);
-                //   history.push(`/patient/${data.id}-${data.row.firstName}`, {
-                //     data: patient.find((item) => item._id === data.id),
-                //   });
-                // }}
                 autoHeight
                 rowHeight={70}
                 rows={rows()}

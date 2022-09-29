@@ -9,6 +9,9 @@ const appointmentScheduledWith = mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     required: [true, "Please Enter Patient Id"],
   },
+  visitType: {
+    type: String,
+  },
   visitFor: {
     type: String,
     default: "checkup",

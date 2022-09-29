@@ -1,7 +1,44 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const patientVitals = mongoose.Schema({
+  bloodPressure: {
+    type: String,
+  },
+  bodyTemperature: {
+    type: String,
+  },
+  pulseRate: {
+    type: String,
+  },
+  respirationRate: {
+    type: String,
+  },
+});
+
+const patientChiefComplaint = mongoose.Schema({
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  since: {
+    type: String,
+  },
+});
+
 const patientSchema = mongoose.Schema({
+  patientImage: {
+    public_id: {
+      type: String,
+      required: false,
+    },
+    url: {
+      type: String,
+      required: false,
+    },
+  },
   patientName: {
     type: String,
     required: [true, "Please Enter Name"],
@@ -46,12 +83,10 @@ const patientSchema = mongoose.Schema({
   guardianPhone: {
     type: Number,
   },
-  medicalHistory: {
-    type: String,
-  },
-  vitals: {
-    type: String,
-  },
+  medicalHistory: [{ id: String, title: String, description: String }],
+  vitals: [patientVitals],
+  prescribedTests: [{ title: String, description: String }],
+  chiefComplaint: [patientChiefComplaint],
   patientBloodGroup: {
     type: String,
   },
@@ -87,5 +122,24 @@ const patientSchema = mongoose.Schema({
     default: Date.now,
   },
 });
+
+// const patientMedicalHistory = mongoose.Schema({
+//   type: Array,
+//   title: {
+//     type: String,
+//   },
+//   description: {
+//     type: String,
+//   },
+// });
+
+// const patientPrescribedTests = mongoose.Schema({
+//   title: {
+//     type: String,
+//   },
+//   description: {
+//     type: String,
+//   },
+// });
 
 module.exports = mongoose.model("Patient", patientSchema);

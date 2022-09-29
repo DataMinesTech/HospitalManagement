@@ -7,33 +7,12 @@ import Layout from "../Layout/LayoutComponent/Layout";
 import { Tab } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../actions/patientActions";
+import MedicalHistory from "./MedicalHistory";
+import PrescribedTests from "./PrescribedTests";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
-const tabItems = [
-  {
-    label: "Chief Compaints",
-    data: "Chief Compaints Informations",
-  },
-  {
-    label: "Vitals",
-    data: "Vitals Informations",
-  },
-  {
-    label: "Medical History",
-    data: "Medical history Informations",
-  },
-  {
-    label: "Prescribed Tests",
-    data: "Prescribed Tests Informations",
-  },
-  {
-    label: "Summary",
-    data: "Summary Informations",
-  },
-];
 
 const PatientView = ({ location }) => {
   const history = useHistory();
@@ -41,9 +20,34 @@ const PatientView = ({ location }) => {
   console.log("patient data", patientData);
   const dispatch = useDispatch();
   const { patient } = useSelector((state) => state.patients);
+
   useEffect(() => {
     dispatch(getAllPatients());
   }, [dispatch]);
+
+  const tabItems = [
+    {
+      label: "Chief Compaints",
+      data: "Chief Compaints Informations",
+    },
+    {
+      label: "Vitals",
+      data: "Vitals Informations",
+    },
+    {
+      label: "Medical History",
+      data: <MedicalHistory patientData={patientData} />,
+    },
+    {
+      label: "Prescribed Tests",
+      data: <PrescribedTests patientData={patientData} />,
+    },
+    {
+      label: "Summary",
+      data: "Summary Informations",
+    },
+  ];
+
   return (
     <div className="relative">
       <PageHeader

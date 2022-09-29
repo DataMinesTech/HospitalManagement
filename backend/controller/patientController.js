@@ -5,9 +5,53 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 //Create Patient
 
 exports.createPatient = catchAsyncErrors(async (req, res) => {
-  const patient = await Patients.create(req.body);
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.patientImage, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
 
-  console.log("patient", patient);
+  const {
+    patientName,
+    patientGender,
+    patientEmail,
+    patientPhoneNo,
+    patientAge,
+    patientCity,
+    patientZIP,
+    guardianCity,
+    guardianZIP,
+    patientDOB,
+    patientBloodGroup,
+    patientOccupation,
+    patientAdmissionStatus,
+    patientAppointment,
+    patientInRoom,
+    patientAddress,
+  } = req.body;
+
+  const patient = await Patients.create({
+    patientName,
+    patientGender,
+    patientEmail,
+    patientPhoneNo,
+    patientAge,
+    patientCity,
+    patientZIP,
+    guardianCity,
+    guardianZIP,
+    patientDOB,
+    patientBloodGroup,
+    patientOccupation,
+    patientAdmissionStatus,
+    patientAppointment,
+    patientInRoom,
+    patientAddress,
+    patientImage: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
+  });
 
   res.status(201).json({
     success: true,
@@ -54,6 +98,43 @@ exports.updatePatient = catchAsyncErrors(async (req, res, next) => {
     runValidators: true,
     useFindAndModify: false,
   });
+
+  res.status(200).json({
+    success: true,
+    patient,
+  });
+});
+
+exports.updatePatientMedicalHistory = catchAsyncErrors(
+  async (req, res, next) => {
+    console.log("medicalHistory", req.body);
+
+    const patient = await Patients.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { medicalHistory: req.body } },
+      { new: true }
+    );
+
+    console.log("patient Error", patient);
+    // console.log(pat)
+
+    res.status(200).json({
+      success: true,
+      patient,
+    });
+  }
+);
+
+exports.updatePrescribedTests = catchAsyncErrors(async (req, res, next) => {
+  console.log("medicalHistory", req.body);
+
+  const patient = await Patients.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { prescribedTests: req.body } },
+    { new: true }
+  );
+
+  console.log("patient Error", patient);
 
   res.status(200).json({
     success: true,

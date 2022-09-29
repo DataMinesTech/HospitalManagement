@@ -48,6 +48,7 @@ import AddDoctor from "./Components/DoctorComponent/AddDoctor";
 import { AdmittedPatientList } from "./Components/Layout/InPatient/AdmittedPatientList";
 import DischargePatient from "./Components/Layout/InPatient/DischargePatient";
 import InventoryManagement from "./Components/InventoryManagementSystem/InventoryManagement";
+import Billing from "./Components/Layout/Billing/Billing";
 
 const theme = createTheme({
   typography: {
@@ -231,6 +232,7 @@ function App(props) {
                 component={InventoryManagement}
               />
               <ProtectedRoute exact path="/search" component={SearchPage} />
+              <ProtectedRoute exact path="/billing" component={Billing} />
             </Switch>
           </Box>
         </Box>
