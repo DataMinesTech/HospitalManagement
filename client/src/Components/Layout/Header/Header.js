@@ -17,7 +17,7 @@ import { FiBell, FiChevronLeft, FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userActions";
 import { useHistory } from "react-router-dom";
-import { NotificationsModal } from "../../Components/NotificationModal";
+import { NotificationsModal } from "../../Notifications/NotificationModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

@@ -20,6 +20,7 @@ const AddDoctor = () => {
       userAvailability: "Available",
       email: data.email,
       phoneNo: data.phoneNo,
+      password: "11111111",
       address,
       biography: data.biography,
     };

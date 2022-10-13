@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
@@ -6,9 +6,19 @@ import { useHistory } from "react-router-dom";
 import Button from "../Components/Button";
 import { PageHeader } from "../Layout/Header/Header";
 import Layout from "../Layout/LayoutComponent/Layout";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllInventory } from "../../actions/inventoryActions";
 
 const InventoryManagement = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.allInventory);
+  console.log("items", items);
+
+  useEffect(() => {
+    dispatch(getAllInventory());
+  }, [dispatch]);
+
   const columns = () => [
     {
       field: "productName",
@@ -112,17 +122,20 @@ const InventoryManagement = () => {
     },
   ];
 
-  const rows = () => [
-    {
-      id: 1,
-      productId: "MD-101",
-      firstName: "Patacetimol",
-      productCategory: "Medicine",
-      productLocation: "Lorem Ipsum",
-      signeeExpiry: new Date(),
-      signeeStatus: "Signed",
-    },
-  ];
+  const rows = () =>
+    items?.map(({ _id, itemId, itemName, itemImage, quantity }) => {
+      return {
+        id: _id,
+        productId: itemId,
+        firstName: itemName,
+        productCategory: itemImage,
+        productQuantity: quantity,
+        productLocation: "Lorem Ipsum",
+        signeeExpiry: new Date(),
+        signeeStatus: "Signed",
+      };
+    });
+
   return (
     <div className="relative">
       <PageHeader title={"Inventory Management System"} />

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import moment from "moment";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ import { PageHeader } from "../Header/Header";
 import Layout from "../LayoutComponent/Layout";
 
 export const AdmittedPatientList = () => {
+  const [patientFilter, setPatientFilter] = useState("Admitted");
   const history = useHistory();
   const dispatch = useDispatch();
   const { patient } = useSelector((state) => state.patients);
@@ -121,32 +122,36 @@ export const AdmittedPatientList = () => {
   ];
 
   const rows = () =>
-    patient?.map(
-      ({
-        _id,
-        patientName,
-        patientEmail,
-        patientPhoneNo,
-        patientAdmissionStatus,
-        patientInRoom,
-        patientDOB,
-        patientAge,
-        patientBloodGroup,
-      }) => {
-        return {
-          id: _id,
-          // patientName: patientName,
-          firstName: patientName.split(" ")[0],
-          lastName: patientName.split(" ")[1],
-          patientEmail: patientEmail,
-          patientPhoneNo: patientPhoneNo,
-          patientAdmissionStatus: patientAdmissionStatus,
-          patientInRoom: patientInRoom,
-          patientAge: patientAge || moment().diff(patientDOB, "years", false),
-          patientBloodGroup: patientBloodGroup,
-        };
-      }
-    );
+    patient
+      ?.filter(
+        ({ patientAdmissionStatus }) => patientAdmissionStatus === patientFilter
+      )
+      ?.map(
+        ({
+          _id,
+          patientName,
+          patientEmail,
+          patientPhoneNo,
+          patientAdmissionStatus,
+          patientInRoom,
+          patientDOB,
+          patientAge,
+          patientBloodGroup,
+        }) => {
+          return {
+            id: _id,
+            // patientName: patientName,
+            firstName: patientName.split(" ")[0],
+            lastName: patientName.split(" ")[1],
+            patientEmail: patientEmail,
+            patientPhoneNo: patientPhoneNo,
+            patientAdmissionStatus: patientAdmissionStatus,
+            patientInRoom: patientInRoom,
+            patientAge: patientAge || moment().diff(patientDOB, "years", false),
+            patientBloodGroup: patientBloodGroup,
+          };
+        }
+      );
 
   return (
     <div className="relative">
@@ -161,7 +166,17 @@ export const AdmittedPatientList = () => {
           }}
         >
           <div className="flex justify-between items-center pb-5 border-b border-gray-200">
-            <div className="font-bold text-xl">Admitted Patients</div>
+            <div className="font-bold text-xl flex items-center space-x-5">
+              <div>Admitted Patients</div>
+
+              <select
+                onChange={(e) => setPatientFilter(e.target.value)}
+                className="border-2 rounded-lg border-primaryColor text-primaryColor font-bold text-base outline-none py-2 px-3"
+              >
+                <option value="Admitted">Admitted</option>
+                <option value="Discharged">Discharged</option>
+              </select>
+            </div>
             <div className="flex space-x-6">
               <Button
                 onClick={

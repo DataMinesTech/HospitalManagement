@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllAppointments } from "../../../actions/appointmentActions";
 import Button from "../../Components/Button";
 import AddPatientModal from "../../Components/FilterModal";
-import { Box, TextField } from "@mui/material";
+import { Box, InputBase, Paper, TextField } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Calendar, momentLocalizer, Views, Navigate } from "react-big-calendar";
 import Toolbar from "react-big-calendar/lib/Toolbar";
@@ -15,6 +15,7 @@ import { addHours } from "date-fns";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { FiCalendar } from "react-icons/fi";
 
 export const CustomToolbar = ({
   date,
@@ -182,42 +183,78 @@ const CalenderToolbar = ({ handleChange, newDate, date }) => {
     render() {
       console.log({ props: this.props });
       return (
-        <div className="posr">
-          <div className="rbc-btn-group">
+        <div className="flex justify-between items-center">
+          <div className="space-x-3">
             <button
               type="button"
-              className="defaultbtn"
+              className="px-3 py-2 border-2 border-primaryColor rounded-lg hover:bg-primaryColor hover:text-white text-primaryColor font-bold"
               onClick={() => this.handleNamvigate(this, "TODAY")}
             >
               Today
             </button>
             <button
               type="button"
-              className="nextp-btn"
+              className="px-3 py-2 border-2 border-primaryColor rounded-lg hover:bg-primaryColor hover:text-white text-primaryColor font-bold"
               onClick={() => this.handleNamvigate(this, "PREV")}
             >
               Prev
             </button>
             <button
               type="button"
-              className="nextp-btn"
+              className="px-3 py-2 border-2 border-primaryColor rounded-lg hover:bg-primaryColor hover:text-white text-primaryColor font-bold"
               onClick={() => this.handleNamvigate(this, "NEXT")}
             >
               Next
             </button>
           </div>
-          <div className="rbc-toolbar-label">{this.props.label}</div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Basic example"
-              value={date}
-              onChange={(newValue, event) => {
-                console.log({ n: newValue.$d, event });
-                newDate(newValue.$d);
+          {/* <div className="rbc-toolbar-label">{this.props.label}</div> */}
+          <div className="py-2">
+            <Paper
+              sx={{
+                borderRadius: "8px",
+                display: "flex",
+                py: 1,
+                alignItems: "center",
               }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
+              className="border-2 border-gray-300 w-full"
+              elevation={0}
+            >
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  OpenPickerButtonProps={{
+                    style: {
+                      color: "#FF7B54",
+                      background: "#FFF1EC",
+                      borderRadius: "8px",
+                      marginRight: "4px",
+                      position: "relative",
+                    },
+                  }}
+                  components={{
+                    OpenPickerIcon: FiCalendar,
+                  }}
+                  label="Basic example"
+                  value={date}
+                  onChange={(newValue, event) => {
+                    console.log({ n: newValue.$d, event });
+                    newDate(newValue.$d);
+                  }}
+                  renderInput={({ inputRef, inputProps, InputProps }) => (
+                    <div className="flex items-center relative">
+                      {InputProps?.endAdornment}
+                      <InputBase
+                        variant="standard"
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Google Maps"
+                        ref={inputRef}
+                        {...inputProps}
+                      />
+                    </div>
+                  )}
+                />
+              </LocalizationProvider>
+            </Paper>
+          </div>
           <div className="rbc-btn-group">
             <select
               className="form-control"

@@ -1,5 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { Badge, IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import { Fragment } from "react";
 import { FiBell, FiChevronDown } from "react-icons/fi";
@@ -75,6 +76,13 @@ export const NotificationsModal = () => {
                         </div>
                       </a>
                     ))}
+                  </div>
+                  <div className="bg-gray-100 py-4">
+                    <Link to="/notifications">
+                      <div className="text-primaryColor font-bold text-center text-md hover:underline underline-offset-2 transition">
+                        Show all notificatons
+                      </div>
+                    </Link>
                   </div>
                   <div className="bg-gray-50 p-4">
                     <a

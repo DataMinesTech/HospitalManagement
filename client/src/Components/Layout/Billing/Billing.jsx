@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Pdf from "react-to-pdf";
 import { useReactToPrint } from "react-to-print";
 import { Divider } from '@mui/material';
 

@@ -9,6 +9,7 @@ import {
 } from "./reducers/appointmentReducer";
 import { allRoomReducer, createRoomReducer } from "./reducers/roomReducer";
 import { doctorReducer } from "./reducers/doctorReducer";
+import { allInventoryReducer } from "./reducers/inventoryReducer";
 
 const reducer = combineReducers({
   user: userReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   allrooms: allRoomReducer,
   allDoctors: doctorReducer,
   allUsers: allUsers,
+  allInventory: allInventoryReducer,
 });
 
 const middleware = [thunk];
