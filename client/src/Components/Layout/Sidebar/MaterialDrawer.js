@@ -85,10 +85,10 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
           >
             <CssBaseline />
             <div className="flex flex-col pb-10 w-full bg-gradient-to-b from-red-400 to-red-300 text-white">
-              <div className="flex justify-between items-center py-5 px-4">
+              <div className="flex justify-start items-center py-5 px-4">
                 {/* <div className="text-md font-bold">My Profile</div> */}
                 <img src={Logo} alt={"edit profile"} width={100} />
-                <IconButton
+                {/* <IconButton
                   sx={{
                     backgroundColor: "#ffffff",
                     transition: "box-shadow 0.3s ease-in-out",
@@ -105,7 +105,7 @@ const MaterialDrawer = ({ isOpen, setIsOpen }) => {
                     alt={"edit profile"}
                     width={24}
                   />
-                </IconButton>
+                </IconButton> */}
               </div>
               <div className="flex flex-col items-center py-5">
                 <div className="flex justify-center pb-3">

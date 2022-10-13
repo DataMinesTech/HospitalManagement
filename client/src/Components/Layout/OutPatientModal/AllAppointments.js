@@ -40,7 +40,7 @@ const AllAppointments = () => {
               <input
                 {...register("uhid")}
                 type="text"
-                className="pl-2 form-control-sm px-3   shadow-sm mb-3 bg-white rounded border"
+                className="pl-2 form-control-sm px-3 shadow-sm mb-3 bg-white rounded border"
               />
             </div>
             <div>

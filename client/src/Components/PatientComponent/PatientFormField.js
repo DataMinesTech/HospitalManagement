@@ -96,5 +96,22 @@ export const patientFormField = {
       name: "patientGuardianZipcode",
       label: "Guardian State",
     },
+    // data.patientDiagnosis,
+    patientBloodPressure: {
+      name: "bloodPressure",
+      label: "Blood Pressure",
+    },
+    patientRespirationRate: {
+      name: "respirationRate",
+      label: "Respiration Rate",
+    },
+    patientPulseRate: {
+      name: "pulseRate",
+      label: "Pulse Rate",
+    },
+    patientBodyTemperature: {
+      name: "bodyTemperature",
+      label: "Body Temperature",
+    },
   },
 };

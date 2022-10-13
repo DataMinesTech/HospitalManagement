@@ -17,6 +17,7 @@ import { FiBell, FiChevronLeft, FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userActions";
 import { useHistory } from "react-router-dom";
+import { NotificationsModal } from "../../Notifications/NotificationModal";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -129,14 +130,6 @@ export const PageHeader = ({ title, searchHidden, back, onClick, value }) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -205,16 +198,16 @@ export const PageHeader = ({ title, searchHidden, back, onClick, value }) => {
             </Search>
           )}
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/* <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <FiMail />
-              </Badge>
-            </IconButton> */}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+              },
+            }}
+          >
+            <NotificationsModal />
+
             <IconButton
               onClick={() => dispatch(logout())}
               size="large"

@@ -1,3 +1,4 @@
+// var cloudinary = require("cloudinary").v2;
 const Patients = require("../models/patientModel");
 const ApiFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../utils/errorHandler");
@@ -5,11 +6,11 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 //Create Patient
 
 exports.createPatient = catchAsyncErrors(async (req, res) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.patientImage, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
+  // const myCloud = await cloudinary.uploader.upload(req.body.patientImage, {
+  //   folder: "avatars",
+  //   width: 150,
+  //   crop: "scale",
+  // });
 
   const {
     patientName,
@@ -47,10 +48,10 @@ exports.createPatient = catchAsyncErrors(async (req, res) => {
     patientAppointment,
     patientInRoom,
     patientAddress,
-    patientImage: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
+    // patientImage: {
+    //   public_id: myCloud.public_id,
+    //   url: myCloud.secure_url,
+    // },
   });
 
   res.status(201).json({

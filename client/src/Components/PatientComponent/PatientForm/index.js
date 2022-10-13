@@ -56,6 +56,10 @@ export const PatientForm = ({ data: patientData }) => {
       patientGuardianCity,
       patientGuardianState,
       patientGuardianZipcode,
+      patientBloodPressure,
+      patientRespirationRate,
+      patientPulseRate,
+      patientBodyTemperature,
     },
   } = patientFormField;
 
@@ -85,6 +89,10 @@ export const PatientForm = ({ data: patientData }) => {
     [patientGuardianState.name]:
       patientData?.guardianCity?.split(", ")?.[1] || "",
     [patientGuardianZipcode.name]: patientData?.guardianZIP || "",
+    [patientBloodPressure.name]: patientData?.bloodPressure || "",
+    [patientRespirationRate.name]: patientData?.bodyTemperature || "",
+    [patientPulseRate.name]: patientData?.pulseRate || "",
+    [patientBodyTemperature.name]: patientData?.respirationRate || "",
   };
 
   function _renderStepContent(step, setFieldValue, values) {
@@ -150,7 +158,14 @@ export const PatientForm = ({ data: patientData }) => {
       patientEmail: data.patientEmail,
       patientPhoneNo: data.patientMobile,
       patientAge,
-      vitals: data.patientDiagnosis,
+      vitals: [
+        {
+          bloodPressure: data.patientBloodPressure || "",
+          bodyTemperature: data.patientBodyTemperature || "",
+          pulseRate: data.patientPulseRate || "",
+          respirationRate: data.patientRespirationRate || "",
+        },
+      ],
       guardianName: data.patientGuardianName,
       guardianPhone: data.patientGuardianMobile,
       guardianAddress,

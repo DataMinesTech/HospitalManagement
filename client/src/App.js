@@ -25,7 +25,6 @@ import MedicalCertificate from "./Components/PatientComponent/MedicalCertificate
 import Medication from "./Components/PatientComponent/Medication";
 import NewPatient from "./Components/PatientComponent/NewPatient";
 import PatientAdmission from "./Components/PatientComponent/PatientAdmission";
-import PatientDischarge from "./Components/PatientComponent/PatientDischarge";
 import PatientList from "./Components/PatientComponent/PatientList";
 import PatientVisit from "./Components/PatientComponent/PatientVisit";
 import PrescriptionMedicine from "./Components/PatientComponent/PrescriptionMedicine";
@@ -44,7 +43,15 @@ import DoctorView from "./Components/PatientComponent/DoctorView";
 import ContractManagement from "./Components/ContractManagementSystem/ContractManagement";
 import SearchPage from "./Components/Layout/SearchComponent/SearchPage";
 import UpdatePatient from "./Components/PatientComponent/UpdatePatient";
+import AddDoctor from "./Components/DoctorComponent/AddDoctor";
+import { AdmittedPatientList } from "./Components/Layout/InPatient/AdmittedPatientList";
+import DischargePatient from "./Components/Layout/InPatient/DischargePatient";
+import InventoryManagement from "./Components/InventoryManagementSystem/InventoryManagement";
 import Billing from "./Components/Layout/Billing/Billing";
+import ProductList from "./Components/InventoryManagementSystem/ProductList";
+import AddProduct from "./Components/InventoryManagementSystem/AddProduct";
+import NotificationsList from "./Components/Notifications/NotificationsList";
+import CreateRoom from "./Components/RoomComponent/CreateRoom";
 
 const theme = createTheme({
   typography: {
@@ -93,6 +100,11 @@ function App(props) {
               <ProtectedRoute exact path="/newpatient" component={NewPatient} />
               <ProtectedRoute
                 exact
+                path="/notifications"
+                component={NotificationsList}
+              />
+              <ProtectedRoute
+                exact
                 path="/updatepatient/:id"
                 component={UpdatePatient}
               />
@@ -136,12 +148,13 @@ function App(props) {
                 path="/roomstatus"
                 component={RoomsOccupied}
               />
+              <ProtectedRoute exact path="/createroom" component={CreateRoom} />
               <ProtectedRoute
                 exact
                 path="/refertodoctor"
                 component={ReferToDoctor}
               />
-              <ProtectedRoute exact path="/inventory" component={Inventory} />
+              {/* <ProtectedRoute exact path="/inventory" component={Inventory} /> */}
               <ProtectedRoute
                 exact
                 path="/patientissue"
@@ -193,14 +206,20 @@ function App(props) {
                 path="/patient/:id"
                 component={PatientView}
               />
-              <ProtectedRoute exact path="/roomstatus" component={RoomStatus} />
+              {/* <ProtectedRoute exact path="/roomstatus" component={RoomStatus} /> */}
               <ProtectedRoute
                 exact
                 path="/roomtransfer"
                 component={RoomTransfer}
               />
               <ProtectedRoute exact path="/alldoctors" component={AllDoctors} />
+              <ProtectedRoute exact path="/newdoctor" component={AddDoctor} />
               <ProtectedRoute exact path="/doctor/:id" component={DoctorView} />
+              <ProtectedRoute
+                exact
+                path="/admittedpatient"
+                component={AdmittedPatientList}
+              />
               <ProtectedRoute
                 exact
                 path="/patientadmission"
@@ -209,12 +228,27 @@ function App(props) {
               <ProtectedRoute
                 exact
                 path="/patientdischarge"
-                component={PatientDischarge}
+                component={DischargePatient}
               />
               <ProtectedRoute
                 exact
                 path="/contractmanagement"
                 component={ContractManagement}
+              />
+              <ProtectedRoute
+                exact
+                path="/inventory"
+                component={InventoryManagement}
+              />
+              <ProtectedRoute
+                exact
+                path="/inventory/products"
+                component={ProductList}
+              />
+              <ProtectedRoute
+                exact
+                path="/inventory/products/addproduct"
+                component={AddProduct}
               />
               <ProtectedRoute exact path="/search" component={SearchPage} />
               <ProtectedRoute exact path="/billing" component={Billing} />
